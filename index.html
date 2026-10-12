@@ -1,0 +1,2412 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>VerbMaster YDS — Irregular Verbs</title>
+
+  <!-- iOS Safari PWA / Web App Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="YDS Verbs">
+  <meta name="theme-color" content="#2563eb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+
+  <!-- Embedded High-Res Apple Touch Icon (Lightning Flashcard) -->
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='128' fill='%232563eb'/%3E%3Cpath d='M296 64L144 288h112l-40 160 152-224H256z' fill='%23ffffff' stroke='%23fbbf24' stroke-width='24' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='25' fill='%232563eb'/%3E%3Cpath d='M58 12L28 56h22l-8 32 30-44H50z' fill='%23fef08a'/%3E%3C/svg%3E">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #dbeafe;
+      --primary-dark: #1d4ed8;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --danger: #dc2626;
+      --danger-bg: #fee2e2;
+      --purple: #9333ea;
+      --purple-bg: #f3e8ff;
+      --warning: #f59e0b;
+      --warning-bg: #fef3c7;
+      --bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --input-bg: #ffffff;
+      --input-border: #cbd5e1;
+      --locked-bg: #e2e8f0;
+      --locked-text: #1e293b;
+      --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.07), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+      --radius: 16px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #090d16;
+        --card-bg: #131b2e;
+        --card-border: #1e293b;
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+        --input-bg: #1e293b;
+        --input-border: #334155;
+        --locked-bg: #1e293b;
+        --locked-text: #e2e8f0;
+        --primary-light: #1e3a8a;
+        --success-bg: #064e3b;
+        --danger-bg: #7f1d1d;
+        --purple-bg: #581c87;
+        --warning-bg: #78350f;
+        --shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    body.dark-mode {
+      --bg: #090d16;
+      --card-bg: #131b2e;
+      --card-border: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --input-bg: #1e293b;
+      --input-border: #334155;
+      --locked-bg: #1e293b;
+      --locked-text: #e2e8f0;
+      --primary-light: #1e3a8a;
+      --success-bg: #064e3b;
+      --danger-bg: #7f1d1d;
+      --purple-bg: #581c87;
+      --warning-bg: #78350f;
+    }
+
+    body.light-mode {
+      --bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --input-bg: #ffffff;
+      --input-border: #cbd5e1;
+      --locked-bg: #e2e8f0;
+      --locked-text: #1e293b;
+      --primary-light: #dbeafe;
+      --success-bg: #dcfce7;
+      --danger-bg: #fee2e2;
+      --purple-bg: #f3e8ff;
+      --warning-bg: #fef3c7;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: calc(var(--safe-top) + 10px) 12px calc(var(--safe-bottom) + 16px) 12px;
+      overflow-x: hidden;
+      transition: background-color 0.25s, color 0.25s;
+    }
+
+    /* iPhone SE 3 Optimized Container: max 380px ensures it fits comfortably */
+    .app-wrapper {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px 4px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.3px;
+    }
+
+    .brand-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .icon-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.1s, background-color 0.2s, color 0.2s;
+    }
+
+    .icon-btn:active {
+      transform: scale(0.92);
+      background: var(--card-border);
+    }
+
+    /* Gamification Strip: Level, XP Bar, Streak */
+    .game-strip {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+      gap: 10px;
+    }
+
+    .level-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 100px;
+    }
+
+    .level-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .xp-meter-wrap {
+      width: 100%;
+      height: 6px;
+      background: var(--input-border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 2px;
+    }
+
+    .xp-meter-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #60a5fa);
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .xp-text {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .streak-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: linear-gradient(135deg, #fef3c7, #fee2e2);
+      border: 1px solid #fcd34d;
+      color: #b45309;
+      padding: 5px 10px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: transform 0.2s;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .streak-badge {
+        background: linear-gradient(135deg, #78350f, #451a03);
+        border-color: #b45309;
+        color: #fde68a;
+      }
+    }
+    body.dark-mode .streak-badge {
+      background: linear-gradient(135deg, #78350f, #451a03);
+      border-color: #b45309;
+      color: #fde68a;
+    }
+
+    .streak-badge.fire-pulse {
+      animation: streakPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes streakPop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15) rotate(4deg); }
+      100% { transform: scale(1); }
+    }
+
+    /* Category Filter Pills (Scrollable horizontal on mobile) */
+    .filter-scroll {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 2px 0 4px 0;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-chip {
+      flex: 0 0 auto;
+      padding: 6px 12px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      border-radius: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .filter-chip.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+    }
+
+    .filter-chip:active {
+      transform: scale(0.95);
+    }
+
+    /* Main Challenge Card */
+    .challenge-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 16px 14px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+
+    /* Card Header: Category & Hint button */
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .group-indicator {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 4px 8px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .hint-btn {
+      background: var(--warning-bg);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #b45309;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: transform 0.1s;
+    }
+    @media (prefers-color-scheme: dark) {
+      .hint-btn { color: #fde68a; }
+    }
+    body.dark-mode .hint-btn { color: #fde68a; }
+    .hint-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Meaning Banner */
+    .meaning-box {
+      background: var(--input-bg);
+      border: 1px dashed var(--card-border);
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.25s;
+    }
+
+    .meaning-text {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.2px;
+    }
+
+    .meaning-placeholder {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .audio-btn {
+      background: var(--primary-light);
+      border: none;
+      color: var(--primary);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      margin-left: 4px;
+      transition: transform 0.15s;
+    }
+    .audio-btn:active {
+      transform: scale(0.85);
+    }
+
+    /* 3-Column Verb Input Grid (NEVER breaks to 1 column on iPhone SE!) */
+    .verb-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin: 4px 0;
+    }
+
+    .verb-col {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      text-align: center;
+    }
+
+    .verb-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .verb-sublabel {
+      font-size: 0.62rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      opacity: 0.8;
+      margin-top: -3px;
+    }
+
+    /* Input & Locked boxes: 16px font-size to prevent iOS Safari auto-zoom! */
+    .verb-input, .locked-verb {
+      height: 48px;
+      width: 100%;
+      padding: 8px 4px;
+      font-size: 16px; /* CRITICAL FOR IOS SAFARI */
+      font-weight: 700;
+      text-align: center;
+      border-radius: 12px;
+      border: 2px solid var(--input-border);
+      background-color: var(--input-bg);
+      color: var(--text);
+      transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .verb-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+    }
+
+    .verb-input.correct {
+      border-color: var(--success);
+      background-color: var(--success-bg);
+      color: var(--success);
+    }
+
+    .verb-input.wrong {
+      border-color: var(--danger);
+      background-color: var(--danger-bg);
+      color: var(--danger);
+      animation: shake 0.3s;
+    }
+
+    .verb-input.given-up {
+      border-color: var(--purple);
+      background-color: var(--purple-bg);
+      color: var(--purple);
+      font-weight: 800;
+    }
+
+    .locked-verb {
+      background-color: var(--locked-bg);
+      color: var(--locked-text);
+      border-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-4px); }
+      40%, 80% { transform: translateX(4px); }
+    }
+
+    /* Motivational Toast message inside card */
+    .feedback-toast {
+      min-height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 800;
+      transition: all 0.2s;
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+
+    .feedback-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .feedback-toast.success {
+      color: var(--success);
+    }
+
+    .feedback-toast.failure {
+      color: var(--danger);
+    }
+
+    .feedback-toast.giveup {
+      color: var(--purple);
+    }
+
+    /* Action Buttons (Ergonomic for Thumb on 4.7" screen) */
+    .action-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .btn {
+      height: 48px;
+      border: none;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: transform 0.1s, opacity 0.15s, background-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-check {
+      background: var(--primary);
+      color: #ffffff;
+      flex: 2;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-giveup {
+      background: var(--locked-bg);
+      color: var(--text-muted);
+      flex: 1;
+      font-size: 0.82rem;
+    }
+
+    .btn-next {
+      background: var(--success);
+      color: #ffffff;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+      display: none;
+    }
+
+    /* Bottom Quick Stats Card */
+    .stats-footer {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: var(--shadow);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .stat-val {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    /* Fullscreen Modal (Kelime Defteri / Zor Kelimeler) */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: center;
+      align-items: flex-end;
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-sheet {
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 440px;
+      max-height: 80vh;
+      border-radius: 20px 20px 0 0;
+      padding: 16px 16px calc(var(--safe-bottom) + 20px) 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.open .modal-sheet {
+      transform: translateY(0);
+    }
+
+    .modal-handle {
+      width: 36px;
+      height: 4px;
+      background: var(--input-border);
+      border-radius: 2px;
+      align-self: center;
+      margin-bottom: 4px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .modal-close {
+      background: var(--locked-bg);
+      border: none;
+      color: var(--text-muted);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .verb-list-scroll {
+      overflow-y: auto;
+      max-height: 52vh;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-right: 4px;
+    }
+
+    .verb-list-item {
+      background: var(--bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 8px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .verb-list-words {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .verb-list-eng {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .verb-list-tr {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .verb-status-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .status-mastered {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .status-hard {
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .status-learning {
+      background: var(--warning-bg);
+      color: #b45309;
+    }
+
+    /* Floating XP Notification */
+    .xp-float {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: var(--warning);
+      font-weight: 800;
+      font-size: 1rem;
+      pointer-events: none;
+      animation: floatUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0% { opacity: 0; transform: translateY(0); }
+      30% { opacity: 1; transform: translateY(-8px); }
+      100% { opacity: 0; transform: translateY(-24px); }
+    }
+
+    /* Canvas for micro-confetti */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<div class="app-wrapper">
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="brand">
+      <span>⚡ VerbMaster</span>
+      <span class="brand-tag">YDS</span>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="btn-sound" title="Ses Aç/Kapat" onclick="toggleSound()">🔊</button>
+      <button class="icon-btn" id="btn-theme" title="Tema Değiştir" onclick="toggleTheme()">🌙</button>
+      <button class="icon-btn" id="btn-list" title="Kelime Listesi / İlerleme" onclick="openModal()">📚</button>
+    </div>
+  </div>
+
+  <!-- Gamification Status Bar -->
+  <div class="game-strip">
+    <div class="level-info">
+      <div class="level-title">
+        <span id="rank-icon">🌱</span>
+        <span id="rank-name">Acemi Dilci</span>
+        <span style="opacity: 0.6; font-size: 0.65rem;">(Lv.<span id="rank-lvl">1</span>)</span>
+      </div>
+      <div class="xp-meter-wrap">
+        <div class="xp-meter-fill" id="xp-bar"></div>
+      </div>
+      <div class="xp-text"><span id="curr-xp">0</span> / <span id="next-xp">100</span> XP</div>
+    </div>
+
+    <div class="streak-badge" id="streak-box">
+      <span>🔥</span>
+      <span id="streak-num">0</span>
+      <span style="font-size: 0.7rem; font-weight: 700;">SERİ</span>
+    </div>
+  </div>
+
+  <!-- Category Filter Pills -->
+  <div class="filter-scroll" id="filter-pills">
+    <button class="filter-chip active" onclick="setCategory('all', this)">Tümü (117)</button>
+    <button class="filter-chip" onclick="setCategory(1, this)">1. 3'ü Aynı (14)</button>
+    <button class="filter-chip" onclick="setCategory(2, this)">2. 2'si Aynı (53)</button>
+    <button class="filter-chip" onclick="setCategory(3, this)">3. 3'ü Farklı (50)</button>
+    <button class="filter-chip" onclick="setCategory('hard', this)">⚠️ Zorlandıklarım (<span id="hard-count-pill">0</span>)</button>
+  </div>
+
+  <!-- Main Challenge Card -->
+  <div class="challenge-card">
+    <div class="card-top">
+      <span class="group-indicator" id="group-tag">1. Grup: 3 Hali Aynı</span>
+      <button class="hint-btn" id="btn-hint" onclick="useHint()">
+        <span>💡 İpucu</span>
+      </button>
+    </div>
+
+    <!-- Turkish Meaning Box -->
+    <div class="meaning-box" id="meaning-box">
+      <span class="meaning-text" id="turkish-meaning">Yayınlamak</span>
+      <button class="audio-btn" id="btn-speak" title="Telaffuz Dinle" onclick="speakCurrentVerb()">🔊</button>
+    </div>
+
+    <!-- 3-Column Inputs: V1, V2, V3 -->
+    <div class="verb-grid">
+      <div class="verb-col">
+        <span class="verb-label">V1</span>
+        <span class="verb-sublabel">Base</span>
+        <div id="v1-container"></div>
+      </div>
+      <div class="verb-col">
+        <span class="verb-label">V2</span>
+        <span class="verb-sublabel">Past</span>
+        <div id="v2-container"></div>
+      </div>
+      <div class="verb-col">
+        <span class="verb-label">V3</span>
+        <span class="verb-sublabel">Participle</span>
+        <div id="v3-container"></div>
+      </div>
+    </div>
+
+    <!-- Dynamic Feedback Toast -->
+    <div class="feedback-toast" id="feedback-toast">Harika! Doğru Cevap 🎯</div>
+
+    <!-- Ergonomic Action Row -->
+    <div class="action-row">
+      <button class="btn btn-giveup" onclick="giveUp()">Bilmiyorum</button>
+      <button class="btn btn-check" onclick="checkAnswer()">Kontrol Et ➔</button>
+      <button class="btn btn-next" onclick="nextQuestion()">Sonraki Soru ➔</button>
+    </div>
+  </div>
+
+  <!-- Bottom Quick Stats -->
+  <div class="stats-footer">
+    <div class="stat-item">
+      <span class="stat-val" id="stat-learned">0</span>
+      <span>Öğrenildi</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val" id="stat-accuracy">0%</span>
+      <span>Doğruluk</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val" id="stat-total">0</span>
+      <span>Toplam Soru</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal: Kelime Listesi & İlerleme Tablosu -->
+<div class="modal-overlay" id="words-modal" onclick="closeModalOnOverlay(event)">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-title">📖 Kelime Listesi & Durum</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div style="font-size: 0.75rem; color: var(--text-muted); display:flex; justify-content:space-between;">
+      <span>Kelimeye tıklayarak telaffuzunu dinleyebilirsin:</span>
+      <a href="javascript:void(0)" onclick="resetProgress()" style="color:var(--danger); text-decoration:none; font-weight:700;">İlerlemeyi Sıfırla</a>
+    </div>
+    <div class="verb-list-scroll" id="verb-list-container">
+      <!-- Verbs list populated dynamically -->
+    </div>
+  </div>
+</div>
+
+<script>
+  // 117 YDS IRREGULAR VERBS LIST WITH CATEGORIES
+  const RAW_VERBS = [
+  {
+    "v1": "broadcast",
+    "v2": "broadcast",
+    "v3": "broadcast",
+    "tr": "Yayınlamak",
+    "cat": 1
+  },
+  {
+    "v1": "burst",
+    "v2": "burst",
+    "v3": "burst",
+    "tr": "Patlamak",
+    "cat": 1
+  },
+  {
+    "v1": "cost",
+    "v2": "cost",
+    "v3": "cost",
+    "tr": "Mal olmak",
+    "cat": 1
+  },
+  {
+    "v1": "cut",
+    "v2": "cut",
+    "v3": "cut",
+    "tr": "Kesmek",
+    "cat": 1
+  },
+  {
+    "v1": "forecast",
+    "v2": "forecast",
+    "v3": "forecast",
+    "tr": "Tahmin etmek",
+    "cat": 1
+  },
+  {
+    "v1": "hit",
+    "v2": "hit",
+    "v3": "hit",
+    "tr": "Vurmak",
+    "cat": 1
+  },
+  {
+    "v1": "hurt",
+    "v2": "hurt",
+    "v3": "hurt",
+    "tr": "İncitmek/Acımak",
+    "cat": 1
+  },
+  {
+    "v1": "let",
+    "v2": "let",
+    "v3": "let",
+    "tr": "İzin vermek",
+    "cat": 1
+  },
+  {
+    "v1": "put",
+    "v2": "put",
+    "v3": "put",
+    "tr": "Koymak",
+    "cat": 1
+  },
+  {
+    "v1": "read",
+    "v2": "read",
+    "v3": "read",
+    "tr": "Okumak",
+    "cat": 1
+  },
+  {
+    "v1": "set",
+    "v2": "set",
+    "v3": "set",
+    "tr": "Belirlemek/Kurmak",
+    "cat": 1
+  },
+  {
+    "v1": "shut",
+    "v2": "shut",
+    "v3": "shut",
+    "tr": "Kapamak",
+    "cat": 1
+  },
+  {
+    "v1": "split",
+    "v2": "split",
+    "v3": "split",
+    "tr": "Bölmek/Ayırmak",
+    "cat": 1
+  },
+  {
+    "v1": "spread",
+    "v2": "spread",
+    "v3": "spread",
+    "tr": "Yaymak",
+    "cat": 1
+  },
+  {
+    "v1": "become",
+    "v2": "became",
+    "v3": "become",
+    "tr": "Olmak",
+    "cat": 2
+  },
+  {
+    "v1": "come",
+    "v2": "came",
+    "v3": "come",
+    "tr": "Gelmek",
+    "cat": 2
+  },
+  {
+    "v1": "overcome",
+    "v2": "overcame",
+    "v3": "overcome",
+    "tr": "Üstesinden gelmek",
+    "cat": 2
+  },
+  {
+    "v1": "run",
+    "v2": "ran",
+    "v3": "run",
+    "tr": "Koşmak",
+    "cat": 2
+  },
+  {
+    "v1": "bend",
+    "v2": "bent",
+    "v3": "bent",
+    "tr": "Eğmek",
+    "cat": 2
+  },
+  {
+    "v1": "bring",
+    "v2": "brought",
+    "v3": "brought",
+    "tr": "Getirmek",
+    "cat": 2
+  },
+  {
+    "v1": "build",
+    "v2": "built",
+    "v3": "built",
+    "tr": "İnşa etmek",
+    "cat": 2
+  },
+  {
+    "v1": "burn",
+    "v2": "burnt",
+    "v3": "burnt",
+    "tr": "Yakmak",
+    "cat": 2
+  },
+  {
+    "v1": "buy",
+    "v2": "bought",
+    "v3": "bought",
+    "tr": "Satın almak",
+    "cat": 2
+  },
+  {
+    "v1": "catch",
+    "v2": "caught",
+    "v3": "caught",
+    "tr": "Yakalamak",
+    "cat": 2
+  },
+  {
+    "v1": "deal",
+    "v2": "dealt",
+    "v3": "dealt",
+    "tr": "Anlaşmak/Başa çıkmak",
+    "cat": 2
+  },
+  {
+    "v1": "dig",
+    "v2": "dug",
+    "v3": "dug",
+    "tr": "Kazmak",
+    "cat": 2
+  },
+  {
+    "v1": "dream",
+    "v2": "dreamt",
+    "v3": "dreamt",
+    "tr": "Rüya görmek",
+    "cat": 2
+  },
+  {
+    "v1": "dwell",
+    "v2": "dwelt",
+    "v3": "dwelt",
+    "tr": "Yaşamak/İkamet etmek",
+    "cat": 2
+  },
+  {
+    "v1": "feed",
+    "v2": "fed",
+    "v3": "fed",
+    "tr": "Beslemek",
+    "cat": 2
+  },
+  {
+    "v1": "feel",
+    "v2": "felt",
+    "v3": "felt",
+    "tr": "Hissetmek",
+    "cat": 2
+  },
+  {
+    "v1": "fight",
+    "v2": "fought",
+    "v3": "fought",
+    "tr": "Savaşmak",
+    "cat": 2
+  },
+  {
+    "v1": "find",
+    "v2": "found",
+    "v3": "found",
+    "tr": "Bulmak",
+    "cat": 2
+  },
+  {
+    "v1": "flee",
+    "v2": "fled",
+    "v3": "fled",
+    "tr": "Kaçmak",
+    "cat": 2
+  },
+  {
+    "v1": "foretell",
+    "v2": "foretold",
+    "v3": "foretold",
+    "tr": "Kehanette bulunmak",
+    "cat": 2
+  },
+  {
+    "v1": "get",
+    "v2": "got",
+    "v3": "got",
+    "tr": "Almak/Varmak",
+    "cat": 2
+  },
+  {
+    "v1": "hang",
+    "v2": "hung",
+    "v3": "hung",
+    "tr": "Asmak",
+    "cat": 2
+  },
+  {
+    "v1": "have",
+    "v2": "had",
+    "v3": "had",
+    "tr": "Sahip olmak",
+    "cat": 2
+  },
+  {
+    "v1": "hear",
+    "v2": "heard",
+    "v3": "heard",
+    "tr": "Duymak",
+    "cat": 2
+  },
+  {
+    "v1": "hold",
+    "v2": "held",
+    "v3": "held",
+    "tr": "Tutmak",
+    "cat": 2
+  },
+  {
+    "v1": "keep",
+    "v2": "kept",
+    "v3": "kept",
+    "tr": "Muhafaza etmek/Saklamak",
+    "cat": 2
+  },
+  {
+    "v1": "lead",
+    "v2": "led",
+    "v3": "led",
+    "tr": "Yönetmek/Önderlik etmek",
+    "cat": 2
+  },
+  {
+    "v1": "learn",
+    "v2": "learnt",
+    "v3": "learnt",
+    "tr": "Öğrenmek",
+    "cat": 2
+  },
+  {
+    "v1": "leave",
+    "v2": "left",
+    "v3": "left",
+    "tr": "Ayrılmak/Bırakmak",
+    "cat": 2
+  },
+  {
+    "v1": "lend",
+    "v2": "lent",
+    "v3": "lent",
+    "tr": "Ödünç vermek",
+    "cat": 2
+  },
+  {
+    "v1": "lose",
+    "v2": "lost",
+    "v3": "lost",
+    "tr": "Kaybetmek",
+    "cat": 2
+  },
+  {
+    "v1": "make",
+    "v2": "made",
+    "v3": "made",
+    "tr": "Yapmak",
+    "cat": 2
+  },
+  {
+    "v1": "mean",
+    "v2": "meant",
+    "v3": "meant",
+    "tr": "Anlamına gelmek/Kastetmek",
+    "cat": 2
+  },
+  {
+    "v1": "meet",
+    "v2": "met",
+    "v3": "met",
+    "tr": "Buluşmak/Tanışmak",
+    "cat": 2
+  },
+  {
+    "v1": "misunderstand",
+    "v2": "misunderstood",
+    "v3": "misunderstood",
+    "tr": "Yanlış anlamak",
+    "cat": 2
+  },
+  {
+    "v1": "pay",
+    "v2": "paid",
+    "v3": "paid",
+    "tr": "Ödemek",
+    "cat": 2
+  },
+  {
+    "v1": "say",
+    "v2": "said",
+    "v3": "said",
+    "tr": "Söylemek",
+    "cat": 2
+  },
+  {
+    "v1": "seek",
+    "v2": "sought",
+    "v3": "sought",
+    "tr": "Aramak/Çabalamak",
+    "cat": 2
+  },
+  {
+    "v1": "sell",
+    "v2": "sold",
+    "v3": "sold",
+    "tr": "Satmak",
+    "cat": 2
+  },
+  {
+    "v1": "send",
+    "v2": "sent",
+    "v3": "sent",
+    "tr": "Göndermek",
+    "cat": 2
+  },
+  {
+    "v1": "shine",
+    "v2": "shone",
+    "v3": "shone",
+    "tr": "Parıldamak",
+    "cat": 2
+  },
+  {
+    "v1": "sit",
+    "v2": "sat",
+    "v3": "sat",
+    "tr": "Oturmak",
+    "cat": 2
+  },
+  {
+    "v1": "sleep",
+    "v2": "slept",
+    "v3": "slept",
+    "tr": "Uyumak",
+    "cat": 2
+  },
+  {
+    "v1": "smell",
+    "v2": "smelt",
+    "v3": "smelt",
+    "tr": "Kokmak",
+    "cat": 2
+  },
+  {
+    "v1": "spend",
+    "v2": "spent",
+    "v3": "spent",
+    "tr": "Harcamak",
+    "cat": 2
+  },
+  {
+    "v1": "stand",
+    "v2": "stood",
+    "v3": "stood",
+    "tr": "Ayakta durmak",
+    "cat": 2
+  },
+  {
+    "v1": "strike",
+    "v2": "struck",
+    "v3": "struck",
+    "tr": "Vurmak/Çarpmak",
+    "cat": 2
+  },
+  {
+    "v1": "teach",
+    "v2": "taught",
+    "v3": "taught",
+    "tr": "Öğretmek",
+    "cat": 2
+  },
+  {
+    "v1": "tell",
+    "v2": "told",
+    "v3": "told",
+    "tr": "Anlatmak/Söylemek",
+    "cat": 2
+  },
+  {
+    "v1": "think",
+    "v2": "thought",
+    "v3": "thought",
+    "tr": "Düşünmek",
+    "cat": 2
+  },
+  {
+    "v1": "understand",
+    "v2": "understood",
+    "v3": "understood",
+    "tr": "Anlamak",
+    "cat": 2
+  },
+  {
+    "v1": "win",
+    "v2": "won",
+    "v3": "won",
+    "tr": "Kazanmak",
+    "cat": 2
+  },
+  {
+    "v1": "withstand",
+    "v2": "withstood",
+    "v3": "withstood",
+    "tr": "Dayanmak",
+    "cat": 2
+  },
+  {
+    "v1": "arise",
+    "v2": "arose",
+    "v3": "arisen",
+    "tr": "Ortaya çıkmak",
+    "cat": 3
+  },
+  {
+    "v1": "be",
+    "v2": "was/were",
+    "v3": "been",
+    "tr": "Olmak",
+    "cat": 3
+  },
+  {
+    "v1": "bear",
+    "v2": "bore",
+    "v3": "born",
+    "tr": "Doğurmak/Taşımak",
+    "cat": 3
+  },
+  {
+    "v1": "begin",
+    "v2": "began",
+    "v3": "begun",
+    "tr": "Başlamak",
+    "cat": 3
+  },
+  {
+    "v1": "bite",
+    "v2": "bit",
+    "v3": "bitten",
+    "tr": "Isırmak",
+    "cat": 3
+  },
+  {
+    "v1": "blow",
+    "v2": "blew",
+    "v3": "blown",
+    "tr": "Esmek/Üflemek",
+    "cat": 3
+  },
+  {
+    "v1": "break",
+    "v2": "broke",
+    "v3": "broken",
+    "tr": "Kırmak",
+    "cat": 3
+  },
+  {
+    "v1": "choose",
+    "v2": "chose",
+    "v3": "chosen",
+    "tr": "Seçmek",
+    "cat": 3
+  },
+  {
+    "v1": "do",
+    "v2": "did",
+    "v3": "done",
+    "tr": "Yapmak",
+    "cat": 3
+  },
+  {
+    "v1": "draw",
+    "v2": "drew",
+    "v3": "drawn",
+    "tr": "Çizmek",
+    "cat": 3
+  },
+  {
+    "v1": "drink",
+    "v2": "drank",
+    "v3": "drunk",
+    "tr": "İçmek",
+    "cat": 3
+  },
+  {
+    "v1": "drive",
+    "v2": "drove",
+    "v3": "driven",
+    "tr": "Sürmek",
+    "cat": 3
+  },
+  {
+    "v1": "eat",
+    "v2": "ate",
+    "v3": "eaten",
+    "tr": "Yemek",
+    "cat": 3
+  },
+  {
+    "v1": "fall",
+    "v2": "fell",
+    "v3": "fallen",
+    "tr": "Düşmek",
+    "cat": 3
+  },
+  {
+    "v1": "fly",
+    "v2": "flew",
+    "v3": "flown",
+    "tr": "Uçmak",
+    "cat": 3
+  },
+  {
+    "v1": "forbid",
+    "v2": "forbade",
+    "v3": "forbidden",
+    "tr": "Yasaklamak",
+    "cat": 3
+  },
+  {
+    "v1": "foresee",
+    "v2": "foresaw",
+    "v3": "foreseen",
+    "tr": "Öngörmek",
+    "cat": 3
+  },
+  {
+    "v1": "forget",
+    "v2": "forgot",
+    "v3": "forgotten",
+    "tr": "Unutmak",
+    "cat": 3
+  },
+  {
+    "v1": "forgive",
+    "v2": "forgave",
+    "v3": "forgiven",
+    "tr": "Affetmek",
+    "cat": 3
+  },
+  {
+    "v1": "freeze",
+    "v2": "froze",
+    "v3": "frozen",
+    "tr": "Donmak",
+    "cat": 3
+  },
+  {
+    "v1": "give",
+    "v2": "gave",
+    "v3": "given",
+    "tr": "Vermek",
+    "cat": 3
+  },
+  {
+    "v1": "go",
+    "v2": "went",
+    "v3": "gone",
+    "tr": "Gitmek",
+    "cat": 3
+  },
+  {
+    "v1": "grow",
+    "v2": "grew",
+    "v3": "grown",
+    "tr": "Büyümek/Yetiştirmek",
+    "cat": 3
+  },
+  {
+    "v1": "hide",
+    "v2": "hid",
+    "v3": "hidden",
+    "tr": "Saklanmak",
+    "cat": 3
+  },
+  {
+    "v1": "know",
+    "v2": "knew",
+    "v3": "known",
+    "tr": "Bilmek",
+    "cat": 3
+  },
+  {
+    "v1": "overtake",
+    "v2": "overtook",
+    "v3": "overtaken",
+    "tr": "Sollamak/Geçmek",
+    "cat": 3
+  },
+  {
+    "v1": "overthrow",
+    "v2": "overthrew",
+    "v3": "overthrown",
+    "tr": "Devirmek",
+    "cat": 3
+  },
+  {
+    "v1": "prove",
+    "v2": "proved",
+    "v3": "proven",
+    "tr": "Kanıtlamak",
+    "cat": 3
+  },
+  {
+    "v1": "ride",
+    "v2": "rode",
+    "v3": "ridden",
+    "tr": "Binmek",
+    "cat": 3
+  },
+  {
+    "v1": "ring",
+    "v2": "rang",
+    "v3": "rung",
+    "tr": "Çalmak (zil/telefon)",
+    "cat": 3
+  },
+  {
+    "v1": "rise",
+    "v2": "rose",
+    "v3": "risen",
+    "tr": "Yükselmek",
+    "cat": 3
+  },
+  {
+    "v1": "see",
+    "v2": "saw",
+    "v3": "seen",
+    "tr": "Görmek",
+    "cat": 3
+  },
+  {
+    "v1": "shake",
+    "v2": "shook",
+    "v3": "shaken",
+    "tr": "Sallamak/Titremek",
+    "cat": 3
+  },
+  {
+    "v1": "show",
+    "v2": "showed",
+    "v3": "shown",
+    "tr": "Göstermek",
+    "cat": 3
+  },
+  {
+    "v1": "sing",
+    "v2": "sang",
+    "v3": "sung",
+    "tr": "Şarkı söylemek",
+    "cat": 3
+  },
+  {
+    "v1": "sink",
+    "v2": "sank",
+    "v3": "sunk",
+    "tr": "Batmak",
+    "cat": 3
+  },
+  {
+    "v1": "speak",
+    "v2": "spoke",
+    "v3": "spoken",
+    "tr": "Konuşmak",
+    "cat": 3
+  },
+  {
+    "v1": "steal",
+    "v2": "stole",
+    "v3": "stolen",
+    "tr": "Çalmak (hırsızlık)",
+    "cat": 3
+  },
+  {
+    "v1": "strive",
+    "v2": "strove",
+    "v3": "striven",
+    "tr": "Çabalamak",
+    "cat": 3
+  },
+  {
+    "v1": "swear",
+    "v2": "swore",
+    "v3": "sworn",
+    "tr": "Yemin etmek/Küfretmek",
+    "cat": 3
+  },
+  {
+    "v1": "swim",
+    "v2": "swam",
+    "v3": "swum",
+    "tr": "Yüzmek",
+    "cat": 3
+  },
+  {
+    "v1": "take",
+    "v2": "took",
+    "v3": "taken",
+    "tr": "Almak",
+    "cat": 3
+  },
+  {
+    "v1": "tear",
+    "v2": "tore",
+    "v3": "torn",
+    "tr": "Yırtmak",
+    "cat": 3
+  },
+  {
+    "v1": "thrive",
+    "v2": "throve",
+    "v3": "thriven",
+    "tr": "Gelişmek/Serpilmek",
+    "cat": 3
+  },
+  {
+    "v1": "throw",
+    "v2": "threw",
+    "v3": "thrown",
+    "tr": "Atmak",
+    "cat": 3
+  },
+  {
+    "v1": "undertake",
+    "v2": "undertook",
+    "v3": "undertaken",
+    "tr": "Üstlenmek",
+    "cat": 3
+  },
+  {
+    "v1": "wake",
+    "v2": "woke",
+    "v3": "woken",
+    "tr": "Uyanmak/Uyandırmak",
+    "cat": 3
+  },
+  {
+    "v1": "wear",
+    "v2": "wore",
+    "v3": "worn",
+    "tr": "Giymek",
+    "cat": 3
+  },
+  {
+    "v1": "withdraw",
+    "v2": "withdrew",
+    "v3": "withdrawn",
+    "tr": "Geri çekilmek/Para çekmek",
+    "cat": 3
+  },
+  {
+    "v1": "write",
+    "v2": "wrote",
+    "v3": "written",
+    "tr": "Yazmak",
+    "cat": 3
+  }
+];
+
+  // RANKS & LEVELS CONFIGURATION
+  const RANKS = [
+    { lvl: 1, minXp: 0, title: "Acemi Dilci", icon: "🌱" },
+    { lvl: 2, minXp: 100, title: "YDS Çaylağı", icon: "📖" },
+    { lvl: 3, minXp: 250, title: "Kelime Avcısı", icon: "🏹" },
+    { lvl: 4, minXp: 500, title: "Gramer Ustası", icon: "⚡" },
+    { lvl: 5, minXp: 900, title: "YDS Canavarı", icon: "🦁" },
+    { lvl: 6, minXp: 1500, title: "YDS Efsanesi", icon: "🏆" }
+  ];
+
+  // MOTIVATIONAL MESSAGES
+  const CHEERS = [
+    "Harikasın! 🎯",
+    "Gözün kapalı yapıyorsun! ⚡",
+    "YDS'de bu soru cepte! 🚀",
+    "Ateş aldın, devam et! 🔥",
+    "Mükemmel hafıza! 🧠",
+    "Harika bir seri yakaladın! ✨",
+    "Tam isabet! 👏",
+    "Sınavda bu soru kaçmaz! 💯"
+  ];
+
+  // LOCAL STORAGE STATE INITIALIZATION
+  let state = {
+    xp: 0,
+    streak: 0,
+    bestStreak: 0,
+    correctCount: 0,
+    wrongCount: 0,
+    soundEnabled: true,
+    darkMode: null, // null: follow system, true/false
+    activeCategory: 'all', // 'all', 1, 2, 3, 'hard'
+    verbStats: {} // { [v1]: { weight: 10, correct: 0, wrong: 0, mastered: false } }
+  };
+
+  // Load from LocalStorage
+  function loadState() {
+    try {
+      const saved = localStorage.getItem('verbmaster_yds_state');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        state = Object.assign(state, parsed);
+      }
+    } catch (e) {
+      console.warn("Storage load error:", e);
+    }
+
+    // Ensure all verbs exist in verbStats
+    RAW_VERBS.forEach(v => {
+      if (!state.verbStats[v.v1]) {
+        state.verbStats[v.v1] = {
+          weight: 10,
+          correct: 0,
+          wrong: 0,
+          mastered: false
+        };
+      }
+    });
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem('verbmaster_yds_state', JSON.stringify(state));
+    } catch (e) {
+      console.warn("Storage save error:", e);
+    }
+  }
+
+  loadState();
+
+  // AUDIO SYNTHESIZER (WEB AUDIO API - ZERO DEPENDENCY)
+  let audioCtx = null;
+  function getAudioContext() {
+    if (!audioCtx && (window.AudioContext || window.webkitAudioContext)) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    return audioCtx;
+  }
+
+  function playTone(freq, type = 'sine', duration = 0.15, delay = 0) {
+    if (!state.soundEnabled) return;
+    const ctx = getAudioContext();
+    if (!ctx) return;
+
+    setTimeout(() => {
+      try {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {}
+    }, delay * 1000);
+  }
+
+  function playSuccessSound(streakBonus = false) {
+    if (streakBonus) {
+      // Ascending celebratory chord
+      playTone(523.25, 'sine', 0.12, 0);       // C5
+      playTone(659.25, 'sine', 0.12, 0.08);    // E5
+      playTone(783.99, 'sine', 0.14, 0.16);    // G5
+      playTone(1046.50, 'sine', 0.25, 0.24);   // C6
+    } else {
+      playTone(659.25, 'sine', 0.10, 0);       // E5
+      playTone(880.00, 'sine', 0.18, 0.08);    // A5
+    }
+  }
+
+  function playWrongSound() {
+    playTone(260, 'triangle', 0.15, 0);
+    playTone(220, 'triangle', 0.22, 0.1);
+  }
+
+  // NATIVE ENGLISH SPEECH SYNTHESIS
+  function speakCurrentVerb() {
+    if (!window.speechSynthesis || !currentVerb) return;
+    window.speechSynthesis.cancel(); // Stop any pending speech
+
+    const textToSpeak = `${currentVerb.v1}, ${currentVerb.v2.replace('/', ' or ')}, ${currentVerb.v3}`;
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.88; // Slightly slower for better memorization clarity
+    window.speechSynthesis.speak(utterance);
+  }
+
+  // CURRENT QUESTION STATE
+  let currentVerb = null;
+  let givenIndex = 0;
+  let isAnswered = false;
+  let hintStage = 0; // 0: none, 1: meaning shown, 2: letter hint
+
+  // DOM Elements
+  const v1Container = document.getElementById('v1-container');
+  const v2Container = document.getElementById('v2-container');
+  const v3Container = document.getElementById('v3-container');
+  const trText = document.getElementById('turkish-meaning');
+  const groupTag = document.getElementById('group-tag');
+  const feedbackToast = document.getElementById('feedback-toast');
+  const btnCheck = document.querySelector('.btn-check');
+  const btnGiveUp = document.querySelector('.btn-giveup');
+  const btnNext = document.querySelector('.btn-next');
+  const btnHint = document.getElementById('btn-hint');
+  const streakNum = document.getElementById('streak-num');
+  const streakBox = document.getElementById('streak-box');
+  const currXpEl = document.getElementById('curr-xp');
+  const nextXpEl = document.getElementById('next-xp');
+  const xpBar = document.getElementById('xp-bar');
+  const rankIcon = document.getElementById('rank-icon');
+  const rankName = document.getElementById('rank-name');
+  const rankLvl = document.getElementById('rank-lvl');
+  const statLearned = document.getElementById('stat-learned');
+  const statAccuracy = document.getElementById('stat-accuracy');
+  const statTotal = document.getElementById('stat-total');
+  const hardCountPill = document.getElementById('hard-count-pill');
+  const btnSound = document.getElementById('btn-sound');
+  const btnTheme = document.getElementById('btn-theme');
+
+  // KEYBOARD NAVIGATION (iPhone SE3 & Desktop)
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (isAnswered) {
+        nextQuestion();
+      } else {
+        // If current input is empty, or if we have another unfilled input, advance to it
+        const inputs = Array.from(document.querySelectorAll('.verb-input'));
+        const activeEl = document.activeElement;
+        const activeIdx = inputs.indexOf(activeEl);
+
+        if (activeIdx !== -1 && activeIdx < inputs.length - 1 && inputs[activeIdx].value.trim() !== '') {
+          inputs[activeIdx + 1].focus();
+        } else {
+          checkAnswer();
+        }
+      }
+    }
+  });
+
+  // FILTER LOGIC
+  function getEligibleVerbs() {
+    if (state.activeCategory === 'all') {
+      return RAW_VERBS;
+    }
+    if (state.activeCategory === 'hard') {
+      const h = RAW_VERBS.filter(v => state.verbStats[v.v1] && (state.verbStats[v.v1].weight > 10 || state.verbStats[v.v1].wrong > 0));
+      return h.length > 0 ? h : RAW_VERBS; // Fallback to all if none
+    }
+    return RAW_VERBS.filter(v => v.cat === state.activeCategory);
+  }
+
+  function setCategory(cat, btnEl) {
+    state.activeCategory = cat;
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    if (btnEl) btnEl.classList.add('active');
+    initGame();
+  }
+
+  function getWeightedRandomVerb() {
+    const pool = getEligibleVerbs();
+    let totalWeight = 0;
+    pool.forEach(v => {
+      const st = state.verbStats[v.v1] || { weight: 10 };
+      totalWeight += st.weight;
+    });
+
+    let random = Math.random() * totalWeight;
+    for (let v of pool) {
+      const st = state.verbStats[v.v1] || { weight: 10 };
+      if (random < st.weight) return v;
+      random -= st.weight;
+    }
+    return pool[0];
+  }
+
+  // GROUP NAMES
+  const GROUP_NAMES = {
+    1: "1. Grup: 3 Hali Aynı",
+    2: "2. Grup: 2 Hali Aynı",
+    3: "3. Grup: 3 Hali Farklı"
+  };
+
+  // INIT GAME QUESTION
+  function initGame() {
+    currentVerb = getWeightedRandomVerb();
+    givenIndex = Math.floor(Math.random() * 3);
+    isAnswered = false;
+    hintStage = 0;
+
+    v1Container.innerHTML = '';
+    v2Container.innerHTML = '';
+    v3Container.innerHTML = '';
+
+    // Set Group Tag
+    groupTag.innerText = GROUP_NAMES[currentVerb.cat] || "YDS Irregular Verb";
+
+    // Set Meaning
+    trText.innerText = currentVerb.tr;
+
+    // Reset Buttons
+    btnCheck.style.display = 'inline-flex';
+    btnGiveUp.style.display = 'inline-flex';
+    btnNext.style.display = 'none';
+    feedbackToast.className = 'feedback-toast';
+    btnHint.innerHTML = '<span>💡 İpucu</span>';
+
+    // Create 3 columns
+    createVerbItem(v1Container, currentVerb.v1, 0);
+    createVerbItem(v2Container, currentVerb.v2, 1);
+    createVerbItem(v3Container, currentVerb.v3, 2);
+
+    // Auto-focus first input
+    const firstInput = document.querySelector('.verb-input');
+    if (firstInput) {
+      setTimeout(() => firstInput.focus(), 50);
+    }
+
+    updateUI();
+  }
+
+  function createVerbItem(container, value, index) {
+    if (index === givenIndex) {
+      const div = document.createElement('div');
+      div.className = 'locked-verb';
+      div.innerText = value;
+      container.appendChild(div);
+    } else {
+      const input = document.createElement('input');
+      input.className = 'verb-input';
+      input.type = 'text';
+      input.dataset.answer = value;
+      input.autocomplete = "off";
+      input.autocorrect = "off";
+      input.autocapitalize = "none";
+      input.spellcheck = false;
+      input.setAttribute('enterkeyhint', 'next');
+      container.appendChild(input);
+    }
+  }
+
+  // SMART ANSWER MATCHING (Handles "was/were", extra spaces, casing)
+  function normalizeStr(str) {
+    return (str || '').trim().toLowerCase().replace(/\s+/g, '');
+  }
+
+  function isAnswerCorrect(userVal, correctVal) {
+    const u = normalizeStr(userVal);
+    const c = normalizeStr(correctVal);
+    if (!u) return false;
+    if (u === c) return true;
+
+    // If answer contains alternatives like "was/were"
+    if (correctVal.includes('/')) {
+      const options = correctVal.split('/').map(normalizeStr);
+      if (options.includes(u)) return true;
+    }
+    return false;
+  }
+
+  // CHECK ANSWER
+  function checkAnswer() {
+    if (isAnswered) return;
+
+    // First user gesture unlocks Web Audio on iOS Safari
+    getAudioContext();
+
+    const inputs = document.querySelectorAll('.verb-input');
+    let allCorrect = true;
+    let anyEmpty = false;
+
+    inputs.forEach(input => {
+      const userVal = input.value;
+      const correctVal = input.dataset.answer;
+
+      if (!userVal.trim()) anyEmpty = true;
+
+      if (isAnswerCorrect(userVal, correctVal)) {
+        input.classList.add('correct');
+        input.classList.remove('wrong');
+      } else {
+        input.classList.add('wrong');
+        input.classList.remove('correct');
+        allCorrect = false;
+      }
+    });
+
+    const vStat = state.verbStats[currentVerb.v1];
+
+    if (allCorrect) {
+      isAnswered = true;
+      state.correctCount++;
+      state.streak++;
+      if (state.streak > state.bestStreak) state.bestStreak = state.streak;
+
+      // Smart Weight reduction on mastery
+      vStat.correct++;
+      vStat.weight = Math.max(1, vStat.weight - 4);
+      if (vStat.weight <= 2) vStat.mastered = true;
+
+      // XP calculation: 10 base + streak bonus
+      const bonus = state.streak >= 5 ? 10 : (state.streak >= 3 ? 5 : 0);
+      const earnedXp = 10 + bonus;
+      state.xp += earnedXp;
+
+      // Play Sound
+      const isMilestone = state.streak % 5 === 0;
+      playSuccessSound(isMilestone);
+
+      // Trigger Confetti on 5, 10, 15... or master
+      if (isMilestone) {
+        launchConfetti();
+        streakBox.classList.add('fire-pulse');
+        setTimeout(() => streakBox.classList.remove('fire-pulse'), 500);
+      }
+
+      // Feedback Toast
+      const cheer = CHEERS[Math.floor(Math.random() * CHEERS.length)];
+      feedbackToast.innerText = `${cheer} (+${earnedXp} XP)`;
+      feedbackToast.className = 'feedback-toast show success';
+
+      // Auto pronounce after correct answer
+      speakCurrentVerb();
+
+      showDoneState();
+      saveState();
+      updateUI();
+    } else {
+      state.wrongCount++;
+      state.streak = 0;
+      vStat.wrong++;
+      vStat.weight += 12; // Increase weight so it appears more often
+      vStat.mastered = false;
+
+      playWrongSound();
+
+      feedbackToast.innerText = anyEmpty ? "Lütfen boşlukları doldur! ✍️" : "Tekrar dene veya 'Bilmiyorum'a bas 🔄";
+      feedbackToast.className = 'feedback-toast show failure';
+
+      // Vibrate if supported
+      if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
+
+      saveState();
+      updateUI();
+    }
+  }
+
+  // GIVE UP
+  function giveUp() {
+    if (isAnswered) return;
+    getAudioContext();
+
+    isAnswered = true;
+    state.wrongCount++;
+    state.streak = 0;
+
+    const vStat = state.verbStats[currentVerb.v1];
+    vStat.wrong++;
+    vStat.weight += 20; // High priority for review
+    vStat.mastered = false;
+
+    const inputs = document.querySelectorAll('.verb-input');
+    inputs.forEach(input => {
+      input.value = input.dataset.answer;
+      input.classList.remove('wrong', 'correct');
+      input.classList.add('given-up');
+    });
+
+    playWrongSound();
+
+    feedbackToast.innerText = "Cevaplar gösterildi. Şimdi sesini dinle ve tekrarla! 💡";
+    feedbackToast.className = 'feedback-toast show giveup';
+
+    speakCurrentVerb();
+    showDoneState();
+    saveState();
+    updateUI();
+  }
+
+  function showDoneState() {
+    btnCheck.style.display = 'none';
+    btnGiveUp.style.display = 'none';
+    btnNext.style.display = 'inline-flex';
+    btnNext.focus();
+  }
+
+  function nextQuestion() {
+    initGame();
+  }
+
+  // HINT SYSTEM
+  function useHint() {
+    if (isAnswered) return;
+
+    if (hintStage === 0) {
+      // Stage 1: Highlight Turkish meaning & speak root verb
+      trText.style.color = "var(--warning)";
+      btnHint.innerHTML = "<span>🔤 İlk Harf</span>";
+      hintStage = 1;
+      feedbackToast.innerText = "Türkçe anlama dikkat et! 💡";
+      feedbackToast.className = "feedback-toast show";
+    } else if (hintStage === 1) {
+      // Stage 2: Fill first letter of empty inputs
+      const inputs = document.querySelectorAll('.verb-input');
+      inputs.forEach(input => {
+        if (!input.value) {
+          input.value = input.dataset.answer.charAt(0);
+        }
+      });
+      btnHint.innerHTML = "<span>✓ İpucu Verildi</span>";
+      hintStage = 2;
+    }
+  }
+
+  // UI & GAMIFICATION UPDATE
+  function updateUI() {
+    // Streak
+    streakNum.innerText = state.streak;
+
+    // Ranks & XP
+    let currentRank = RANKS[0];
+    let nextRank = RANKS[1];
+
+    for (let i = 0; i < RANKS.length; i++) {
+      if (state.xp >= RANKS[i].minXp) {
+        currentRank = RANKS[i];
+        nextRank = RANKS[i + 1] || null;
+      }
+    }
+
+    rankIcon.innerText = currentRank.icon;
+    rankName.innerText = currentRank.title;
+    rankLvl.innerText = currentRank.lvl;
+
+    currXpEl.innerText = state.xp;
+    if (nextRank) {
+      nextXpEl.innerText = nextRank.minXp;
+      const progressPercent = Math.min(100, Math.round(((state.xp - currentRank.minXp) / (nextRank.minXp - currentRank.minXp)) * 100));
+      xpBar.style.width = progressPercent + '%';
+    } else {
+      nextXpEl.innerText = "MAX";
+      xpBar.style.width = '100%';
+    }
+
+    // Stats calculations
+    let masteredCount = 0;
+    let hardCount = 0;
+
+    RAW_VERBS.forEach(v => {
+      const st = state.verbStats[v.v1];
+      if (st) {
+        if (st.mastered || st.weight <= 2) masteredCount++;
+        if (st.weight > 10 || st.wrong > 0) hardCount++;
+      }
+    });
+
+    statLearned.innerText = `${masteredCount} / ${RAW_VERBS.length}`;
+    hardCountPill.innerText = hardCount;
+
+    const totalQuestions = state.correctCount + state.wrongCount;
+    statTotal.innerText = totalQuestions;
+    const accuracy = totalQuestions > 0 ? Math.round((state.correctCount / totalQuestions) * 100) : 0;
+    statAccuracy.innerText = accuracy + '%';
+
+    // Sound button state
+    btnSound.innerText = state.soundEnabled ? '🔊' : '🔇';
+  }
+
+  // SOUND TOGGLE
+  function toggleSound() {
+    state.soundEnabled = !state.soundEnabled;
+    btnSound.innerText = state.soundEnabled ? '🔊' : '🔇';
+    saveState();
+  }
+
+  // THEME TOGGLE
+  function toggleTheme() {
+    const isDark = document.body.classList.contains('dark-mode');
+    if (isDark) {
+      document.body.classList.remove('dark-mode');
+      document.body.classList.add('light-mode');
+      btnTheme.innerText = '☀️';
+      state.darkMode = false;
+    } else {
+      document.body.classList.remove('light-mode');
+      document.body.classList.add('dark-mode');
+      btnTheme.innerText = '🌙';
+      state.darkMode = true;
+    }
+    saveState();
+  }
+
+  if (state.darkMode === true) {
+    document.body.classList.add('dark-mode');
+    btnTheme.innerText = '🌙';
+  } else if (state.darkMode === false) {
+    document.body.classList.add('light-mode');
+    btnTheme.innerText = '☀️';
+  }
+
+  // MODAL / KELİME LİSTESİ
+  function openModal() {
+    const container = document.getElementById('verb-list-container');
+    container.innerHTML = '';
+
+    // Sort: hardest first, then learning, then mastered
+    const sorted = [...RAW_VERBS].sort((a, b) => {
+      const stA = state.verbStats[a.v1] || { weight: 10 };
+      const stB = state.verbStats[b.v1] || { weight: 10 };
+      return stB.weight - stA.weight;
+    });
+
+    sorted.forEach(v => {
+      const st = state.verbStats[v.v1] || { weight: 10, correct: 0, wrong: 0, mastered: false };
+      const item = document.createElement('div');
+      item.className = 'verb-list-item';
+
+      let statusBadge = '';
+      if (st.mastered || st.weight <= 2) {
+        statusBadge = '<span class="verb-status-badge status-mastered">✓ Öğrenildi</span>';
+      } else if (st.weight > 10 || st.wrong > 0) {
+        statusBadge = '<span class="verb-status-badge status-hard">⚠️ Tekrar Et</span>';
+      } else {
+        statusBadge = '<span class="verb-status-badge status-learning">⏳ Çalışılıyor</span>';
+      }
+
+      item.innerHTML = `
+        <div class="verb-list-words">
+          <div class="verb-list-eng">${v.v1} — ${v.v2} — ${v.v3}</div>
+          <div class="verb-list-tr">🇹🇷 ${v.tr}</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:6px;">
+          ${statusBadge}
+          <button class="audio-btn" style="width:24px; height:24px; font-size:0.75rem;" onclick="speakSpecificVerb('${v.v1}', '${v.v2}', '${v.v3}')">🔊</button>
+        </div>
+      `;
+      container.appendChild(item);
+    });
+
+    document.getElementById('words-modal').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('words-modal').classList.remove('open');
+  }
+
+  function closeModalOnOverlay(e) {
+    if (e.target.id === 'words-modal') closeModal();
+  }
+
+  function speakSpecificVerb(v1, v2, v3) {
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(`${v1}, ${v2.replace('/', ' or ')}, ${v3}`);
+    u.lang = 'en-US';
+    u.rate = 0.88;
+    window.speechSynthesis.speak(u);
+  }
+
+  function resetProgress() {
+    if (confirm("Tüm XP, Seri ve Öğrenilen kelime ilerlemenizi sıfırlamak istediğinize emin misiniz?")) {
+      state.xp = 0;
+      state.streak = 0;
+      state.correctCount = 0;
+      state.wrongCount = 0;
+      RAW_VERBS.forEach(v => {
+        state.verbStats[v.v1] = { weight: 10, correct: 0, wrong: 0, mastered: false };
+      });
+      saveState();
+      updateUI();
+      closeModal();
+      initGame();
+    }
+  }
+
+  // LIGHTWEIGHT EMBEDDED CANVAS CONFETTI (Zero external libs)
+  function launchConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const pieces = [];
+    const colors = ['#2563eb', '#38bdf8', '#22c55e', '#f59e0b', '#ec4899', '#a855f7'];
+
+    for (let i = 0; i < 60; i++) {
+      pieces.push({
+        x: canvas.width / 2,
+        y: canvas.height * 0.45,
+        vx: (Math.random() - 0.5) * 10,
+        vy: (Math.random() - 0.7) * 12,
+        size: Math.random() * 6 + 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 360,
+        rSpeed: (Math.random() - 0.5) * 8,
+        life: 1
+      });
+    }
+
+    let animId;
+    function render() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let alive = false;
+
+      pieces.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.35; // gravity
+        p.rotation += p.rSpeed;
+        p.life -= 0.015;
+
+        if (p.life > 0) {
+          alive = true;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.globalAlpha = p.life;
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+          ctx.restore();
+        }
+      });
+
+      if (alive) {
+        animId = requestAnimationFrame(render);
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        cancelAnimationFrame(animId);
+      }
+    }
+    render();
+  }
+
+  // START APP
+  initGame();
+
+</script>
+
+</body>
+</html>
