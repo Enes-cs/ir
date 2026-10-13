@@ -853,13 +853,13 @@
     </div>
 
     <!-- Dynamic Feedback Toast -->
-    <div class="feedback-toast" id="feedback-toast">Harika! Doğru Cevap 🎯</div>
+    <div class="feedback-toast" id="feedback-toast">Awesome! True Answer 🎯</div>
 
     <!-- Ergonomic Action Row -->
     <div class="action-row">
-      <button class="btn btn-giveup" onclick="giveUp()">Bilmiyorum</button>
-      <button class="btn btn-check" onclick="checkAnswer()">Kontrol Et ➔</button>
-      <button class="btn btn-next" onclick="nextQuestion()">Sonraki Soru ➔</button>
+      <button class="btn btn-giveup" onclick="giveUp()">Give Up</button>
+      <button class="btn btn-check" onclick="checkAnswer()">Check it ➔</button>
+      <button class="btn btn-next" onclick="nextQuestion()">Next Question ➔</button>
     </div>
   </div>
 
@@ -1725,24 +1725,23 @@
 
   // RANKS & LEVELS CONFIGURATION
   const RANKS = [
-    { lvl: 1, minXp: 0, title: "Acemi Dilci", icon: "🌱" },
-    { lvl: 2, minXp: 100, title: "YDS Çaylağı", icon: "📖" },
-    { lvl: 3, minXp: 250, title: "Kelime Avcısı", icon: "🏹" },
-    { lvl: 4, minXp: 500, title: "Gramer Ustası", icon: "⚡" },
-    { lvl: 5, minXp: 900, title: "YDS Canavarı", icon: "🦁" },
-    { lvl: 6, minXp: 1500, title: "YDS Efsanesi", icon: "🏆" }
+    { lvl: 1, minXp: 0, title: "Düzensiz Fiil Cahili", icon: "🌱" },
+    { lvl: 2, minXp: 1000, title: "Düzensiz Fiilden Haberdar", icon: "📖" },
+    { lvl: 3, minXp: 2500, title: "Biraz Biliyor", icon: "🏹" },
+    { lvl: 4, minXp: 5000, title: "Sıradan Ezberci", icon: "⚡" },
+    { lvl: 5, minXp: 9000, title: "Düzensiz Fiil Canavarı", icon: "🦁" },
+    { lvl: 6, minXp: 15000, title: "Düzensiz Fiil Efsanesi", icon: "🏆" }
   ];
 
   // MOTIVATIONAL MESSAGES
   const CHEERS = [
     "Harikasın! 🎯",
     "Gözün kapalı yapıyorsun! ⚡",
-    "YDS'de bu soru cepte! 🚀",
+    "Bunu ezberledin cepte! 🚀",
     "Ateş aldın, devam et! 🔥",
     "Mükemmel hafıza! 🧠",
     "Harika bir seri yakaladın! ✨",
     "Tam isabet! 👏",
-    "Sınavda bu soru kaçmaz! 💯"
   ];
 
   // LOCAL STORAGE STATE INITIALIZATION
@@ -2105,7 +2104,7 @@
 
       playWrongSound();
 
-      feedbackToast.innerText = anyEmpty ? "Lütfen boşlukları doldur! ✍️" : "Tekrar dene veya 'Bilmiyorum'a bas 🔄";
+      feedbackToast.innerText = anyEmpty ? "Fill in the blanks Irregular Verbs! ✍️" : "Try again or push 'Give Up' 🔄";
       feedbackToast.className = 'feedback-toast show failure';
 
       // Vibrate if supported
@@ -2139,7 +2138,7 @@
 
     playWrongSound();
 
-    feedbackToast.innerText = "Cevaplar gösterildi. Şimdi sesini dinle ve tekrarla! 💡";
+    feedbackToast.innerText = "Answers showed. Try again! 💡";
     feedbackToast.className = 'feedback-toast show giveup';
 
     speakCurrentVerb();
@@ -2168,7 +2167,7 @@
       trText.style.color = "var(--warning)";
       btnHint.innerHTML = "<span>🔤 İlk Harf</span>";
       hintStage = 1;
-      feedbackToast.innerText = "Türkçe anlama dikkat et! 💡";
+      feedbackToast.innerText = "Caution to Turkish mean! 💡";
       feedbackToast.className = "feedback-toast show";
     } else if (hintStage === 1) {
       // Stage 2: Fill first letter of empty inputs
@@ -2178,7 +2177,7 @@
           input.value = input.dataset.answer.charAt(0);
         }
       });
-      btnHint.innerHTML = "<span>✓ İpucu Verildi</span>";
+      btnHint.innerHTML = "<span>✓ Tips active</span>";
       hintStage = 2;
     }
   }
