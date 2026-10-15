@@ -265,10 +265,39 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.64rem;
+      font-size: 0.63rem;
       color: var(--text-muted);
       font-weight: 600;
       margin-top: 1px;
+    }
+
+    /* Daily Goal Bar */
+    .daily-goal-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: var(--bg);
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 0.63rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .daily-goal-bar-wrap {
+      flex: 1;
+      height: 5px;
+      background: var(--input-border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .daily-goal-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #16a34a, #4ade80);
+      transition: width 0.35s ease;
     }
 
     .streak-badge {
@@ -392,7 +421,7 @@
 
     /* Active Level Rules Banner */
     .level-rules-bar {
-      font-size: 0.64rem;
+      font-size: 0.63rem;
       font-weight: 700;
       color: var(--text-muted);
       display: flex;
@@ -432,7 +461,7 @@
     .filter-chip {
       flex: 0 0 auto;
       padding: 6px 10px;
-      font-size: 0.69rem;
+      font-size: 0.68rem;
       font-weight: 700;
       border-radius: 20px;
       background: var(--card-bg);
@@ -465,7 +494,7 @@
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 9px;
       position: relative;
       overflow: hidden;
     }
@@ -496,17 +525,18 @@
       background: var(--danger);
     }
 
-    /* Card Header: Category, Timer & Hint button */
+    /* Card Header: Category, Word Mastery Stars, Timer & Hint button */
     .card-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-top: 2px;
-      gap: 5px;
+      gap: 4px;
+      flex-wrap: wrap;
     }
 
     .group-indicator {
-      font-size: 0.66rem;
+      font-size: 0.65rem;
       font-weight: 700;
       color: var(--primary);
       background: var(--primary-light);
@@ -517,8 +547,21 @@
       gap: 4px;
     }
 
+    .word-mastery-pill {
+      font-size: 0.64rem;
+      font-weight: 800;
+      padding: 3px 7px;
+      border-radius: 8px;
+      background: var(--bg);
+      border: 1px solid var(--card-border);
+      color: var(--warning);
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
     .timer-pill {
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 800;
       padding: 3px 7px;
       border-radius: 8px;
@@ -547,7 +590,7 @@
       background: var(--warning-bg);
       border: 1px solid rgba(245, 158, 11, 0.3);
       color: #b45309;
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 700;
       padding: 4px 8px;
       border-radius: 8px;
@@ -574,7 +617,7 @@
       background: var(--input-bg);
       border: 1px dashed var(--card-border);
       border-radius: 12px;
-      padding: 9px 10px;
+      padding: 8px 10px;
       text-align: center;
       min-height: 44px;
       display: flex;
@@ -768,6 +811,38 @@
       40%, 80% { transform: translateX(4px); }
     }
 
+    /* Memory Hook & Pattern Family Banner (Helps permanent memorization!) */
+    .memory-hook-box {
+      display: none;
+      background: var(--bg);
+      border-left: 3px solid var(--primary);
+      border-radius: 8px;
+      padding: 6px 9px;
+      font-size: 0.7rem;
+      line-height: 1.35;
+      color: var(--text);
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .memory-hook-box.show {
+      display: flex;
+    }
+
+    .memory-hook-title {
+      font-weight: 800;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+    }
+
+    .memory-hook-desc {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
     /* Motivational Toast message inside card */
     .feedback-toast {
       min-height: 20px;
@@ -921,7 +996,7 @@
       background: var(--card-bg);
       width: 100%;
       max-width: 440px;
-      max-height: 82vh;
+      max-height: 84vh;
       border-radius: 20px 20px 0 0;
       padding: 16px 16px calc(var(--safe-bottom) + 20px) 16px;
       display: flex;
@@ -970,6 +1045,29 @@
       font-size: 1rem;
     }
 
+    .modal-search-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .modal-search-input {
+      flex: 1;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid var(--input-border);
+      background: var(--input-bg);
+      color: var(--text);
+      padding: 0 10px;
+      font-size: 14px;
+      font-weight: 600;
+      outline: none;
+    }
+
+    .modal-search-input:focus {
+      border-color: var(--primary);
+    }
+
     .reset-confirm-bar {
       display: none;
       background: var(--danger-bg);
@@ -1006,12 +1104,14 @@
       justify-content: space-between;
       align-items: center;
       font-size: 0.8rem;
+      gap: 8px;
     }
 
     .verb-list-words {
       display: flex;
       flex-direction: column;
       gap: 2px;
+      min-width: 0;
     }
 
     .verb-list-eng {
@@ -1029,6 +1129,7 @@
       font-weight: 700;
       padding: 3px 7px;
       border-radius: 6px;
+      white-space: nowrap;
     }
 
     .status-mastered {
@@ -1074,7 +1175,7 @@
       }
       .challenge-card {
         padding: 10px 10px;
-        gap: 8px;
+        gap: 7px;
       }
       .meaning-box {
         min-height: 40px;
@@ -1155,7 +1256,7 @@
 
       .game-strip {
         padding: 18px;
-        gap: 14px;
+        gap: 12px;
       }
 
       .level-title {
@@ -1168,6 +1269,11 @@
 
       .xp-meta-row {
         font-size: 0.72rem;
+      }
+
+      .daily-goal-row {
+        font-size: 0.7rem;
+        padding: 6px 10px;
       }
 
       .diff-header-label {
@@ -1236,12 +1342,17 @@
       /* Spacious Main Challenge Card on PC */
       .challenge-card {
         padding: 26px 28px;
-        gap: 18px;
+        gap: 16px;
       }
 
       .group-indicator {
         font-size: 0.8rem;
         padding: 6px 12px;
+      }
+
+      .word-mastery-pill {
+        font-size: 0.76rem;
+        padding: 5px 10px;
       }
 
       .timer-pill {
@@ -1302,6 +1413,11 @@
         font-size: 0.85rem;
       }
 
+      .memory-hook-box {
+        padding: 10px 14px;
+        font-size: 0.82rem;
+      }
+
       .feedback-toast {
         font-size: 0.92rem;
         min-height: 24px;
@@ -1332,8 +1448,8 @@
       }
 
       .modal-sheet {
-        max-width: 720px;
-        max-height: 80vh;
+        max-width: 740px;
+        max-height: 82vh;
         border-radius: 20px;
         padding: 22px 24px;
         transform: scale(0.95);
@@ -1352,7 +1468,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 8px;
-        max-height: 58vh;
+        max-height: 56vh;
       }
     }
 
@@ -1430,6 +1546,15 @@
           </div>
         </div>
 
+        <!-- Daily Goal Progress Bar -->
+        <div class="daily-goal-row">
+          <span id="daily-goal-label">🎯 Günlük Hedef: 0/15</span>
+          <div class="daily-goal-bar-wrap">
+            <div class="daily-goal-bar-fill" id="daily-goal-bar"></div>
+          </div>
+          <span id="familiar-count-label" style="color: var(--success);">★ 0 Tanıdık</span>
+        </div>
+
         <div class="diff-header-label">
           <span>🎯 Zorluk Seviyesi Seç:</span>
           <span id="diff-badge-pill" style="color: var(--primary);">Çok Basit Mod Aktif</span>
@@ -1462,7 +1587,7 @@
         </div>
       </div>
 
-      <!-- Quick Stats (In Sidebar on PC, at Bottom on Mobile via CSS order if needed, or right here) -->
+      <!-- Quick Stats -->
       <div class="stats-footer">
         <div class="stat-item">
           <span class="stat-val" id="stat-learned">0</span>
@@ -1503,6 +1628,7 @@
 
         <div class="card-top">
           <span class="group-indicator" id="group-tag">1. Grup: 3 Hali Aynı</span>
+          <span class="word-mastery-pill" id="word-mastery-pill" title="Bu kelimedeki ustalık seviyen">☆☆☆ Yeni</span>
           <span class="timer-pill" id="timer-pill">⏱️ <span id="timer-sec">Süresiz</span></span>
           <button class="hint-btn" id="btn-hint" onclick="useHint()">
             <span>💡 İpucu</span>
@@ -1540,6 +1666,15 @@
           <div class="meaning-options-grid" id="meaning-options-grid"></div>
         </div>
 
+        <!-- Memory Hook & Pattern Family Banner -->
+        <div class="memory-hook-box" id="memory-hook-box">
+          <div class="memory-hook-title">
+            <span id="memory-hook-pattern">🧠 Kalıp İpucu</span>
+            <span id="memory-hook-alt" style="font-size: 0.65rem; color: var(--text-muted);"></span>
+          </div>
+          <div class="memory-hook-desc" id="memory-hook-desc"></div>
+        </div>
+
         <!-- Dynamic Feedback Toast -->
         <div class="feedback-toast" id="feedback-toast">Harika! Doğru Cevap 🎯</div>
 
@@ -1570,8 +1705,13 @@
       <div class="modal-title">📖 Kelime Listesi & Durum</div>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
+
+    <div class="modal-search-row">
+      <input type="text" class="modal-search-input" id="modal-search-input" placeholder="🔍 İngilizce veya Türkçe kelime ara..." oninput="renderModalVerbList()">
+    </div>
+
     <div style="font-size: 0.73rem; color: var(--text-muted); display:flex; justify-content:space-between; align-items:center;">
-      <span>Kelimeye tıklayarak telaffuzunu dinleyebilirsin:</span>
+      <span>Kelimeye tıklayarak dinle veya <b>Çalış</b> ile hemen sor:</span>
       <button type="button" onclick="toggleResetConfirm(true)" style="background:none; border:none; color:var(--danger); cursor:pointer; font-weight:800; font-size:0.73rem;">İlerlemeyi Sıfırla</button>
     </div>
 
@@ -1739,6 +1879,158 @@
     {"v1": "mislead", "v2": "misled", "v3": "misled", "tr": "Yanıltmak/Aldatmak", "cat": 4}
   ];
 
+  // DUAL-FORM / ALTERNATIVE ACCEPTED FORMS (British & American English + YDS Variants)
+  const ALTERNATE_FORMS = {
+    "broadcast": { v2: ["broadcasted"], v3: ["broadcasted"] },
+    "forecast":  { v2: ["forecasted"],  v3: ["forecasted"] },
+    "burn":      { v2: ["burned"],      v3: ["burned"] },
+    "dream":     { v2: ["dreamed"],     v3: ["dreamed"] },
+    "dwell":     { v2: ["dwelled"],     v3: ["dwelled"] },
+    "get":       { v2: [],              v3: ["gotten"] },
+    "hang":      { v2: ["hanged"],      v3: ["hanged"] },
+    "learn":     { v2: ["learned"],     v3: ["learned"] },
+    "shine":     { v2: ["shined"],      v3: ["shined"] },
+    "smell":     { v2: ["smelled"],     v3: ["smelled"] },
+    "strike":    { v2: [],              v3: ["stricken"] },
+    "bear":      { v2: [],              v3: ["borne"] },
+    "forbid":    { v2: ["forbad"],      v3: [] },
+    "forget":    { v2: [],              v3: ["forgot"] },
+    "prove":     { v2: [],              v3: ["proved"] },
+    "show":      { v2: [],              v3: ["showed"] },
+    "sink":      { v2: ["sunk"],        v3: ["sunken"] },
+    "shrink":    { v2: ["shrunk"],      v3: ["shrunken"] },
+    "strive":    { v2: ["strived"],     v3: ["strived"] },
+    "thrive":    { v2: ["thrived"],     v3: ["thrived"] },
+    "wake":      { v2: ["waked"],       v3: ["waked"] },
+    "tread":     { v2: [],              v3: ["trod"] },
+    "weave":     { v2: ["weaved"],      v3: ["weaved"] },
+    "abide":     { v2: ["abided"],      v3: ["abided"] }
+  };
+
+  // LINGUISTIC PATTERN FAMILY & MEMORY HOOK GENERATOR
+  function getVerbPatternInfo(verb) {
+    const { v1, v2, v3, cat } = verb;
+    const alt = ALTERNATE_FORMS[v1];
+    let altText = "";
+    if (alt) {
+      const a2 = alt.v2 && alt.v2.length ? `V2: ${alt.v2.join('/')}` : '';
+      const a3 = alt.v3 && alt.v3.length ? `V3: ${alt.v3.join('/')}` : '';
+      altText = [a2, a3].filter(Boolean).join(' • ');
+      if (altText) altText = `Alternatif: ${altText}`;
+    }
+
+    if (v1 === "read") {
+      return {
+        pattern: "📢 Okunuş Tuzağı (Yazılış Aynı, Ses Farklı)",
+        tip: "Yazılışı 3 halde de 'read' kalır ama V2 ve V3 'red' (kırmızı gibi) okunur!",
+        altText
+      };
+    }
+    if (v1 === "lie") {
+      return {
+        pattern: "⚠️ YDS En Büyük Tuzağı: Lie vs. Lay",
+        tip: "Uzanmak: lie - lay - lain | Serip koymak: lay - laid - laid (YDS'de 'yalan söylemek' ise düzenli: lied - lied).",
+        altText
+      };
+    }
+    if (v1 === "lay") {
+      return {
+        pattern: "⚠️ YDS En Büyük Tuzağı: Lay vs. Lie",
+        tip: "Nesne alır (masayı kurmak, temel atmak): lay - laid - laid (pay - paid - paid gibi!).",
+        altText
+      };
+    }
+    if (v1 === "wind") {
+      return {
+        pattern: "⚠️ YDS Tuzağı: Wind vs. Wound",
+        tip: "Sarmak/Kurmak: wind - wound - wound ('find - found - found' kalıbı). 'Yaralamak' olan wound ise düzenlidir (wounded).",
+        altText
+      };
+    }
+    if (v1 === "bear") {
+      return {
+        pattern: "🎓 YDS Akademik İpucu: Born vs. Borne",
+        tip: "Doğmak: be born | Taşımak/Katlanmak/Hastalığı bulaştırmak: bear - bore - borne (water-borne diseases).",
+        altText
+      };
+    }
+    if (cat === 1) {
+      return {
+        pattern: "🔒 Sabit Kalıp (V1 = V2 = V3)",
+        tip: "Sonu -t veya -d ile biten bu kısa fiil 3 halde de hiç değişmez: " + `${v1} - ${v2} - ${v3}.`,
+        altText
+      };
+    }
+    if (v1 === v3 && v1 !== v2) {
+      return {
+        pattern: "🪃 Bumerang Kalıbı (V1 = V3 Aynı!)",
+        tip: `Ortada ses değişir ama V3 tekrar başa (V1'e) döner: ${v1} ➔ ${v2} ➔ ${v3}.`,
+        altText
+      };
+    }
+    if (v2.endsWith("ought") || v2.endsWith("aught")) {
+      return {
+        pattern: "🧱 -ought / -aught Ailesi (V2 = V3)",
+        tip: "Sadece 'catch' ve 'teach' içinde 'a' varsa -aught olur; diğerleri -ought ile biter.",
+        altText
+      };
+    }
+    if (["begin","drink","ring","sing","sink","swim","shrink"].includes(v1)) {
+      return {
+        pattern: "🎵 i ➔ a ➔ u Melodik Ses Değişimi",
+        tip: `Kök içindeki 'i' harfi V2'de 'a', V3'te 'u' olur: ${v1} ➔ ${v2} ➔ ${v3}.`,
+        altText
+      };
+    }
+    if (v2.endsWith("ew") && v3.endsWith("own")) {
+      return {
+        pattern: "🌬️ -ew ➔ -own Ailesi",
+        tip: `V2 '-ew' ile, V3 ise '-own' ile biter: ${v1} ➔ ${v2} ➔ ${v3}.`,
+        altText
+      };
+    }
+    if (["break","choose","freeze","speak","steal","wake","weave"].includes(v1)) {
+      return {
+        pattern: "❄️ o ➔ o_en Ailesi",
+        tip: `V2'de ses 'o'ya döner, V3'te sonuna '-en' eklenir: ${v1} ➔ ${v2} ➔ ${v3}.`,
+        altText
+      };
+    }
+    if (["arise","drive","ride","rise","stride","strive","thrive","write"].includes(v1)) {
+      return {
+        pattern: "🚴 i_e ➔ o_e ➔ i_en Ailesi",
+        tip: `Uzun 'i' sesi V2'de 'o' olur, V3'te kısa 'i + en' alır: ${v1} ➔ ${v2} ➔ ${v3}.`,
+        altText
+      };
+    }
+    if (["bind","find","grind","wind"].includes(v1)) {
+      return {
+        pattern: "🎯 -ind ➔ -ound İkiz Kalıbı (V2 = V3)",
+        tip: `Sonu '-ind' olan bu grupta V2 ve V3 '-ound' olur: ${v1} ➔ ${v2} ➔ ${v3}.`,
+        altText
+      };
+    }
+    if (["swear","tear","wear"].includes(v1)) {
+      return {
+        pattern: "🧵 -ear ➔ -ore ➔ -orn Ailesi",
+        tip: `Kafiyeli üçlü (wear/tear/swear): V2 '-ore', V3 '-orn' ile biter.`,
+        altText
+      };
+    }
+    if (v2 === v3) {
+      return {
+        pattern: "👯 İkiz Kardeşler (V2 = V3 Aynı!)",
+        tip: `2. ve 3. halleri birebir aynıdır, tek kelime ezberlemen yeter: ${v2} = ${v3}.`,
+        altText
+      };
+    }
+    return {
+      pattern: "⚡ 3 Hali Farklı Akademik Fiil",
+      tip: `Ritimle sesli tekrarla: "${v1} — ${v2} — ${v3}" (${verb.tr}).`,
+      altText
+    };
+  }
+
   // RANKS & LEVELS CONFIGURATION
   const RANKS = [
     { lvl: 1,  minXp: 0,    title: "Acemi Dilci",      icon: "🌱" },
@@ -1758,7 +2050,7 @@
     easy: {
       id: 'easy',
       name: "🌱 Çok Basit Mod",
-      blanksCount: 1, // 2 given, only 1 blank!
+      blanksCount: 1,
       timed: false,
       timeSec: 0,
       blindTrProb: 0,
@@ -1774,7 +2066,7 @@
     medium: {
       id: 'medium',
       name: "⚖️ Orta Mod",
-      blanksCount: 2, // 1 given, 2 blanks (Classic)
+      blanksCount: 2,
       timed: false,
       timeSec: 0,
       blindTrProb: 0,
@@ -1790,7 +2082,7 @@
     hard: {
       id: 'hard',
       name: "🔥 Zor Mod",
-      blanksCount: 3, // All 3 blanks! Only Turkish meaning is shown
+      blanksCount: 3,
       timed: true,
       timeSec: 18,
       blindTrProb: 0,
@@ -1799,14 +2091,14 @@
       giveUpPenalty: 12,
       baseXp: 20,
       hintsAllowed: true,
-      masteryTarget: 4,
+      masteryTarget: 3,
       ruleText: "3 Kutu da Boş (V1-V2-V3) • 18sn Süre",
       penaltyText: "Hata: -8 XP | İpucu: -5 XP"
     },
     extra_hard: {
       id: 'extra_hard',
       name: "💀 Extra Zor Mod",
-      blanksCount: 3, // 3 blanks OR 2 blanks + hidden Turkish meaning quiz
+      blanksCount: 3,
       timed: true,
       timeSec: 10,
       blindTrProb: 0.55,
@@ -1815,7 +2107,7 @@
       giveUpPenalty: 25,
       baseXp: 30,
       hintsAllowed: false,
-      masteryTarget: 5,
+      masteryTarget: 4,
       ruleText: "Kör Anlam Testi & 3 Boşluk • 10sn Süre",
       penaltyText: "İpucu Yok | Hata: -15 XP"
     }
@@ -1832,13 +2124,21 @@
     "Tam isabet! 👏"
   ];
 
-  // LOCAL STORAGE STATE INITIALIZATION (Defaulting to 'easy' for beginners!)
+  function getTodayKey() {
+    const d = new Date();
+    return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+  }
+
+  // LOCAL STORAGE STATE INITIALIZATION
   let state = {
     xp: 0,
     streak: 0,
     bestStreak: 0,
     correctCount: 0,
     wrongCount: 0,
+    dailyDate: getTodayKey(),
+    dailyCount: 0,
+    dailyGoal: 15,
     soundEnabled: true,
     darkMode: null,
     activeCategory: 'all',
@@ -1861,6 +2161,12 @@
       state.difficultyMode = 'easy';
     }
 
+    const today = getTodayKey();
+    if (state.dailyDate !== today) {
+      state.dailyDate = today;
+      state.dailyCount = 0;
+    }
+
     RAW_VERBS.forEach(v => {
       if (!state.verbStats[v.v1]) {
         state.verbStats[v.v1] = {
@@ -1874,7 +2180,6 @@
         if (typeof state.verbStats[v.v1].consecutive !== 'number') {
           state.verbStats[v.v1].consecutive = 0;
         }
-        // Cap any previously inflated weights from localStorage so a few verbs never monopolize the game
         if (!state.verbStats[v.v1].mastered) {
           state.verbStats[v.v1].weight = Math.min(18, Math.max(4, state.verbStats[v.v1].weight || 10));
         }
@@ -1942,15 +2247,22 @@
     playTone(210, 'triangle', 0.22, 0.1);
   }
 
-  // NATIVE ENGLISH SPEECH SYNTHESIS
+  // NATIVE ENGLISH SPEECH SYNTHESIS (Fixes 'read' V2/V3 pronunciation as 'red')
+  function buildSpeechText(v1, v2, v3) {
+    if (v1 === 'read') {
+      return 'read, red, red';
+    }
+    return `${v1}, ${v2.replace('/', ' or ')}, ${v3.replace('/', ' or ')}`;
+  }
+
   function speakCurrentVerb() {
     if (!window.speechSynthesis || !currentVerb) return;
     window.speechSynthesis.cancel();
 
-    const textToSpeak = `${currentVerb.v1}, ${currentVerb.v2.replace('/', ' or ')}, ${currentVerb.v3}`;
+    const textToSpeak = buildSpeechText(currentVerb.v1, currentVerb.v2, currentVerb.v3);
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
     utterance.lang = 'en-US';
-    utterance.rate = 0.88;
+    utterance.rate = 0.86;
     window.speechSynthesis.speak(utterance);
   }
 
@@ -1960,6 +2272,7 @@
   let isMeaningHidden = false;
   let selectedMeaningOption = null;
   let isAnswered = false;
+  let hadMistakeOnCurrent = false; // Prevents double-penalizing retries on the same question!
   let hintStage = 0;
   let timerInterval = null;
   let timeRemaining = 18.0;
@@ -1971,7 +2284,12 @@
   const v3Container = document.getElementById('v3-container');
   const trText = document.getElementById('turkish-meaning');
   const groupTag = document.getElementById('group-tag');
+  const wordMasteryPill = document.getElementById('word-mastery-pill');
   const feedbackToast = document.getElementById('feedback-toast');
+  const memoryHookBox = document.getElementById('memory-hook-box');
+  const memoryHookPattern = document.getElementById('memory-hook-pattern');
+  const memoryHookAlt = document.getElementById('memory-hook-alt');
+  const memoryHookDesc = document.getElementById('memory-hook-desc');
   const btnCheck = document.querySelector('.btn-check');
   const btnGiveUp = document.getElementById('btn-giveup');
   const btnNext = document.querySelector('.btn-next');
@@ -1985,6 +2303,9 @@
   const rankName = document.getElementById('rank-name');
   const rankLvl = document.getElementById('rank-lvl');
   const rankReqText = document.getElementById('rank-req-text');
+  const dailyGoalLabel = document.getElementById('daily-goal-label');
+  const dailyGoalBar = document.getElementById('daily-goal-bar');
+  const familiarCountLabel = document.getElementById('familiar-count-label');
   const statLearned = document.getElementById('stat-learned');
   const statAccuracy = document.getElementById('stat-accuracy');
   const statBestStreak = document.getElementById('stat-best-streak');
@@ -2007,6 +2328,10 @@
 
   // KEYBOARD NAVIGATION
   document.addEventListener('keydown', function(e) {
+    if (document.getElementById('words-modal').classList.contains('open')) {
+      if (e.key === 'Escape') closeModal();
+      return;
+    }
     if (e.key === 'Enter') {
       e.preventDefault();
       if (isAnswered) {
@@ -2030,6 +2355,15 @@
     RAW_VERBS.forEach(v => {
       const st = state.verbStats[v.v1];
       if (st && (st.mastered || st.weight <= 2)) count++;
+    });
+    return count;
+  }
+
+  function getFamiliarCount() {
+    let count = 0;
+    RAW_VERBS.forEach(v => {
+      const st = state.verbStats[v.v1];
+      if (st && (st.correct > 0 || st.mastered)) count++;
     });
     return count;
   }
@@ -2081,7 +2415,6 @@
 
   function getWeightedRandomVerb() {
     const fullPool = getEligibleVerbs();
-    // Exclude recently asked verbs (last 10 questions) so the same verb never appears back-to-back
     const cooldownLimit = Math.min(10, Math.max(1, fullPool.length - 1));
     const filteredPool = fullPool.filter(v => !recentVerbsQueue.includes(v.v1));
     const pool = filteredPool.length > 0 ? filteredPool : fullPool;
@@ -2118,6 +2451,40 @@
     3: "3. Grup: 3 Hali Farklı",
     4: "🔥 4. Grup: YDS Tuzağı"
   };
+
+  function updateWordMasteryBadge(verbObj) {
+    if (!verbObj || !wordMasteryPill) return;
+    const st = state.verbStats[verbObj.v1] || { consecutive: 0, mastered: false, wrong: 0 };
+    const cfg = getActiveDifficultyConfig();
+    const target = cfg.masteryTarget || 2;
+    const cons = Math.min(3, st.consecutive || 0);
+
+    if (st.mastered || st.weight <= 2) {
+      wordMasteryPill.innerText = "★★★ Ezberlendi";
+      wordMasteryPill.style.color = "var(--success)";
+    } else if (cons >= 2) {
+      wordMasteryPill.innerText = "★★☆ Gelişiyor";
+      wordMasteryPill.style.color = "var(--warning)";
+    } else if (cons === 1 || st.correct > 0) {
+      wordMasteryPill.innerText = "★☆☆ Tanıdık";
+      wordMasteryPill.style.color = "var(--primary)";
+    } else if (st.wrong > 0) {
+      wordMasteryPill.innerText = "⚠️ Zorlanılan";
+      wordMasteryPill.style.color = "var(--danger)";
+    } else {
+      wordMasteryPill.innerText = `☆☆☆ Yeni (0/${target})`;
+      wordMasteryPill.style.color = "var(--text-muted)";
+    }
+  }
+
+  function showMemoryHookBanner(verbObj) {
+    if (!verbObj || !memoryHookBox) return;
+    const info = getVerbPatternInfo(verbObj);
+    memoryHookPattern.innerText = info.pattern;
+    memoryHookAlt.innerText = info.altText || "";
+    memoryHookDesc.innerText = info.tip;
+    memoryHookBox.classList.add('show');
+  }
 
   function stopQuestionTimer() {
     if (timerInterval) {
@@ -2193,6 +2560,9 @@
     }
 
     playWrongSound();
+    showMemoryHookBanner(currentVerb);
+    updateWordMasteryBadge(currentVerb);
+
     const penMsg = cfg.wrongPenalty > 0 ? ` (-${cfg.wrongPenalty} XP)` : '';
     feedbackToast.innerText = `⏰ Süre Doldu!${penMsg} Doğru cevaplar gösterildi.`;
     feedbackToast.className = 'feedback-toast show failure';
@@ -2263,24 +2633,27 @@
     }
   }
 
-  // INIT GAME QUESTION
-  function initGame() {
+  // INIT GAME QUESTION (Optionally accepts a specific verb to practice from the list!)
+  function initGame(forcedVerb = null) {
     stopQuestionTimer();
-    currentVerb = getWeightedRandomVerb();
+    currentVerb = forcedVerb || getWeightedRandomVerb();
     const cfg = getActiveDifficultyConfig();
 
     isMeaningHidden = false;
     lockedIndices = chooseLockedIndices(cfg);
 
     isAnswered = false;
+    hadMistakeOnCurrent = false;
     hintStage = 0;
 
     v1Container.innerHTML = '';
     v2Container.innerHTML = '';
     v3Container.innerHTML = '';
+    memoryHookBox.classList.remove('show');
 
-    // Set Group Tag
+    // Set Group Tag & Mastery Badge
     groupTag.innerText = GROUP_NAMES[currentVerb.cat] || "YDS Irregular Verb";
+    updateWordMasteryBadge(currentVerb);
 
     // Set Meaning or Blind Quiz
     if (isMeaningHidden) {
@@ -2308,7 +2681,7 @@
       btnHint.disabled = false;
       btnHint.innerHTML = cfg.hintCost > 0
         ? `<span>💡 İpucu (-${cfg.hintCost} XP)</span>`
-        : '<span>💡 İpucu (Ücretsiz)</span>';
+        : '<span>💡 İpucu</span>';
     }
 
     diffBadgePill.innerText = `${cfg.name} Aktif`;
@@ -2356,6 +2729,7 @@
       input.className = 'verb-input';
       input.type = 'text';
       input.dataset.answer = value;
+      input.dataset.colIndex = String(index);
       input.placeholder = `V${index + 1} yaz...`;
       input.autocomplete = "off";
       input.autocorrect = "off";
@@ -2370,7 +2744,8 @@
     return (str || '').trim().toLowerCase().replace(/\s+/g, '');
   }
 
-  function isAnswerCorrect(userVal, correctVal) {
+  // SMART VALIDATION: Supports slash options ('was/were') AND British/American alternate forms!
+  function isAnswerCorrect(userVal, correctVal, colIndex) {
     const u = normalizeStr(userVal);
     const c = normalizeStr(correctVal);
     if (!u) return false;
@@ -2380,6 +2755,13 @@
       const options = correctVal.split('/').map(normalizeStr);
       if (options.includes(u)) return true;
     }
+
+    if (currentVerb && ALTERNATE_FORMS[currentVerb.v1]) {
+      const alt = ALTERNATE_FORMS[currentVerb.v1];
+      if (colIndex === 1 && alt.v2 && alt.v2.map(normalizeStr).includes(u)) return true;
+      if (colIndex === 2 && alt.v3 && alt.v3.map(normalizeStr).includes(u)) return true;
+    }
+
     return false;
   }
 
@@ -2397,10 +2779,11 @@
     inputs.forEach(input => {
       const userVal = input.value;
       const correctVal = input.dataset.answer;
+      const colIdx = parseInt(input.dataset.colIndex || '0', 10);
 
       if (!userVal.trim()) anyEmpty = true;
 
-      if (isAnswerCorrect(userVal, correctVal)) {
+      if (isAnswerCorrect(userVal, correctVal, colIdx)) {
         input.classList.add('correct');
         input.classList.remove('wrong');
       } else {
@@ -2421,20 +2804,62 @@
       if (!meaningQuizCorrect) allCorrect = false;
     }
 
+    // If user left boxes empty without typing anything, don't penalize them—just prompt them!
+    if (anyEmpty && !allCorrect) {
+      feedbackToast.innerText = "Lütfen önce boş kutuyu doldur veya '💡 İpucu' kullan! ✍️";
+      feedbackToast.className = 'feedback-toast show failure';
+      const firstEmpty = Array.from(inputs).find(inp => !inp.value.trim());
+      if (firstEmpty) firstEmpty.focus();
+      return;
+    }
+
     const vStat = state.verbStats[currentVerb.v1];
 
     if (allCorrect) {
       stopQuestionTimer();
       isAnswered = true;
-      state.correctCount++;
-      state.streak++;
-      if (state.streak > state.bestStreak) state.bestStreak = state.streak;
 
-      vStat.correct++;
-      vStat.consecutive = (vStat.consecutive || 0) + 1;
-      vStat.weight = Math.max(1, vStat.weight - 4);
-      if (vStat.consecutive >= cfg.masteryTarget || vStat.weight <= 2) {
-        vStat.mastered = true;
+      state.dailyCount = (state.dailyCount || 0) + 1;
+      const hitDailyGoalJustNow = state.dailyCount === state.dailyGoal;
+
+      if (!hadMistakeOnCurrent) {
+        // First-try clean success!
+        state.correctCount++;
+        state.streak++;
+        if (state.streak > state.bestStreak) state.bestStreak = state.streak;
+
+        vStat.correct++;
+        vStat.consecutive = (vStat.consecutive || 0) + 1;
+        vStat.weight = Math.max(1, vStat.weight - 4);
+        if (vStat.consecutive >= cfg.masteryTarget || vStat.weight <= 2) {
+          vStat.mastered = true;
+        }
+
+        const streakBonus = state.streak >= 5 ? 8 : (state.streak >= 3 ? 4 : 0);
+        const earnedXp = cfg.baseXp + streakBonus;
+        state.xp += earnedXp;
+
+        const isMilestone = state.streak % 5 === 0 || hitDailyGoalJustNow;
+        playSuccessSound(isMilestone);
+
+        if (isMilestone) {
+          launchConfetti();
+          streakBox.classList.add('fire-pulse');
+          setTimeout(() => streakBox.classList.remove('fire-pulse'), 500);
+        }
+
+        const cheer = hitDailyGoalJustNow
+          ? "🎉 Günlük Hedef Tamamlandı! Harikasın!"
+          : CHEERS[Math.floor(Math.random() * CHEERS.length)];
+        feedbackToast.innerText = `${cheer} (+${earnedXp} XP)`;
+        feedbackToast.className = 'feedback-toast show success';
+      } else {
+        // Corrected after a mistake (Muscle memory recovery!)
+        const recoveryXp = 5;
+        state.xp += recoveryXp;
+        playSuccessSound(false);
+        feedbackToast.innerText = `Doğrusunu yazarak hafızana kazıdın! 👏 (+${recoveryXp} Telafi XP)`;
+        feedbackToast.className = 'feedback-toast show success';
       }
 
       if (isMeaningHidden) {
@@ -2443,38 +2868,27 @@
         revealMeaningQuizCorrect();
       }
 
-      const streakBonus = state.streak >= 5 ? 8 : (state.streak >= 3 ? 4 : 0);
-      const earnedXp = cfg.baseXp + streakBonus;
-      state.xp += earnedXp;
-
-      const isMilestone = state.streak % 5 === 0;
-      playSuccessSound(isMilestone);
-
-      if (isMilestone) {
-        launchConfetti();
-        streakBox.classList.add('fire-pulse');
-        setTimeout(() => streakBox.classList.remove('fire-pulse'), 500);
-      }
-
-      const cheer = CHEERS[Math.floor(Math.random() * CHEERS.length)];
-      feedbackToast.innerText = `${cheer} (+${earnedXp} XP)`;
-      feedbackToast.className = 'feedback-toast show success';
-
+      showMemoryHookBanner(currentVerb);
+      updateWordMasteryBadge(currentVerb);
       speakCurrentVerb();
       showDoneState();
       saveState();
       updateUI();
     } else {
-      state.wrongCount++;
-      state.streak = 0;
-      if (cfg.wrongPenalty > 0) {
-        state.xp = Math.max(0, state.xp - cfg.wrongPenalty);
-      }
+      // Only penalize once per question so retrying doesn't drain XP or inflate wrongCount
+      if (!hadMistakeOnCurrent) {
+        hadMistakeOnCurrent = true;
+        state.wrongCount++;
+        state.streak = 0;
+        if (cfg.wrongPenalty > 0) {
+          state.xp = Math.max(0, state.xp - cfg.wrongPenalty);
+        }
 
-      vStat.wrong++;
-      vStat.consecutive = 0;
-      vStat.weight = Math.min(22, vStat.weight + 4);
-      vStat.mastered = false;
+        vStat.wrong++;
+        vStat.consecutive = 0;
+        vStat.weight = Math.min(22, vStat.weight + 4);
+        vStat.mastered = false;
+      }
 
       if (isMeaningHidden && selectedMeaningOption && selectedMeaningOption !== currentVerb.tr) {
         document.querySelectorAll('.meaning-opt-btn').forEach(btn => {
@@ -2483,11 +2897,11 @@
       }
 
       playWrongSound();
+      showMemoryHookBanner(currentVerb);
+      updateWordMasteryBadge(currentVerb);
 
       const penText = cfg.wrongPenalty > 0 ? ` (-${cfg.wrongPenalty} XP)` : '';
-      feedbackToast.innerText = anyEmpty
-        ? `Lütfen boş kutuyu doldur!${penText} ✍️`
-        : `Tekrar dene veya 'İpucu / Bilmiyorum' kullan${penText} 🔄`;
+      feedbackToast.innerText = `Hatalı kutuyu düzelt veya '💡 İpucu / Bilmiyorum' kullan${penText} 🔄`;
       feedbackToast.className = 'feedback-toast show failure';
 
       if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
@@ -2505,17 +2919,20 @@
 
     const cfg = getActiveDifficultyConfig();
     isAnswered = true;
-    state.wrongCount++;
-    state.streak = 0;
-    if (cfg.giveUpPenalty > 0) {
-      state.xp = Math.max(0, state.xp - cfg.giveUpPenalty);
-    }
 
-    const vStat = state.verbStats[currentVerb.v1];
-    vStat.wrong++;
-    vStat.consecutive = 0;
-    vStat.weight = Math.min(22, vStat.weight + 5);
-    vStat.mastered = false;
+    if (!hadMistakeOnCurrent) {
+      state.wrongCount++;
+      state.streak = 0;
+      if (cfg.giveUpPenalty > 0) {
+        state.xp = Math.max(0, state.xp - cfg.giveUpPenalty);
+      }
+
+      const vStat = state.verbStats[currentVerb.v1];
+      vStat.wrong++;
+      vStat.consecutive = 0;
+      vStat.weight = Math.min(22, vStat.weight + 5);
+      vStat.mastered = false;
+    }
 
     const inputs = document.querySelectorAll('.verb-input');
     inputs.forEach(input => {
@@ -2531,9 +2948,11 @@
     }
 
     playWrongSound();
+    showMemoryHookBanner(currentVerb);
+    updateWordMasteryBadge(currentVerb);
 
     const penMsg = cfg.giveUpPenalty > 0 ? ` (-${cfg.giveUpPenalty} XP)` : '';
-    feedbackToast.innerText = `Cevap gösterildi${penMsg}. Sesini dinle ve tekrarla! 💡`;
+    feedbackToast.innerText = `Cevap ve Kalıp İpucu açıldı${penMsg}. Sesini dinle! 💡`;
     feedbackToast.className = 'feedback-toast show giveup';
 
     speakCurrentVerb();
@@ -2553,7 +2972,7 @@
     initGame();
   }
 
-  // HINT SYSTEM
+  // PROGRESSIVE HINT SYSTEM (Works even if user typed a wrong answer!)
   function useHint() {
     if (isAnswered) return;
     const cfg = getActiveDifficultyConfig();
@@ -2565,18 +2984,27 @@
       }
       const inputs = document.querySelectorAll('.verb-input');
       inputs.forEach(input => {
-        if (!input.value) {
-          const ans = input.dataset.answer;
+        const ans = input.dataset.answer.split('/')[0];
+        const colIdx = parseInt(input.dataset.colIndex || '0', 10);
+        // If empty OR currently wrong, fill the first 1-2 letters!
+        if (!input.value.trim() || !isAnswerCorrect(input.value, input.dataset.answer, colIdx)) {
           input.value = (cfg.id === 'easy' && ans.length >= 4) ? ans.slice(0, 2) : ans.charAt(0);
+          input.classList.remove('wrong');
         }
       });
+
+      showMemoryHookBanner(currentVerb);
       btnHint.innerHTML = "<span>✓ İpucu Verildi</span>";
       btnHint.disabled = true;
       hintStage = 1;
       feedbackToast.innerText = cfg.hintCost > 0
-        ? `Başlangıç harfleri yazıldı (-${cfg.hintCost} XP)`
-        : "Başlangıç harfleri kutuya yazıldı! 💡";
+        ? `Başlangıç harfleri ve Kalıp İpucu açıldı (-${cfg.hintCost} XP)`
+        : "Başlangıç harfleri ve Kalıp İpucu açıldı! 💡";
       feedbackToast.className = "feedback-toast show giveup";
+
+      const firstInput = document.querySelector('.verb-input');
+      if (firstInput) firstInput.focus();
+
       saveState();
       updateUI();
     }
@@ -2588,6 +3016,7 @@
     statBestStreak.innerText = state.bestStreak;
 
     const masteredCount = getMasteredCount();
+    const familiarCount = getFamiliarCount();
     const currentRank = getCurrentRankObj();
     const nextRank = RANKS.find(r => r.lvl === currentRank.lvl + 1) || null;
 
@@ -2607,6 +3036,13 @@
       xpBar.style.width = '100%';
       rankReqText.innerText = "Maksimum Seviye!";
     }
+
+    // Daily Goal & Familiar count
+    const dCount = state.dailyCount || 0;
+    const dGoal = state.dailyGoal || 15;
+    dailyGoalLabel.innerText = `🎯 Günlük Hedef: ${dCount}/${dGoal}`;
+    dailyGoalBar.style.width = Math.min(100, Math.round((dCount / dGoal) * 100)) + '%';
+    familiarCountLabel.innerText = `★ ${familiarCount} Tanıdık`;
 
     let hardCount = 0;
     RAW_VERBS.forEach(v => {
@@ -2660,10 +3096,27 @@
   // MODAL / KELİME LİSTESİ
   function openModal() {
     toggleResetConfirm(false);
+    const searchInput = document.getElementById('modal-search-input');
+    if (searchInput) searchInput.value = '';
+    renderModalVerbList();
+    document.getElementById('words-modal').classList.add('open');
+  }
+
+  function renderModalVerbList() {
     const container = document.getElementById('verb-list-container');
+    const searchInput = document.getElementById('modal-search-input');
+    const query = (searchInput ? searchInput.value : '').trim().toLowerCase();
     container.innerHTML = '';
 
-    const sorted = [...RAW_VERBS].sort((a, b) => {
+    const filtered = RAW_VERBS.filter(v => {
+      if (!query) return true;
+      return v.v1.toLowerCase().includes(query) ||
+             v.v2.toLowerCase().includes(query) ||
+             v.v3.toLowerCase().includes(query) ||
+             v.tr.toLowerCase().includes(query);
+    });
+
+    const sorted = [...filtered].sort((a, b) => {
       const stA = state.verbStats[a.v1] || { weight: 10 };
       const stB = state.verbStats[b.v1] || { weight: 10 };
       return stB.weight - stA.weight;
@@ -2676,9 +3129,11 @@
 
       let statusBadge = '';
       if (st.mastered || st.weight <= 2) {
-        statusBadge = '<span class="verb-status-badge status-mastered">✓ Öğrenildi</span>';
+        statusBadge = '<span class="verb-status-badge status-mastered">★★★ Öğrenildi</span>';
       } else if (st.weight > 10 || st.wrong > 0) {
         statusBadge = '<span class="verb-status-badge status-hard">⚠️ Tekrar Et</span>';
+      } else if (st.correct > 0) {
+        statusBadge = '<span class="verb-status-badge status-learning">★ Tanıdık</span>';
       } else {
         statusBadge = '<span class="verb-status-badge status-learning">⏳ Çalışılıyor</span>';
       }
@@ -2688,15 +3143,22 @@
           <div class="verb-list-eng">${v.v1} — ${v.v2} — ${v.v3}</div>
           <div class="verb-list-tr">🇹🇷 ${v.tr}</div>
         </div>
-        <div style="display:flex; align-items:center; gap:6px;">
+        <div style="display:flex; align-items:center; gap:5px; flex-shrink:0;">
           ${statusBadge}
-          <button class="audio-btn" style="width:24px; height:24px; font-size:0.75rem;" onclick="speakSpecificVerb('${v.v1}', '${v.v2}', '${v.v3}')">🔊</button>
+          <button type="button" class="hint-btn" style="padding:3px 7px; font-size:0.65rem;" onclick="practiceSpecificVerb('${v.v1}')">🎯 Sor</button>
+          <button type="button" class="audio-btn" style="width:24px; height:24px; font-size:0.75rem;" onclick="speakSpecificVerb('${v.v1}', '${v.v2}', '${v.v3}')">🔊</button>
         </div>
       `;
       container.appendChild(item);
     });
+  }
 
-    document.getElementById('words-modal').classList.add('open');
+  function practiceSpecificVerb(v1Key) {
+    const found = RAW_VERBS.find(v => v.v1 === v1Key);
+    if (found) {
+      closeModal();
+      initGame(found);
+    }
   }
 
   function closeModal() {
@@ -2710,9 +3172,9 @@
   function speakSpecificVerb(v1, v2, v3) {
     if (!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(`${v1}, ${v2.replace('/', ' or ')}, ${v3}`);
+    const u = new SpeechSynthesisUtterance(buildSpeechText(v1, v2, v3));
     u.lang = 'en-US';
-    u.rate = 0.88;
+    u.rate = 0.86;
     window.speechSynthesis.speak(u);
   }
 
@@ -2729,6 +3191,8 @@
     state.bestStreak = 0;
     state.correctCount = 0;
     state.wrongCount = 0;
+    state.dailyCount = 0;
+    recentVerbsQueue = [];
     RAW_VERBS.forEach(v => {
       state.verbStats[v.v1] = {
         weight: 10,
