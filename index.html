@@ -110,21 +110,39 @@
       background-color: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: calc(var(--safe-top) + 10px) 12px calc(var(--safe-bottom) + 16px) 12px;
+      justify-content: flex-start;
+      padding: calc(var(--safe-top) + 8px) 10px calc(var(--safe-bottom) + 12px) 10px;
       overflow-x: hidden;
       transition: background-color 0.25s, color 0.25s;
     }
 
-    /* iPhone SE 3 Optimized Container: max 400px ensures it fits comfortably */
+    /* ==========================================================================
+       BASE LAYOUT (Mobile & iPhone SE 3 First: 375x667)
+       ========================================================================== */
     .app-wrapper {
       width: 100%;
-      max-width: 400px;
+      max-width: 420px;
       display: flex;
       flex-direction: column;
-      gap: 9px;
+      gap: 8px;
+    }
+
+    .layout-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .side-col, .main-col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
     }
 
     /* Top Bar */
@@ -132,14 +150,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 2px 4px;
+      padding: 2px 2px;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       font-weight: 800;
       color: var(--primary);
       letter-spacing: -0.3px;
@@ -148,11 +166,22 @@
     .brand-tag {
       background: var(--primary-light);
       color: var(--primary);
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       font-weight: 800;
       padding: 2px 6px;
       border-radius: 6px;
       text-transform: uppercase;
+    }
+
+    .device-badge {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 2px 6px;
+      border-radius: 6px;
+      display: none;
     }
 
     .top-actions {
@@ -173,7 +202,7 @@
       justify-content: center;
       cursor: pointer;
       font-size: 1rem;
-      transition: transform 0.1s, background-color 0.2s, color 0.2s;
+      transition: transform 0.1s, background-color 0.2s, color 0.2s, border-color 0.2s;
     }
 
     .icon-btn:active {
@@ -186,18 +215,18 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 10px 14px;
+      padding: 10px 12px;
       display: flex;
       flex-direction: column;
       box-shadow: var(--shadow);
-      gap: 8px;
+      gap: 7px;
     }
 
     .game-strip-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
     }
 
     .level-info {
@@ -236,7 +265,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.65rem;
+      font-size: 0.64rem;
       color: var(--text-muted);
       font-weight: 600;
       margin-top: 1px;
@@ -249,9 +278,9 @@
       background: linear-gradient(135deg, #fef3c7, #fee2e2);
       border: 1px solid #fcd34d;
       color: #b45309;
-      padding: 5px 10px;
+      padding: 5px 9px;
       border-radius: 12px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 800;
       white-space: nowrap;
       transition: transform 0.2s;
@@ -282,12 +311,12 @@
 
     /* 4-Tier Difficulty Mode Selector: Çok Basit, Orta, Zor, Extra Zor */
     .diff-header-label {
-      font-size: 0.65rem;
+      font-size: 0.64rem;
       font-weight: 800;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.3px;
-      margin-bottom: -4px;
+      margin-bottom: -3px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -298,7 +327,7 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 4px;
       background: var(--bg);
-      padding: 4px;
+      padding: 3px;
       border-radius: 11px;
       border: 1px solid var(--card-border);
     }
@@ -307,9 +336,9 @@
       border: 1px solid transparent;
       background: transparent;
       color: var(--text-muted);
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       font-weight: 800;
-      padding: 6px 2px;
+      padding: 5px 2px;
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.2s;
@@ -322,9 +351,9 @@
     }
 
     .diff-btn .diff-sub {
-      font-size: 0.56rem;
+      font-size: 0.54rem;
       font-weight: 600;
-      opacity: 0.8;
+      opacity: 0.82;
     }
 
     .diff-btn.active[data-diff="easy"] {
@@ -363,32 +392,34 @@
 
     /* Active Level Rules Banner */
     .level-rules-bar {
-      font-size: 0.66rem;
+      font-size: 0.64rem;
       font-weight: 700;
       color: var(--text-muted);
       display: flex;
       justify-content: space-between;
       align-items: center;
       background: var(--bg);
-      padding: 5px 8px;
+      padding: 4px 8px;
       border-radius: 8px;
+      gap: 4px;
     }
 
     .penalty-tag {
       color: var(--primary);
       font-weight: 800;
+      white-space: nowrap;
     }
 
     .penalty-tag.strict {
       color: var(--danger);
     }
 
-    /* Category Filter Pills (Scrollable horizontal on mobile) */
+    /* Category Filter Pills (Scrollable horizontal on mobile, wrapped on PC) */
     .filter-scroll {
       display: flex;
-      gap: 6px;
+      gap: 5px;
       overflow-x: auto;
-      padding: 2px 0 4px 0;
+      padding: 1px 0 2px 0;
       scrollbar-width: none;
       -ms-overflow-style: none;
       -webkit-overflow-scrolling: touch;
@@ -400,8 +431,8 @@
 
     .filter-chip {
       flex: 0 0 auto;
-      padding: 6px 11px;
-      font-size: 0.7rem;
+      padding: 6px 10px;
+      font-size: 0.69rem;
       font-weight: 700;
       border-radius: 20px;
       background: var(--card-bg);
@@ -430,11 +461,11 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 15px 14px;
+      padding: 13px 12px;
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
-      gap: 11px;
+      gap: 10px;
       position: relative;
       overflow: hidden;
     }
@@ -471,15 +502,15 @@
       justify-content: space-between;
       align-items: center;
       margin-top: 2px;
-      gap: 6px;
+      gap: 5px;
     }
 
     .group-indicator {
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 700;
       color: var(--primary);
       background: var(--primary-light);
-      padding: 4px 8px;
+      padding: 4px 7px;
       border-radius: 8px;
       display: inline-flex;
       align-items: center;
@@ -487,9 +518,9 @@
     }
 
     .timer-pill {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 800;
-      padding: 3px 8px;
+      padding: 3px 7px;
       border-radius: 8px;
       background: var(--bg);
       border: 1px solid var(--card-border);
@@ -516,9 +547,9 @@
       background: var(--warning-bg);
       border: 1px solid rgba(245, 158, 11, 0.3);
       color: #b45309;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      padding: 4px 9px;
+      padding: 4px 8px;
       border-radius: 8px;
       cursor: pointer;
       display: inline-flex;
@@ -543,9 +574,9 @@
       background: var(--input-bg);
       border: 1px dashed var(--card-border);
       border-radius: 12px;
-      padding: 10px;
+      padding: 9px 10px;
       text-align: center;
-      min-height: 46px;
+      min-height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -554,7 +585,7 @@
     }
 
     .meaning-text {
-      font-size: 1.1rem;
+      font-size: 1.08rem;
       font-weight: 800;
       color: var(--primary);
       letter-spacing: -0.2px;
@@ -562,7 +593,7 @@
 
     .meaning-text.hidden-meaning {
       color: var(--purple);
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       letter-spacing: 0;
     }
 
@@ -578,8 +609,9 @@
       align-items: center;
       justify-content: center;
       font-size: 0.85rem;
-      margin-left: 4px;
+      margin-left: 2px;
       transition: transform 0.15s;
+      flex-shrink: 0;
     }
     .audio-btn:active {
       transform: scale(0.85);
@@ -589,7 +621,7 @@
     .meaning-quiz-wrap {
       display: none;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
       margin-top: -2px;
     }
 
@@ -598,7 +630,7 @@
     }
 
     .meaning-quiz-label {
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 800;
       color: var(--purple);
       text-align: center;
@@ -608,7 +640,7 @@
     .meaning-options-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6px;
+      gap: 5px;
     }
 
     .meaning-opt-btn {
@@ -616,8 +648,8 @@
       border: 1.5px solid var(--input-border);
       color: var(--text);
       border-radius: 10px;
-      padding: 7px 6px;
-      font-size: 0.74rem;
+      padding: 6px 5px;
+      font-size: 0.72rem;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.15s;
@@ -646,19 +678,20 @@
     .verb-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
-      margin: 2px 0;
+      gap: 7px;
+      margin: 1px 0;
     }
 
     .verb-col {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 4px;
       text-align: center;
+      min-width: 0;
     }
 
     .verb-label {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 800;
       color: var(--text-muted);
       text-transform: uppercase;
@@ -666,7 +699,7 @@
     }
 
     .verb-sublabel {
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       font-weight: 500;
       color: var(--text-muted);
       opacity: 0.8;
@@ -675,9 +708,9 @@
 
     /* Input & Locked boxes: 16px font-size to prevent iOS Safari auto-zoom! */
     .verb-input, .locked-verb {
-      height: 48px;
+      height: 46px;
       width: 100%;
-      padding: 8px 4px;
+      padding: 6px 3px;
       font-size: 16px; /* CRITICAL FOR IOS SAFARI */
       font-weight: 700;
       text-align: center;
@@ -724,6 +757,9 @@
       justify-content: center;
       user-select: none;
       box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     @keyframes shake {
@@ -734,11 +770,11 @@
 
     /* Motivational Toast message inside card */
     .feedback-toast {
-      min-height: 22px;
+      min-height: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 800;
       text-align: center;
       transition: all 0.2s;
@@ -763,25 +799,25 @@
       color: var(--purple);
     }
 
-    /* Action Buttons (Ergonomic for Thumb on 4.7" screen) */
+    /* Action Buttons (Ergonomic for Thumb on 4.7" iPhone SE 3 screen) */
     .action-row {
       display: flex;
       gap: 8px;
-      margin-top: 2px;
+      margin-top: 1px;
     }
 
     .btn {
-      height: 48px;
+      height: 46px;
       border: none;
       border-radius: 12px;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: transform 0.1s, opacity 0.15s, background-color 0.2s;
+      transition: transform 0.1s, opacity 0.15s, background-color 0.2s, box-shadow 0.2s;
       -webkit-appearance: none;
     }
 
@@ -800,7 +836,7 @@
       background: var(--locked-bg);
       color: var(--text-muted);
       flex: 1;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
     }
 
     .btn-next {
@@ -811,17 +847,41 @@
       display: none;
     }
 
+    /* PC Keyboard Shortcuts Hint (Hidden on Mobile/iPhone SE3, Shown on PC) */
+    .pc-shortcuts-bar {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      padding-top: 4px;
+      border-top: 1px dashed var(--card-border);
+    }
+
+    .kbd-key {
+      background: var(--bg);
+      border: 1px solid var(--input-border);
+      border-bottom-width: 2px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text);
+      font-family: monospace;
+    }
+
     /* Bottom Quick Stats Card */
     .stats-footer {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 10px 14px;
+      padding: 9px 12px;
       display: flex;
       justify-content: space-around;
       align-items: center;
       box-shadow: var(--shadow);
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       color: var(--text-muted);
     }
 
@@ -833,12 +893,12 @@
     }
 
     .stat-val {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 800;
       color: var(--text);
     }
 
-    /* Fullscreen Modal (Kelime Defteri / Zor Kelimeler) */
+    /* Fullscreen / Dialog Modal (Kelime Defteri / Zor Kelimeler) */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -996,6 +1056,328 @@
       pointer-events: none;
       z-index: 9999;
     }
+
+    /* ==========================================================================
+       iPHONE SE 3 SPECIAL TUNING (375x667 & Short Mobile Viewports)
+       Ensures zero vertical scroll & comfortable thumb ergonomics on 4.7" screen
+       ========================================================================== */
+    @media (max-width: 420px) and (max-height: 700px) {
+      body {
+        padding: calc(var(--safe-top) + 4px) 8px calc(var(--safe-bottom) + 6px) 8px;
+      }
+      .app-wrapper, .layout-grid, .side-col, .main-col {
+        gap: 6px;
+      }
+      .game-strip {
+        padding: 8px 10px;
+        gap: 5px;
+      }
+      .challenge-card {
+        padding: 10px 10px;
+        gap: 8px;
+      }
+      .meaning-box {
+        min-height: 40px;
+        padding: 7px 8px;
+      }
+      .verb-input, .locked-verb {
+        height: 42px;
+        font-size: 16px; /* Prevents iOS auto-zoom */
+      }
+      .btn {
+        height: 42px;
+      }
+      .stats-footer {
+        padding: 7px 10px;
+      }
+    }
+
+    /* ==========================================================================
+       PC / DESKTOP WIDESCREEN LAYOUT (min-width: 820px)
+       Transforms into a spacious 2-column dashboard tailored for PC monitors
+       ========================================================================== */
+    @media (min-width: 820px) {
+      body {
+        justify-content: center;
+        padding: 28px 32px;
+      }
+
+      .app-wrapper {
+        max-width: 1020px;
+        gap: 18px;
+      }
+
+      .top-bar {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: var(--radius);
+        padding: 12px 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .brand {
+        font-size: 1.35rem;
+        gap: 10px;
+      }
+
+      .brand-tag {
+        font-size: 0.72rem;
+        padding: 3px 9px;
+      }
+
+      .device-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .icon-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+      }
+
+      /* 2-Column PC Dashboard Grid */
+      .layout-grid {
+        display: grid;
+        grid-template-columns: 340px 1fr;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .side-col {
+        gap: 16px;
+      }
+
+      .main-col {
+        gap: 16px;
+      }
+
+      .game-strip {
+        padding: 18px;
+        gap: 14px;
+      }
+
+      .level-title {
+        font-size: 0.92rem;
+      }
+
+      .xp-meter-wrap {
+        height: 9px;
+      }
+
+      .xp-meta-row {
+        font-size: 0.72rem;
+      }
+
+      .diff-header-label {
+        font-size: 0.72rem;
+        margin-bottom: -4px;
+      }
+
+      /* 2x2 Grid for Difficulty Buttons on PC Sidebar */
+      .diff-selector {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding: 6px;
+      }
+
+      .diff-btn {
+        font-size: 0.8rem;
+        padding: 10px 8px;
+        border-radius: 10px;
+        gap: 2px;
+      }
+
+      .diff-btn .diff-sub {
+        font-size: 0.65rem;
+      }
+
+      .level-rules-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding: 8px 10px;
+        font-size: 0.72rem;
+      }
+
+      /* 2x2 Stats Grid inside Left Sidebar on PC */
+      .stats-footer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 14px;
+      }
+
+      .stat-item {
+        background: var(--bg);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        padding: 10px 8px;
+        gap: 3px;
+      }
+
+      .stat-val {
+        font-size: 1.15rem;
+      }
+
+      /* Filter chips wrap cleanly on PC without horizontal scrolling */
+      .filter-scroll {
+        flex-wrap: wrap;
+        overflow-x: visible;
+        gap: 8px;
+      }
+
+      .filter-chip {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+      }
+
+      /* Spacious Main Challenge Card on PC */
+      .challenge-card {
+        padding: 26px 28px;
+        gap: 18px;
+      }
+
+      .group-indicator {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+      }
+
+      .timer-pill {
+        font-size: 0.85rem;
+        padding: 5px 12px;
+      }
+
+      .hint-btn {
+        font-size: 0.8rem;
+        padding: 6px 14px;
+      }
+
+      .meaning-box {
+        min-height: 68px;
+        padding: 16px 20px;
+        border-radius: 14px;
+      }
+
+      .meaning-text {
+        font-size: 1.5rem;
+      }
+
+      .meaning-text.hidden-meaning {
+        font-size: 1.05rem;
+      }
+
+      .audio-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.05rem;
+      }
+
+      .verb-grid {
+        gap: 14px;
+        margin: 4px 0;
+      }
+
+      .verb-label {
+        font-size: 0.85rem;
+      }
+
+      .verb-sublabel {
+        font-size: 0.72rem;
+      }
+
+      .verb-input, .locked-verb {
+        height: 58px;
+        font-size: 1.2rem;
+        border-radius: 14px;
+      }
+
+      .meaning-options-grid {
+        gap: 10px;
+      }
+
+      .meaning-opt-btn {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+      }
+
+      .feedback-toast {
+        font-size: 0.92rem;
+        min-height: 24px;
+      }
+
+      .action-row {
+        gap: 12px;
+      }
+
+      .btn {
+        height: 54px;
+        font-size: 1.05rem;
+        border-radius: 14px;
+      }
+
+      .btn-giveup {
+        font-size: 0.9rem;
+      }
+
+      .pc-shortcuts-bar {
+        display: flex;
+      }
+
+      /* Centered Dialog Modal with 2-Column Verb List on PC */
+      .modal-overlay {
+        align-items: center;
+        padding: 24px;
+      }
+
+      .modal-sheet {
+        max-width: 720px;
+        max-height: 80vh;
+        border-radius: 20px;
+        padding: 22px 24px;
+        transform: scale(0.95);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      }
+
+      .modal-overlay.open .modal-sheet {
+        transform: scale(1);
+      }
+
+      .modal-handle {
+        display: none;
+      }
+
+      .verb-list-scroll {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        max-height: 58vh;
+      }
+    }
+
+    /* Hover states for PC mouse users */
+    @media (hover: hover) {
+      .icon-btn:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+      .filter-chip:hover:not(.active) {
+        border-color: var(--primary);
+        color: var(--text);
+      }
+      .diff-btn:hover:not(.active) {
+        background: var(--card-bg);
+        color: var(--text);
+      }
+      .btn-check:hover {
+        background: var(--primary-dark);
+      }
+      .btn-giveup:hover {
+        background: var(--input-border);
+        color: var(--text);
+      }
+    }
   </style>
 </head>
 <body>
@@ -1009,6 +1391,7 @@
     <div class="brand">
       <span>⚡ VerbMaster</span>
       <span class="brand-tag">YDS</span>
+      <span class="device-badge" id="device-mode-label">💻 PC Masaüstü Görünümü</span>
     </div>
     <div class="top-actions">
       <button class="icon-btn" id="btn-sound" title="Ses Aç/Kapat" onclick="toggleSound()">🔊</button>
@@ -1017,147 +1400,164 @@
     </div>
   </div>
 
-  <!-- Gamification Status Bar & 4 Difficulty Levels Selector -->
-  <div class="game-strip">
-    <div class="game-strip-top">
-      <div class="level-info">
-        <div class="level-title">
-          <span id="rank-icon">🌱</span>
-          <span id="rank-name">Acemi Dilci</span>
-          <span style="opacity: 0.75; font-size: 0.68rem;">(Lv.<span id="rank-lvl">1</span>)</span>
+  <!-- Responsive Layout Grid: 1-Col on iPhone SE3, 2-Col Dashboard on PC -->
+  <div class="layout-grid">
+
+    <!-- Left Column on PC / Top Section on iPhone SE3 -->
+    <div class="side-col">
+      <!-- Gamification Status Bar & 4 Difficulty Levels Selector -->
+      <div class="game-strip">
+        <div class="game-strip-top">
+          <div class="level-info">
+            <div class="level-title">
+              <span id="rank-icon">🌱</span>
+              <span id="rank-name">Acemi Dilci</span>
+              <span style="opacity: 0.75; font-size: 0.68rem;">(Lv.<span id="rank-lvl">1</span>)</span>
+            </div>
+            <div class="xp-meter-wrap">
+              <div class="xp-meter-fill" id="xp-bar"></div>
+            </div>
+            <div class="xp-meta-row">
+              <span><span id="curr-xp">0</span> / <span id="next-xp">150</span> XP</span>
+              <span id="rank-req-text">Adım adım YDS!</span>
+            </div>
+          </div>
+
+          <div class="streak-badge" id="streak-box">
+            <span>🔥</span>
+            <span id="streak-num">0</span>
+            <span style="font-size: 0.68rem; font-weight: 700;">SERİ</span>
+          </div>
         </div>
-        <div class="xp-meter-wrap">
-          <div class="xp-meter-fill" id="xp-bar"></div>
+
+        <div class="diff-header-label">
+          <span>🎯 Zorluk Seviyesi Seç:</span>
+          <span id="diff-badge-pill" style="color: var(--primary);">Çok Basit Mod Aktif</span>
         </div>
-        <div class="xp-meta-row">
-          <span><span id="curr-xp">0</span> / <span id="next-xp">150</span> XP</span>
-          <span id="rank-req-text">Adım adım YDS!</span>
+
+        <!-- 4 Selectable Difficulty Modes: Çok Basit, Orta, Zor, Extra Zor -->
+        <div class="diff-selector" id="diff-selector">
+          <button class="diff-btn active" data-diff="easy" onclick="setDifficultyMode('easy')">
+            <span>🌱 Çok Basit</span>
+            <span class="diff-sub">1 Boş • Süresiz</span>
+          </button>
+          <button class="diff-btn" data-diff="medium" onclick="setDifficultyMode('medium')">
+            <span>⚖️ Orta</span>
+            <span class="diff-sub">2 Boş • Rahat</span>
+          </button>
+          <button class="diff-btn" data-diff="hard" onclick="setDifficultyMode('hard')">
+            <span>🔥 Zor</span>
+            <span class="diff-sub">3 Boş • 18sn</span>
+          </button>
+          <button class="diff-btn" data-diff="extra_hard" onclick="setDifficultyMode('extra_hard')">
+            <span>💀 Extra Zor</span>
+            <span class="diff-sub">Kör Mod • 10sn</span>
+          </button>
+        </div>
+
+        <!-- Active Mode Rules Info -->
+        <div class="level-rules-bar">
+          <span id="active-mode-desc">2 Kutu Hazır Verilir, Sadece 1 Kutu Yazılır</span>
+          <span class="penalty-tag" id="penalty-desc">Süresiz • Ceza Yok</span>
         </div>
       </div>
 
-      <div class="streak-badge" id="streak-box">
-        <span>🔥</span>
-        <span id="streak-num">0</span>
-        <span style="font-size: 0.68rem; font-weight: 700;">SERİ</span>
+      <!-- Quick Stats (In Sidebar on PC, at Bottom on Mobile via CSS order if needed, or right here) -->
+      <div class="stats-footer">
+        <div class="stat-item">
+          <span class="stat-val" id="stat-learned">0</span>
+          <span>Öğrenildi</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val" id="stat-accuracy">0%</span>
+          <span>Doğruluk</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val" id="stat-best-streak">0</span>
+          <span>Rekor Seri</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val" id="stat-total">0</span>
+          <span>Toplam Soru</span>
+        </div>
       </div>
     </div>
 
-    <div class="diff-header-label">
-      <span>🎯 Zorluk Seviyesi Seç:</span>
-      <span id="diff-badge-pill" style="color: var(--primary);">Çok Basit Mod Aktif</span>
-    </div>
-
-    <!-- 4 Selectable Difficulty Modes: Çok Basit, Orta, Zor, Extra Zor -->
-    <div class="diff-selector" id="diff-selector">
-      <button class="diff-btn active" data-diff="easy" onclick="setDifficultyMode('easy')">
-        <span>🌱 Çok Basit</span>
-        <span class="diff-sub">1 Boş • Süresiz</span>
-      </button>
-      <button class="diff-btn" data-diff="medium" onclick="setDifficultyMode('medium')">
-        <span>⚖️ Orta</span>
-        <span class="diff-sub">2 Boş • Rahat</span>
-      </button>
-      <button class="diff-btn" data-diff="hard" onclick="setDifficultyMode('hard')">
-        <span>🔥 Zor</span>
-        <span class="diff-sub">3 Boş • 18sn</span>
-      </button>
-      <button class="diff-btn" data-diff="extra_hard" onclick="setDifficultyMode('extra_hard')">
-        <span>💀 Extra Zor</span>
-        <span class="diff-sub">Kör Mod • 10sn</span>
-      </button>
-    </div>
-
-    <!-- Active Mode Rules Info -->
-    <div class="level-rules-bar">
-      <span id="active-mode-desc">2 Kutu Hazır Verilir, Sadece 1 Kutu Yazılır</span>
-      <span class="penalty-tag" id="penalty-desc">Süresiz • Ceza Yok</span>
-    </div>
-  </div>
-
-  <!-- Category Filter Pills -->
-  <div class="filter-scroll" id="filter-pills">
-    <button class="filter-chip active" onclick="setCategory('all', this)">Tümü (<span id="all-count-pill">141</span>)</button>
-    <button class="filter-chip" onclick="setCategory(1, this)">1. 3'ü Aynı (15)</button>
-    <button class="filter-chip" onclick="setCategory(2, this)">2. 2'si Aynı (60)</button>
-    <button class="filter-chip" onclick="setCategory(3, this)">3. 3'ü Farklı (52)</button>
-    <button class="filter-chip" onclick="setCategory(4, this)">🔥 4. YDS Tuzakları (14)</button>
-    <button class="filter-chip" onclick="setCategory('hard', this)">⚠️ Zorlandıklarım (<span id="hard-count-pill">0</span>)</button>
-  </div>
-
-  <!-- Main Challenge Card -->
-  <div class="challenge-card">
-    <div class="timer-bar-wrap" id="timer-bar-wrap">
-      <div class="timer-bar-fill" id="timer-bar"></div>
-    </div>
-
-    <div class="card-top">
-      <span class="group-indicator" id="group-tag">1. Grup: 3 Hali Aynı</span>
-      <span class="timer-pill" id="timer-pill">⏱️ <span id="timer-sec">Süresiz</span></span>
-      <button class="hint-btn" id="btn-hint" onclick="useHint()">
-        <span>💡 İpucu</span>
-      </button>
-    </div>
-
-    <!-- Turkish Meaning Box -->
-    <div class="meaning-box" id="meaning-box">
-      <span class="meaning-text" id="turkish-meaning">Yayınlamak</span>
-      <button class="audio-btn" id="btn-speak" title="Telaffuz Dinle" onclick="speakCurrentVerb()">🔊</button>
-    </div>
-
-    <!-- 3-Column Inputs: V1, V2, V3 -->
-    <div class="verb-grid">
-      <div class="verb-col">
-        <span class="verb-label">V1</span>
-        <span class="verb-sublabel">Base</span>
-        <div id="v1-container"></div>
+    <!-- Right Column on PC / Main Interactive Area on iPhone SE3 -->
+    <div class="main-col">
+      <!-- Category Filter Pills -->
+      <div class="filter-scroll" id="filter-pills">
+        <button class="filter-chip active" onclick="setCategory('all', this)">Tümü (<span id="all-count-pill">141</span>)</button>
+        <button class="filter-chip" onclick="setCategory(1, this)">1. 3'ü Aynı (15)</button>
+        <button class="filter-chip" onclick="setCategory(2, this)">2. 2'si Aynı (60)</button>
+        <button class="filter-chip" onclick="setCategory(3, this)">3. 3'ü Farklı (52)</button>
+        <button class="filter-chip" onclick="setCategory(4, this)">🔥 4. YDS Tuzakları (14)</button>
+        <button class="filter-chip" onclick="setCategory('hard', this)">⚠️ Zorlandıklarım (<span id="hard-count-pill">0</span>)</button>
       </div>
-      <div class="verb-col">
-        <span class="verb-label">V2</span>
-        <span class="verb-sublabel">Past</span>
-        <div id="v2-container"></div>
-      </div>
-      <div class="verb-col">
-        <span class="verb-label">V3</span>
-        <span class="verb-sublabel">Participle</span>
-        <div id="v3-container"></div>
+
+      <!-- Main Challenge Card -->
+      <div class="challenge-card">
+        <div class="timer-bar-wrap" id="timer-bar-wrap">
+          <div class="timer-bar-fill" id="timer-bar"></div>
+        </div>
+
+        <div class="card-top">
+          <span class="group-indicator" id="group-tag">1. Grup: 3 Hali Aynı</span>
+          <span class="timer-pill" id="timer-pill">⏱️ <span id="timer-sec">Süresiz</span></span>
+          <button class="hint-btn" id="btn-hint" onclick="useHint()">
+            <span>💡 İpucu</span>
+          </button>
+        </div>
+
+        <!-- Turkish Meaning Box -->
+        <div class="meaning-box" id="meaning-box">
+          <span class="meaning-text" id="turkish-meaning">Yayınlamak</span>
+          <button class="audio-btn" id="btn-speak" title="Telaffuz Dinle" onclick="speakCurrentVerb()">🔊</button>
+        </div>
+
+        <!-- 3-Column Inputs: V1, V2, V3 -->
+        <div class="verb-grid">
+          <div class="verb-col">
+            <span class="verb-label">V1</span>
+            <span class="verb-sublabel">Base</span>
+            <div id="v1-container"></div>
+          </div>
+          <div class="verb-col">
+            <span class="verb-label">V2</span>
+            <span class="verb-sublabel">Past</span>
+            <div id="v2-container"></div>
+          </div>
+          <div class="verb-col">
+            <span class="verb-label">V3</span>
+            <span class="verb-sublabel">Participle</span>
+            <div id="v3-container"></div>
+          </div>
+        </div>
+
+        <!-- Extra Meaning Quiz (Shown when Meaning is Hidden in Extra Hard Mode) -->
+        <div class="meaning-quiz-wrap" id="meaning-quiz-wrap">
+          <div class="meaning-quiz-label">🇹🇷 Bu fiilin Türkçe anlamını da seç:</div>
+          <div class="meaning-options-grid" id="meaning-options-grid"></div>
+        </div>
+
+        <!-- Dynamic Feedback Toast -->
+        <div class="feedback-toast" id="feedback-toast">Harika! Doğru Cevap 🎯</div>
+
+        <!-- Ergonomic Action Row -->
+        <div class="action-row">
+          <button class="btn btn-giveup" id="btn-giveup" onclick="giveUp()">Bilmiyorum</button>
+          <button class="btn btn-check" onclick="checkAnswer()">Kontrol Et ➔</button>
+          <button class="btn btn-next" onclick="nextQuestion()">Sonraki Soru ➔</button>
+        </div>
+
+        <!-- PC Keyboard Shortcuts Bar (Visible on PC Desktop) -->
+        <div class="pc-shortcuts-bar">
+          <span><kbd class="kbd-key">Enter</kbd> Sonraki Kutu / Kontrol Et</span>
+          <span><kbd class="kbd-key">Tab</kbd> Kutular Arası Geçiş</span>
+        </div>
       </div>
     </div>
 
-    <!-- Extra Meaning Quiz (Shown when Meaning is Hidden in Extra Hard Mode) -->
-    <div class="meaning-quiz-wrap" id="meaning-quiz-wrap">
-      <div class="meaning-quiz-label">🇹🇷 Bu fiilin Türkçe anlamını da seç:</div>
-      <div class="meaning-options-grid" id="meaning-options-grid"></div>
-    </div>
-
-    <!-- Dynamic Feedback Toast -->
-    <div class="feedback-toast" id="feedback-toast">Harika! Doğru Cevap 🎯</div>
-
-    <!-- Ergonomic Action Row -->
-    <div class="action-row">
-      <button class="btn btn-giveup" id="btn-giveup" onclick="giveUp()">Bilmiyorum</button>
-      <button class="btn btn-check" onclick="checkAnswer()">Kontrol Et ➔</button>
-      <button class="btn btn-next" onclick="nextQuestion()">Sonraki Soru ➔</button>
-    </div>
-  </div>
-
-  <!-- Bottom Quick Stats -->
-  <div class="stats-footer">
-    <div class="stat-item">
-      <span class="stat-val" id="stat-learned">0</span>
-      <span>Öğrenildi</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-val" id="stat-accuracy">0%</span>
-      <span>Doğruluk</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-val" id="stat-best-streak">0</span>
-      <span>Rekor Seri</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-val" id="stat-total">0</span>
-      <span>Toplam Soru</span>
-    </div>
   </div>
 
 </div>
@@ -1354,10 +1754,6 @@
   ];
 
   // 4 DISTINCT SELECTABLE DIFFICULTY MODES
-  // 1. easy (Çok Basit): 2 boxes already given, only 1 blank! Untimed, free hints, 0 XP penalty.
-  // 2. medium (Orta): 1 box given, 2 blanks. Untimed, free hints, 0 XP penalty.
-  // 3. hard (Zor): All 3 boxes blank (only Turkish meaning shown). 18s timer, -8 XP wrong penalty.
-  // 4. extra_hard (Extra Zor): 10s timer, 50% all 3 blank / 50% Turkish meaning hidden + 4-option meaning quiz, no hints, -15 XP wrong penalty.
   const DIFFICULTY_MODES = {
     easy: {
       id: 'easy',
@@ -1446,7 +1842,7 @@
     soundEnabled: true,
     darkMode: null,
     activeCategory: 'all',
-    difficultyMode: 'easy', // 'easy' (Çok Basit), 'medium' (Orta), 'hard' (Zor), 'extra_hard' (Extra Zor)
+    difficultyMode: 'easy',
     verbStats: {}
   };
 
@@ -1461,7 +1857,6 @@
       console.warn("Storage load error:", e);
     }
 
-    // Ensure valid difficultyMode (migrate old modes like 'auto'/'classic'/'nightmare' to new 4 modes, defaulting to 'easy')
     if (!DIFFICULTY_MODES[state.difficultyMode]) {
       state.difficultyMode = 'easy';
     }
@@ -1475,8 +1870,14 @@
           consecutive: 0,
           mastered: false
         };
-      } else if (typeof state.verbStats[v.v1].consecutive !== 'number') {
-        state.verbStats[v.v1].consecutive = 0;
+      } else {
+        if (typeof state.verbStats[v.v1].consecutive !== 'number') {
+          state.verbStats[v.v1].consecutive = 0;
+        }
+        // Cap any previously inflated weights from localStorage so a few verbs never monopolize the game
+        if (!state.verbStats[v.v1].mastered) {
+          state.verbStats[v.v1].weight = Math.min(18, Math.max(4, state.verbStats[v.v1].weight || 10));
+        }
       }
     });
   }
@@ -1555,7 +1956,7 @@
 
   // CURRENT QUESTION & TIMER STATE
   let currentVerb = null;
-  let lockedIndices = []; // Array of indices (0, 1, 2) that are locked/given
+  let lockedIndices = [];
   let isMeaningHidden = false;
   let selectedMeaningOption = null;
   let isAnswered = false;
@@ -1676,34 +2077,38 @@
     initGame();
   }
 
-  function getWeightedRandomVerb() {
-    const pool = getEligibleVerbs();
-    const cfg = getActiveDifficultyConfig();
-    let totalWeight = 0;
+  let recentVerbsQueue = [];
 
+  function getWeightedRandomVerb() {
+    const fullPool = getEligibleVerbs();
+    // Exclude recently asked verbs (last 10 questions) so the same verb never appears back-to-back
+    const cooldownLimit = Math.min(10, Math.max(1, fullPool.length - 1));
+    const filteredPool = fullPool.filter(v => !recentVerbsQueue.includes(v.v1));
+    const pool = filteredPool.length > 0 ? filteredPool : fullPool;
+
+    let totalWeight = 0;
     const weights = pool.map(v => {
       const st = state.verbStats[v.v1] || { weight: 10 };
-      let mult = 1;
-      // In Very Easy mode, prioritize simpler Group 1 & Group 2 verbs slightly when 'all' is selected
-      if (cfg.id === 'easy' && state.activeCategory === 'all') {
-        if (v.cat === 1) mult = 1.6;
-        else if (v.cat === 2) mult = 1.3;
-        else if (v.cat === 4) mult = 0.5;
-      } else if (cfg.id === 'extra_hard' && state.activeCategory === 'all') {
-        if (v.cat === 4) mult = 2.2;
-        else if (v.cat === 3) mult = 1.5;
-      }
-      const w = Math.max(1, st.weight * mult);
+      const w = Math.min(22, Math.max(1, st.weight));
       totalWeight += w;
       return w;
     });
 
+    let chosen = pool[0];
     let random = Math.random() * totalWeight;
     for (let i = 0; i < pool.length; i++) {
-      if (random < weights[i]) return pool[i];
+      if (random < weights[i]) {
+        chosen = pool[i];
+        break;
+      }
       random -= weights[i];
     }
-    return pool[0];
+
+    recentVerbsQueue.push(chosen.v1);
+    if (recentVerbsQueue.length > cooldownLimit) {
+      recentVerbsQueue.shift();
+    }
+    return chosen;
   }
 
   // GROUP NAMES
@@ -1771,7 +2176,7 @@
     const vStat = state.verbStats[currentVerb.v1];
     vStat.wrong++;
     vStat.consecutive = 0;
-    vStat.weight += 15;
+    vStat.weight = Math.min(22, vStat.weight + 4);
     vStat.mastered = false;
 
     const inputs = document.querySelectorAll('.verb-input');
@@ -1838,20 +2243,16 @@
   // CHOOSE WHICH BOXES ARE LOCKED (GIVEN) VS BLANK
   function chooseLockedIndices(cfg) {
     if (cfg.id === 'easy') {
-      // Çok Basit Mod: 2 boxes are given (locked), only 1 box is blank!
       const blankIdx = Math.floor(Math.random() * 3);
       return [0, 1, 2].filter(i => i !== blankIdx);
     }
     if (cfg.id === 'medium') {
-      // Orta Mod: 1 box is given, 2 boxes are blank
       const lockedIdx = Math.floor(Math.random() * 3);
       return [lockedIdx];
     }
     if (cfg.id === 'hard') {
-      // Zor Mod: 0 boxes given, all 3 are blank!
       return [];
     }
-    // Extra Zor Mod: Either all 3 blank (with Turkish shown) OR 1 given + Turkish meaning hidden + Meaning Quiz!
     if (Math.random() < cfg.blindTrProb) {
       const lockedIdx = Math.floor(Math.random() * 3);
       isMeaningHidden = true;
@@ -2009,7 +2410,6 @@
       }
     });
 
-    // Check Meaning Quiz if active
     let meaningQuizCorrect = true;
     if (isMeaningHidden) {
       if (!selectedMeaningOption) {
@@ -2073,7 +2473,7 @@
 
       vStat.wrong++;
       vStat.consecutive = 0;
-      vStat.weight += 12;
+      vStat.weight = Math.min(22, vStat.weight + 4);
       vStat.mastered = false;
 
       if (isMeaningHidden && selectedMeaningOption && selectedMeaningOption !== currentVerb.tr) {
@@ -2114,7 +2514,7 @@
     const vStat = state.verbStats[currentVerb.v1];
     vStat.wrong++;
     vStat.consecutive = 0;
-    vStat.weight += 18;
+    vStat.weight = Math.min(22, vStat.weight + 5);
     vStat.mastered = false;
 
     const inputs = document.querySelectorAll('.verb-input');
@@ -2153,7 +2553,7 @@
     initGame();
   }
 
-  // HINT SYSTEM (Friendly in Çok Basit & Orta, costs XP in Zor, disabled in Extra Zor)
+  // HINT SYSTEM
   function useHint() {
     if (isAnswered) return;
     const cfg = getActiveDifficultyConfig();
@@ -2166,7 +2566,6 @@
       const inputs = document.querySelectorAll('.verb-input');
       inputs.forEach(input => {
         if (!input.value) {
-          // In Çok Basit mode, give first 2 letters if word is >= 4 chars, else 1 letter
           const ans = input.dataset.answer;
           input.value = (cfg.id === 'easy' && ans.length >= 4) ? ans.slice(0, 2) : ans.charAt(0);
         }
