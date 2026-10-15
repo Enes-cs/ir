@@ -118,13 +118,13 @@
       transition: background-color 0.25s, color 0.25s;
     }
 
-    /* iPhone SE 3 Optimized Container: max 380px ensures it fits comfortably */
+    /* iPhone SE 3 Optimized Container: max 400px ensures it fits comfortably */
     .app-wrapper {
       width: 100%;
       max-width: 400px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 9px;
     }
 
     /* Top Bar */
@@ -149,7 +149,7 @@
       background: var(--primary-light);
       color: var(--primary);
       font-size: 0.65rem;
-      font-weight: 700;
+      font-weight: 800;
       padding: 2px 6px;
       border-radius: 6px;
       text-transform: uppercase;
@@ -181,16 +181,22 @@
       background: var(--card-border);
     }
 
-    /* Gamification Strip: Level, XP Bar, Streak */
+    /* Gamification Strip: Level, XP Bar, Streak & Level Selection */
     .game-strip {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
       padding: 10px 14px;
       display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow);
+      gap: 8px;
+    }
+
+    .game-strip-top {
+      display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: var(--shadow);
       gap: 10px;
     }
 
@@ -198,12 +204,12 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
-      min-width: 100px;
+      flex: 1;
     }
 
     .level-title {
-      font-size: 0.72rem;
-      font-weight: 700;
+      font-size: 0.76rem;
+      font-weight: 800;
       color: var(--primary);
       display: flex;
       align-items: center;
@@ -212,7 +218,7 @@
 
     .xp-meter-wrap {
       width: 100%;
-      height: 6px;
+      height: 7px;
       background: var(--input-border);
       border-radius: 4px;
       overflow: hidden;
@@ -226,10 +232,14 @@
       transition: width 0.4s ease;
     }
 
-    .xp-text {
+    .xp-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-size: 0.65rem;
       color: var(--text-muted);
       font-weight: 600;
+      margin-top: 1px;
     }
 
     .streak-badge {
@@ -270,6 +280,109 @@
       100% { transform: scale(1); }
     }
 
+    /* 4-Tier Difficulty Mode Selector: Çok Basit, Orta, Zor, Extra Zor */
+    .diff-header-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: -4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .diff-selector {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+      background: var(--bg);
+      padding: 4px;
+      border-radius: 11px;
+      border: 1px solid var(--card-border);
+    }
+
+    .diff-btn {
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 6px 2px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      white-space: nowrap;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .diff-btn .diff-sub {
+      font-size: 0.56rem;
+      font-weight: 600;
+      opacity: 0.8;
+    }
+
+    .diff-btn.active[data-diff="easy"] {
+      background: var(--success-bg);
+      color: var(--success);
+      border-color: rgba(22, 163, 74, 0.35);
+      box-shadow: 0 2px 6px rgba(22, 163, 74, 0.15);
+    }
+
+    .diff-btn.active[data-diff="medium"] {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: rgba(37, 99, 235, 0.35);
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.15);
+    }
+
+    .diff-btn.active[data-diff="hard"] {
+      background: var(--warning-bg);
+      color: #b45309;
+      border-color: rgba(245, 158, 11, 0.4);
+      box-shadow: 0 2px 6px rgba(245, 158, 11, 0.15);
+    }
+    @media (prefers-color-scheme: dark) {
+      .diff-btn.active[data-diff="hard"] { color: #fde68a; }
+    }
+    body.dark-mode .diff-btn.active[data-diff="hard"] {
+      color: #fde68a;
+    }
+
+    .diff-btn.active[data-diff="extra_hard"] {
+      background: var(--danger);
+      color: #ffffff;
+      border-color: var(--danger);
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+    }
+
+    /* Active Level Rules Banner */
+    .level-rules-bar {
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg);
+      padding: 5px 8px;
+      border-radius: 8px;
+    }
+
+    .penalty-tag {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .penalty-tag.strict {
+      color: var(--danger);
+    }
+
     /* Category Filter Pills (Scrollable horizontal on mobile) */
     .filter-scroll {
       display: flex;
@@ -287,8 +400,8 @@
 
     .filter-chip {
       flex: 0 0 auto;
-      padding: 6px 12px;
-      font-size: 0.72rem;
+      padding: 6px 11px;
+      font-size: 0.7rem;
       font-weight: 700;
       border-radius: 20px;
       background: var(--card-bg);
@@ -317,23 +430,52 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 16px 14px;
+      padding: 15px 14px;
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 11px;
       position: relative;
+      overflow: hidden;
     }
 
-    /* Card Header: Category & Hint button */
+    /* Timer Progress Bar inside Card Top */
+    .timer-bar-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--card-border);
+      overflow: hidden;
+    }
+
+    .timer-bar-fill {
+      height: 100%;
+      width: 100%;
+      background: var(--success);
+      transition: width 0.1s linear, background-color 0.25s;
+    }
+
+    .timer-bar-fill.warn {
+      background: var(--warning);
+    }
+
+    .timer-bar-fill.crit {
+      background: var(--danger);
+    }
+
+    /* Card Header: Category, Timer & Hint button */
     .card-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-top: 2px;
+      gap: 6px;
     }
 
     .group-indicator {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 700;
       color: var(--primary);
       background: var(--primary-light);
@@ -344,19 +486,45 @@
       gap: 4px;
     }
 
+    .timer-pill {
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 8px;
+      background: var(--bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .timer-pill.crit {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border-color: var(--danger);
+      animation: pulseCrit 0.5s infinite alternate;
+    }
+
+    @keyframes pulseCrit {
+      from { transform: scale(1); }
+      to { transform: scale(1.06); }
+    }
+
     .hint-btn {
       background: var(--warning-bg);
       border: 1px solid rgba(245, 158, 11, 0.3);
       color: #b45309;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      padding: 4px 10px;
+      padding: 4px 9px;
       border-radius: 8px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      transition: transform 0.1s;
+      transition: transform 0.1s, opacity 0.2s;
     }
     @media (prefers-color-scheme: dark) {
       .hint-btn { color: #fde68a; }
@@ -364,6 +532,10 @@
     body.dark-mode .hint-btn { color: #fde68a; }
     .hint-btn:active {
       transform: scale(0.95);
+    }
+    .hint-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
     }
 
     /* Meaning Banner */
@@ -373,7 +545,7 @@
       border-radius: 12px;
       padding: 10px;
       text-align: center;
-      min-height: 44px;
+      min-height: 46px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -382,16 +554,16 @@
     }
 
     .meaning-text {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 800;
       color: var(--primary);
       letter-spacing: -0.2px;
     }
 
-    .meaning-placeholder {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-style: italic;
+    .meaning-text.hidden-meaning {
+      color: var(--purple);
+      font-size: 0.88rem;
+      letter-spacing: 0;
     }
 
     .audio-btn {
@@ -413,12 +585,69 @@
       transform: scale(0.85);
     }
 
+    /* Extra Challenge Prompt (Reverse Meaning Quiz in Extra Hard Mode) */
+    .meaning-quiz-wrap {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: -2px;
+    }
+
+    .meaning-quiz-wrap.active {
+      display: flex;
+    }
+
+    .meaning-quiz-label {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--purple);
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .meaning-options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .meaning-opt-btn {
+      background: var(--input-bg);
+      border: 1.5px solid var(--input-border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 7px 6px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: center;
+    }
+
+    .meaning-opt-btn.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .meaning-opt-btn.correct {
+      border-color: var(--success);
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .meaning-opt-btn.wrong {
+      border-color: var(--danger);
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
     /* 3-Column Verb Input Grid (NEVER breaks to 1 column on iPhone SE!) */
     .verb-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 8px;
-      margin: 4px 0;
+      margin: 2px 0;
     }
 
     .verb-col {
@@ -505,12 +734,13 @@
 
     /* Motivational Toast message inside card */
     .feedback-toast {
-      min-height: 24px;
+      min-height: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 800;
+      text-align: center;
       transition: all 0.2s;
       opacity: 0;
       transform: translateY(-4px);
@@ -570,7 +800,7 @@
       background: var(--locked-bg);
       color: var(--text-muted);
       flex: 1;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
     }
 
     .btn-next {
@@ -591,7 +821,7 @@
       justify-content: space-around;
       align-items: center;
       box-shadow: var(--shadow);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
     }
 
@@ -603,7 +833,7 @@
     }
 
     .stat-val {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 800;
       color: var(--text);
     }
@@ -631,12 +861,12 @@
       background: var(--card-bg);
       width: 100%;
       max-width: 440px;
-      max-height: 80vh;
+      max-height: 82vh;
       border-radius: 20px 20px 0 0;
       padding: 16px 16px calc(var(--safe-bottom) + 20px) 16px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       transform: translateY(100%);
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -680,6 +910,24 @@
       font-size: 1rem;
     }
 
+    .reset-confirm-bar {
+      display: none;
+      background: var(--danger-bg);
+      border: 1px solid var(--danger);
+      border-radius: 10px;
+      padding: 8px 10px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--danger);
+    }
+
+    .reset-confirm-bar.show {
+      display: flex;
+    }
+
     .verb-list-scroll {
       overflow-y: auto;
       max-height: 52vh;
@@ -717,9 +965,9 @@
     }
 
     .verb-status-badge {
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       font-weight: 700;
-      padding: 3px 8px;
+      padding: 3px 7px;
       border-radius: 6px;
     }
 
@@ -736,25 +984,6 @@
     .status-learning {
       background: var(--warning-bg);
       color: #b45309;
-    }
-
-    /* Floating XP Notification */
-    .xp-float {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      color: var(--warning);
-      font-weight: 800;
-      font-size: 1rem;
-      pointer-events: none;
-      animation: floatUp 0.8s ease-out forwards;
-      opacity: 0;
-    }
-
-    @keyframes floatUp {
-      0% { opacity: 0; transform: translateY(0); }
-      30% { opacity: 1; transform: translateY(-8px); }
-      100% { opacity: 0; transform: translateY(-24px); }
     }
 
     /* Canvas for micro-confetti */
@@ -788,40 +1017,82 @@
     </div>
   </div>
 
-  <!-- Gamification Status Bar -->
+  <!-- Gamification Status Bar & 4 Difficulty Levels Selector -->
   <div class="game-strip">
-    <div class="level-info">
-      <div class="level-title">
-        <span id="rank-icon">🌱</span>
-        <span id="rank-name">Acemi Dilci</span>
-        <span style="opacity: 0.6; font-size: 0.65rem;">(Lv.<span id="rank-lvl">1</span>)</span>
+    <div class="game-strip-top">
+      <div class="level-info">
+        <div class="level-title">
+          <span id="rank-icon">🌱</span>
+          <span id="rank-name">Acemi Dilci</span>
+          <span style="opacity: 0.75; font-size: 0.68rem;">(Lv.<span id="rank-lvl">1</span>)</span>
+        </div>
+        <div class="xp-meter-wrap">
+          <div class="xp-meter-fill" id="xp-bar"></div>
+        </div>
+        <div class="xp-meta-row">
+          <span><span id="curr-xp">0</span> / <span id="next-xp">150</span> XP</span>
+          <span id="rank-req-text">Adım adım YDS!</span>
+        </div>
       </div>
-      <div class="xp-meter-wrap">
-        <div class="xp-meter-fill" id="xp-bar"></div>
+
+      <div class="streak-badge" id="streak-box">
+        <span>🔥</span>
+        <span id="streak-num">0</span>
+        <span style="font-size: 0.68rem; font-weight: 700;">SERİ</span>
       </div>
-      <div class="xp-text"><span id="curr-xp">0</span> / <span id="next-xp">100</span> XP</div>
     </div>
 
-    <div class="streak-badge" id="streak-box">
-      <span>🔥</span>
-      <span id="streak-num">0</span>
-      <span style="font-size: 0.7rem; font-weight: 700;">SERİ</span>
+    <div class="diff-header-label">
+      <span>🎯 Zorluk Seviyesi Seç:</span>
+      <span id="diff-badge-pill" style="color: var(--primary);">Çok Basit Mod Aktif</span>
+    </div>
+
+    <!-- 4 Selectable Difficulty Modes: Çok Basit, Orta, Zor, Extra Zor -->
+    <div class="diff-selector" id="diff-selector">
+      <button class="diff-btn active" data-diff="easy" onclick="setDifficultyMode('easy')">
+        <span>🌱 Çok Basit</span>
+        <span class="diff-sub">1 Boş • Süresiz</span>
+      </button>
+      <button class="diff-btn" data-diff="medium" onclick="setDifficultyMode('medium')">
+        <span>⚖️ Orta</span>
+        <span class="diff-sub">2 Boş • Rahat</span>
+      </button>
+      <button class="diff-btn" data-diff="hard" onclick="setDifficultyMode('hard')">
+        <span>🔥 Zor</span>
+        <span class="diff-sub">3 Boş • 18sn</span>
+      </button>
+      <button class="diff-btn" data-diff="extra_hard" onclick="setDifficultyMode('extra_hard')">
+        <span>💀 Extra Zor</span>
+        <span class="diff-sub">Kör Mod • 10sn</span>
+      </button>
+    </div>
+
+    <!-- Active Mode Rules Info -->
+    <div class="level-rules-bar">
+      <span id="active-mode-desc">2 Kutu Hazır Verilir, Sadece 1 Kutu Yazılır</span>
+      <span class="penalty-tag" id="penalty-desc">Süresiz • Ceza Yok</span>
     </div>
   </div>
 
   <!-- Category Filter Pills -->
   <div class="filter-scroll" id="filter-pills">
-    <button class="filter-chip active" onclick="setCategory('all', this)">Tümü (117)</button>
-    <button class="filter-chip" onclick="setCategory(1, this)">1. 3'ü Aynı (14)</button>
-    <button class="filter-chip" onclick="setCategory(2, this)">2. 2'si Aynı (53)</button>
-    <button class="filter-chip" onclick="setCategory(3, this)">3. 3'ü Farklı (50)</button>
+    <button class="filter-chip active" onclick="setCategory('all', this)">Tümü (<span id="all-count-pill">141</span>)</button>
+    <button class="filter-chip" onclick="setCategory(1, this)">1. 3'ü Aynı (15)</button>
+    <button class="filter-chip" onclick="setCategory(2, this)">2. 2'si Aynı (60)</button>
+    <button class="filter-chip" onclick="setCategory(3, this)">3. 3'ü Farklı (52)</button>
+    <button class="filter-chip" onclick="setCategory(4, this)">🔥 4. YDS Tuzakları (14)</button>
     <button class="filter-chip" onclick="setCategory('hard', this)">⚠️ Zorlandıklarım (<span id="hard-count-pill">0</span>)</button>
   </div>
 
   <!-- Main Challenge Card -->
   <div class="challenge-card">
+    <div class="timer-bar-wrap" id="timer-bar-wrap">
+      <div class="timer-bar-fill" id="timer-bar"></div>
+    </div>
+
     <div class="card-top">
       <span class="group-indicator" id="group-tag">1. Grup: 3 Hali Aynı</span>
+      <span class="timer-pill" id="timer-pill">⏱️ <span id="timer-sec">Süresiz</span></span>
       <button class="hint-btn" id="btn-hint" onclick="useHint()">
         <span>💡 İpucu</span>
       </button>
@@ -852,14 +1123,20 @@
       </div>
     </div>
 
+    <!-- Extra Meaning Quiz (Shown when Meaning is Hidden in Extra Hard Mode) -->
+    <div class="meaning-quiz-wrap" id="meaning-quiz-wrap">
+      <div class="meaning-quiz-label">🇹🇷 Bu fiilin Türkçe anlamını da seç:</div>
+      <div class="meaning-options-grid" id="meaning-options-grid"></div>
+    </div>
+
     <!-- Dynamic Feedback Toast -->
-    <div class="feedback-toast" id="feedback-toast">Awesome! True Answer 🎯</div>
+    <div class="feedback-toast" id="feedback-toast">Harika! Doğru Cevap 🎯</div>
 
     <!-- Ergonomic Action Row -->
     <div class="action-row">
-      <button class="btn btn-giveup" onclick="giveUp()">Give Up</button>
-      <button class="btn btn-check" onclick="checkAnswer()">Check it ➔</button>
-      <button class="btn btn-next" onclick="nextQuestion()">Next Question ➔</button>
+      <button class="btn btn-giveup" id="btn-giveup" onclick="giveUp()">Bilmiyorum</button>
+      <button class="btn btn-check" onclick="checkAnswer()">Kontrol Et ➔</button>
+      <button class="btn btn-next" onclick="nextQuestion()">Sonraki Soru ➔</button>
     </div>
   </div>
 
@@ -872,6 +1149,10 @@
     <div class="stat-item">
       <span class="stat-val" id="stat-accuracy">0%</span>
       <span>Doğruluk</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val" id="stat-best-streak">0</span>
+      <span>Rekor Seri</span>
     </div>
     <div class="stat-item">
       <span class="stat-val" id="stat-total">0</span>
@@ -889,10 +1170,19 @@
       <div class="modal-title">📖 Kelime Listesi & Durum</div>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
-    <div style="font-size: 0.75rem; color: var(--text-muted); display:flex; justify-content:space-between;">
+    <div style="font-size: 0.73rem; color: var(--text-muted); display:flex; justify-content:space-between; align-items:center;">
       <span>Kelimeye tıklayarak telaffuzunu dinleyebilirsin:</span>
-      <a href="javascript:void(0)" onclick="resetProgress()" style="color:var(--danger); text-decoration:none; font-weight:700;">İlerlemeyi Sıfırla</a>
+      <button type="button" onclick="toggleResetConfirm(true)" style="background:none; border:none; color:var(--danger); cursor:pointer; font-weight:800; font-size:0.73rem;">İlerlemeyi Sıfırla</button>
     </div>
+
+    <div class="reset-confirm-bar" id="reset-confirm-bar">
+      <span>Tüm XP ve ilerleme silinsin mi?</span>
+      <div style="display:flex; gap:6px;">
+        <button type="button" onclick="confirmResetProgress()" style="background:var(--danger); color:#fff; border:none; padding:4px 10px; border-radius:6px; font-weight:700; cursor:pointer;">Evet, Sıfırla</button>
+        <button type="button" onclick="toggleResetConfirm(false)" style="background:var(--card-bg); color:var(--text); border:1px solid var(--card-border); padding:4px 8px; border-radius:6px; font-weight:700; cursor:pointer;">İptal</button>
+      </div>
+    </div>
+
     <div class="verb-list-scroll" id="verb-list-container">
       <!-- Verbs list populated dynamically -->
     </div>
@@ -900,851 +1190,253 @@
 </div>
 
 <script>
-  // 117 YDS IRREGULAR VERBS LIST WITH CATEGORIES
+  // 141 YDS IRREGULAR VERBS (Original 117 + 24 High-Level YDS Irregular Verbs)
   const RAW_VERBS = [
-  {
-    "v1": "broadcast",
-    "v2": "broadcast",
-    "v3": "broadcast",
-    "tr": "Yayınlamak",
-    "cat": 1
-  },
-  {
-    "v1": "burst",
-    "v2": "burst",
-    "v3": "burst",
-    "tr": "Patlamak",
-    "cat": 1
-  },
-  {
-    "v1": "cost",
-    "v2": "cost",
-    "v3": "cost",
-    "tr": "Mal olmak",
-    "cat": 1
-  },
-  {
-    "v1": "cut",
-    "v2": "cut",
-    "v3": "cut",
-    "tr": "Kesmek",
-    "cat": 1
-  },
-  {
-    "v1": "forecast",
-    "v2": "forecast",
-    "v3": "forecast",
-    "tr": "Tahmin etmek",
-    "cat": 1
-  },
-  {
-    "v1": "hit",
-    "v2": "hit",
-    "v3": "hit",
-    "tr": "Vurmak",
-    "cat": 1
-  },
-  {
-    "v1": "hurt",
-    "v2": "hurt",
-    "v3": "hurt",
-    "tr": "İncitmek/Acımak",
-    "cat": 1
-  },
-  {
-    "v1": "let",
-    "v2": "let",
-    "v3": "let",
-    "tr": "İzin vermek",
-    "cat": 1
-  },
-  {
-    "v1": "put",
-    "v2": "put",
-    "v3": "put",
-    "tr": "Koymak",
-    "cat": 1
-  },
-  {
-    "v1": "read",
-    "v2": "read",
-    "v3": "read",
-    "tr": "Okumak",
-    "cat": 1
-  },
-  {
-    "v1": "set",
-    "v2": "set",
-    "v3": "set",
-    "tr": "Belirlemek/Kurmak",
-    "cat": 1
-  },
-  {
-    "v1": "shut",
-    "v2": "shut",
-    "v3": "shut",
-    "tr": "Kapamak",
-    "cat": 1
-  },
-  {
-    "v1": "split",
-    "v2": "split",
-    "v3": "split",
-    "tr": "Bölmek/Ayırmak",
-    "cat": 1
-  },
-  {
-    "v1": "spread",
-    "v2": "spread",
-    "v3": "spread",
-    "tr": "Yaymak",
-    "cat": 1
-  },
-  {
-    "v1": "become",
-    "v2": "became",
-    "v3": "become",
-    "tr": "Olmak",
-    "cat": 2
-  },
-  {
-    "v1": "come",
-    "v2": "came",
-    "v3": "come",
-    "tr": "Gelmek",
-    "cat": 2
-  },
-  {
-    "v1": "overcome",
-    "v2": "overcame",
-    "v3": "overcome",
-    "tr": "Üstesinden gelmek",
-    "cat": 2
-  },
-  {
-    "v1": "run",
-    "v2": "ran",
-    "v3": "run",
-    "tr": "Koşmak",
-    "cat": 2
-  },
-  {
-    "v1": "bend",
-    "v2": "bent",
-    "v3": "bent",
-    "tr": "Eğmek",
-    "cat": 2
-  },
-  {
-    "v1": "bring",
-    "v2": "brought",
-    "v3": "brought",
-    "tr": "Getirmek",
-    "cat": 2
-  },
-  {
-    "v1": "build",
-    "v2": "built",
-    "v3": "built",
-    "tr": "İnşa etmek",
-    "cat": 2
-  },
-  {
-    "v1": "burn",
-    "v2": "burnt",
-    "v3": "burnt",
-    "tr": "Yakmak",
-    "cat": 2
-  },
-  {
-    "v1": "buy",
-    "v2": "bought",
-    "v3": "bought",
-    "tr": "Satın almak",
-    "cat": 2
-  },
-  {
-    "v1": "catch",
-    "v2": "caught",
-    "v3": "caught",
-    "tr": "Yakalamak",
-    "cat": 2
-  },
-  {
-    "v1": "deal",
-    "v2": "dealt",
-    "v3": "dealt",
-    "tr": "Anlaşmak/Başa çıkmak",
-    "cat": 2
-  },
-  {
-    "v1": "dig",
-    "v2": "dug",
-    "v3": "dug",
-    "tr": "Kazmak",
-    "cat": 2
-  },
-  {
-    "v1": "dream",
-    "v2": "dreamt",
-    "v3": "dreamt",
-    "tr": "Rüya görmek",
-    "cat": 2
-  },
-  {
-    "v1": "dwell",
-    "v2": "dwelt",
-    "v3": "dwelt",
-    "tr": "Yaşamak/İkamet etmek",
-    "cat": 2
-  },
-  {
-    "v1": "feed",
-    "v2": "fed",
-    "v3": "fed",
-    "tr": "Beslemek",
-    "cat": 2
-  },
-  {
-    "v1": "feel",
-    "v2": "felt",
-    "v3": "felt",
-    "tr": "Hissetmek",
-    "cat": 2
-  },
-  {
-    "v1": "fight",
-    "v2": "fought",
-    "v3": "fought",
-    "tr": "Savaşmak",
-    "cat": 2
-  },
-  {
-    "v1": "find",
-    "v2": "found",
-    "v3": "found",
-    "tr": "Bulmak",
-    "cat": 2
-  },
-  {
-    "v1": "flee",
-    "v2": "fled",
-    "v3": "fled",
-    "tr": "Kaçmak",
-    "cat": 2
-  },
-  {
-    "v1": "foretell",
-    "v2": "foretold",
-    "v3": "foretold",
-    "tr": "Kehanette bulunmak",
-    "cat": 2
-  },
-  {
-    "v1": "get",
-    "v2": "got",
-    "v3": "got",
-    "tr": "Almak/Varmak",
-    "cat": 2
-  },
-  {
-    "v1": "hang",
-    "v2": "hung",
-    "v3": "hung",
-    "tr": "Asmak",
-    "cat": 2
-  },
-  {
-    "v1": "have",
-    "v2": "had",
-    "v3": "had",
-    "tr": "Sahip olmak",
-    "cat": 2
-  },
-  {
-    "v1": "hear",
-    "v2": "heard",
-    "v3": "heard",
-    "tr": "Duymak",
-    "cat": 2
-  },
-  {
-    "v1": "hold",
-    "v2": "held",
-    "v3": "held",
-    "tr": "Tutmak",
-    "cat": 2
-  },
-  {
-    "v1": "keep",
-    "v2": "kept",
-    "v3": "kept",
-    "tr": "Muhafaza etmek/Saklamak",
-    "cat": 2
-  },
-  {
-    "v1": "lead",
-    "v2": "led",
-    "v3": "led",
-    "tr": "Yönetmek/Önderlik etmek",
-    "cat": 2
-  },
-  {
-    "v1": "learn",
-    "v2": "learnt",
-    "v3": "learnt",
-    "tr": "Öğrenmek",
-    "cat": 2
-  },
-  {
-    "v1": "leave",
-    "v2": "left",
-    "v3": "left",
-    "tr": "Ayrılmak/Bırakmak",
-    "cat": 2
-  },
-  {
-    "v1": "lend",
-    "v2": "lent",
-    "v3": "lent",
-    "tr": "Ödünç vermek",
-    "cat": 2
-  },
-  {
-    "v1": "lose",
-    "v2": "lost",
-    "v3": "lost",
-    "tr": "Kaybetmek",
-    "cat": 2
-  },
-  {
-    "v1": "make",
-    "v2": "made",
-    "v3": "made",
-    "tr": "Yapmak",
-    "cat": 2
-  },
-  {
-    "v1": "mean",
-    "v2": "meant",
-    "v3": "meant",
-    "tr": "Anlamına gelmek/Kastetmek",
-    "cat": 2
-  },
-  {
-    "v1": "meet",
-    "v2": "met",
-    "v3": "met",
-    "tr": "Buluşmak/Tanışmak",
-    "cat": 2
-  },
-  {
-    "v1": "misunderstand",
-    "v2": "misunderstood",
-    "v3": "misunderstood",
-    "tr": "Yanlış anlamak",
-    "cat": 2
-  },
-  {
-    "v1": "pay",
-    "v2": "paid",
-    "v3": "paid",
-    "tr": "Ödemek",
-    "cat": 2
-  },
-  {
-    "v1": "say",
-    "v2": "said",
-    "v3": "said",
-    "tr": "Söylemek",
-    "cat": 2
-  },
-  {
-    "v1": "seek",
-    "v2": "sought",
-    "v3": "sought",
-    "tr": "Aramak/Çabalamak",
-    "cat": 2
-  },
-  {
-    "v1": "sell",
-    "v2": "sold",
-    "v3": "sold",
-    "tr": "Satmak",
-    "cat": 2
-  },
-  {
-    "v1": "send",
-    "v2": "sent",
-    "v3": "sent",
-    "tr": "Göndermek",
-    "cat": 2
-  },
-  {
-    "v1": "shine",
-    "v2": "shone",
-    "v3": "shone",
-    "tr": "Parıldamak",
-    "cat": 2
-  },
-  {
-    "v1": "sit",
-    "v2": "sat",
-    "v3": "sat",
-    "tr": "Oturmak",
-    "cat": 2
-  },
-  {
-    "v1": "sleep",
-    "v2": "slept",
-    "v3": "slept",
-    "tr": "Uyumak",
-    "cat": 2
-  },
-  {
-    "v1": "smell",
-    "v2": "smelt",
-    "v3": "smelt",
-    "tr": "Kokmak",
-    "cat": 2
-  },
-  {
-    "v1": "spend",
-    "v2": "spent",
-    "v3": "spent",
-    "tr": "Harcamak",
-    "cat": 2
-  },
-  {
-    "v1": "stand",
-    "v2": "stood",
-    "v3": "stood",
-    "tr": "Ayakta durmak",
-    "cat": 2
-  },
-  {
-    "v1": "strike",
-    "v2": "struck",
-    "v3": "struck",
-    "tr": "Vurmak/Çarpmak",
-    "cat": 2
-  },
-  {
-    "v1": "teach",
-    "v2": "taught",
-    "v3": "taught",
-    "tr": "Öğretmek",
-    "cat": 2
-  },
-  {
-    "v1": "tell",
-    "v2": "told",
-    "v3": "told",
-    "tr": "Anlatmak/Söylemek",
-    "cat": 2
-  },
-  {
-    "v1": "think",
-    "v2": "thought",
-    "v3": "thought",
-    "tr": "Düşünmek",
-    "cat": 2
-  },
-  {
-    "v1": "understand",
-    "v2": "understood",
-    "v3": "understood",
-    "tr": "Anlamak",
-    "cat": 2
-  },
-  {
-    "v1": "win",
-    "v2": "won",
-    "v3": "won",
-    "tr": "Kazanmak",
-    "cat": 2
-  },
-  {
-    "v1": "withstand",
-    "v2": "withstood",
-    "v3": "withstood",
-    "tr": "Dayanmak",
-    "cat": 2
-  },
-  {
-    "v1": "arise",
-    "v2": "arose",
-    "v3": "arisen",
-    "tr": "Ortaya çıkmak",
-    "cat": 3
-  },
-  {
-    "v1": "be",
-    "v2": "was/were",
-    "v3": "been",
-    "tr": "Olmak",
-    "cat": 3
-  },
-  {
-    "v1": "bear",
-    "v2": "bore",
-    "v3": "born",
-    "tr": "Doğurmak/Taşımak",
-    "cat": 3
-  },
-  {
-    "v1": "begin",
-    "v2": "began",
-    "v3": "begun",
-    "tr": "Başlamak",
-    "cat": 3
-  },
-  {
-    "v1": "bite",
-    "v2": "bit",
-    "v3": "bitten",
-    "tr": "Isırmak",
-    "cat": 3
-  },
-  {
-    "v1": "blow",
-    "v2": "blew",
-    "v3": "blown",
-    "tr": "Esmek/Üflemek",
-    "cat": 3
-  },
-  {
-    "v1": "break",
-    "v2": "broke",
-    "v3": "broken",
-    "tr": "Kırmak",
-    "cat": 3
-  },
-  {
-    "v1": "choose",
-    "v2": "chose",
-    "v3": "chosen",
-    "tr": "Seçmek",
-    "cat": 3
-  },
-  {
-    "v1": "do",
-    "v2": "did",
-    "v3": "done",
-    "tr": "Yapmak",
-    "cat": 3
-  },
-  {
-    "v1": "draw",
-    "v2": "drew",
-    "v3": "drawn",
-    "tr": "Çizmek",
-    "cat": 3
-  },
-  {
-    "v1": "drink",
-    "v2": "drank",
-    "v3": "drunk",
-    "tr": "İçmek",
-    "cat": 3
-  },
-  {
-    "v1": "drive",
-    "v2": "drove",
-    "v3": "driven",
-    "tr": "Sürmek",
-    "cat": 3
-  },
-  {
-    "v1": "eat",
-    "v2": "ate",
-    "v3": "eaten",
-    "tr": "Yemek",
-    "cat": 3
-  },
-  {
-    "v1": "fall",
-    "v2": "fell",
-    "v3": "fallen",
-    "tr": "Düşmek",
-    "cat": 3
-  },
-  {
-    "v1": "fly",
-    "v2": "flew",
-    "v3": "flown",
-    "tr": "Uçmak",
-    "cat": 3
-  },
-  {
-    "v1": "forbid",
-    "v2": "forbade",
-    "v3": "forbidden",
-    "tr": "Yasaklamak",
-    "cat": 3
-  },
-  {
-    "v1": "foresee",
-    "v2": "foresaw",
-    "v3": "foreseen",
-    "tr": "Öngörmek",
-    "cat": 3
-  },
-  {
-    "v1": "forget",
-    "v2": "forgot",
-    "v3": "forgotten",
-    "tr": "Unutmak",
-    "cat": 3
-  },
-  {
-    "v1": "forgive",
-    "v2": "forgave",
-    "v3": "forgiven",
-    "tr": "Affetmek",
-    "cat": 3
-  },
-  {
-    "v1": "freeze",
-    "v2": "froze",
-    "v3": "frozen",
-    "tr": "Donmak",
-    "cat": 3
-  },
-  {
-    "v1": "give",
-    "v2": "gave",
-    "v3": "given",
-    "tr": "Vermek",
-    "cat": 3
-  },
-  {
-    "v1": "go",
-    "v2": "went",
-    "v3": "gone",
-    "tr": "Gitmek",
-    "cat": 3
-  },
-  {
-    "v1": "grow",
-    "v2": "grew",
-    "v3": "grown",
-    "tr": "Büyümek/Yetiştirmek",
-    "cat": 3
-  },
-  {
-    "v1": "hide",
-    "v2": "hid",
-    "v3": "hidden",
-    "tr": "Saklanmak",
-    "cat": 3
-  },
-  {
-    "v1": "know",
-    "v2": "knew",
-    "v3": "known",
-    "tr": "Bilmek",
-    "cat": 3
-  },
-  {
-    "v1": "overtake",
-    "v2": "overtook",
-    "v3": "overtaken",
-    "tr": "Sollamak/Geçmek",
-    "cat": 3
-  },
-  {
-    "v1": "overthrow",
-    "v2": "overthrew",
-    "v3": "overthrown",
-    "tr": "Devirmek",
-    "cat": 3
-  },
-  {
-    "v1": "prove",
-    "v2": "proved",
-    "v3": "proven",
-    "tr": "Kanıtlamak",
-    "cat": 3
-  },
-  {
-    "v1": "ride",
-    "v2": "rode",
-    "v3": "ridden",
-    "tr": "Binmek",
-    "cat": 3
-  },
-  {
-    "v1": "ring",
-    "v2": "rang",
-    "v3": "rung",
-    "tr": "Çalmak (zil/telefon)",
-    "cat": 3
-  },
-  {
-    "v1": "rise",
-    "v2": "rose",
-    "v3": "risen",
-    "tr": "Yükselmek",
-    "cat": 3
-  },
-  {
-    "v1": "see",
-    "v2": "saw",
-    "v3": "seen",
-    "tr": "Görmek",
-    "cat": 3
-  },
-  {
-    "v1": "shake",
-    "v2": "shook",
-    "v3": "shaken",
-    "tr": "Sallamak/Titremek",
-    "cat": 3
-  },
-  {
-    "v1": "show",
-    "v2": "showed",
-    "v3": "shown",
-    "tr": "Göstermek",
-    "cat": 3
-  },
-  {
-    "v1": "sing",
-    "v2": "sang",
-    "v3": "sung",
-    "tr": "Şarkı söylemek",
-    "cat": 3
-  },
-  {
-    "v1": "sink",
-    "v2": "sank",
-    "v3": "sunk",
-    "tr": "Batmak",
-    "cat": 3
-  },
-  {
-    "v1": "speak",
-    "v2": "spoke",
-    "v3": "spoken",
-    "tr": "Konuşmak",
-    "cat": 3
-  },
-  {
-    "v1": "steal",
-    "v2": "stole",
-    "v3": "stolen",
-    "tr": "Çalmak (hırsızlık)",
-    "cat": 3
-  },
-  {
-    "v1": "strive",
-    "v2": "strove",
-    "v3": "striven",
-    "tr": "Çabalamak",
-    "cat": 3
-  },
-  {
-    "v1": "swear",
-    "v2": "swore",
-    "v3": "sworn",
-    "tr": "Yemin etmek/Küfretmek",
-    "cat": 3
-  },
-  {
-    "v1": "swim",
-    "v2": "swam",
-    "v3": "swum",
-    "tr": "Yüzmek",
-    "cat": 3
-  },
-  {
-    "v1": "take",
-    "v2": "took",
-    "v3": "taken",
-    "tr": "Almak",
-    "cat": 3
-  },
-  {
-    "v1": "tear",
-    "v2": "tore",
-    "v3": "torn",
-    "tr": "Yırtmak",
-    "cat": 3
-  },
-  {
-    "v1": "thrive",
-    "v2": "throve",
-    "v3": "thriven",
-    "tr": "Gelişmek/Serpilmek",
-    "cat": 3
-  },
-  {
-    "v1": "throw",
-    "v2": "threw",
-    "v3": "thrown",
-    "tr": "Atmak",
-    "cat": 3
-  },
-  {
-    "v1": "undertake",
-    "v2": "undertook",
-    "v3": "undertaken",
-    "tr": "Üstlenmek",
-    "cat": 3
-  },
-  {
-    "v1": "wake",
-    "v2": "woke",
-    "v3": "woken",
-    "tr": "Uyanmak/Uyandırmak",
-    "cat": 3
-  },
-  {
-    "v1": "wear",
-    "v2": "wore",
-    "v3": "worn",
-    "tr": "Giymek",
-    "cat": 3
-  },
-  {
-    "v1": "withdraw",
-    "v2": "withdrew",
-    "v3": "withdrawn",
-    "tr": "Geri çekilmek/Para çekmek",
-    "cat": 3
-  },
-  {
-    "v1": "write",
-    "v2": "wrote",
-    "v3": "written",
-    "tr": "Yazmak",
-    "cat": 3
-  }
-];
+    {"v1": "broadcast", "v2": "broadcast", "v3": "broadcast", "tr": "Yayınlamak", "cat": 1},
+    {"v1": "burst", "v2": "burst", "v3": "burst", "tr": "Patlamak", "cat": 1},
+    {"v1": "cost", "v2": "cost", "v3": "cost", "tr": "Mal olmak", "cat": 1},
+    {"v1": "cut", "v2": "cut", "v3": "cut", "tr": "Kesmek", "cat": 1},
+    {"v1": "forecast", "v2": "forecast", "v3": "forecast", "tr": "Tahmin etmek", "cat": 1},
+    {"v1": "hit", "v2": "hit", "v3": "hit", "tr": "Vurmak", "cat": 1},
+    {"v1": "hurt", "v2": "hurt", "v3": "hurt", "tr": "İncitmek/Acımak", "cat": 1},
+    {"v1": "let", "v2": "let", "v3": "let", "tr": "İzin vermek", "cat": 1},
+    {"v1": "put", "v2": "put", "v3": "put", "tr": "Koymak", "cat": 1},
+    {"v1": "read", "v2": "read", "v3": "read", "tr": "Okumak", "cat": 1},
+    {"v1": "set", "v2": "set", "v3": "set", "tr": "Belirlemek/Kurmak", "cat": 1},
+    {"v1": "shut", "v2": "shut", "v3": "shut", "tr": "Kapamak", "cat": 1},
+    {"v1": "split", "v2": "split", "v3": "split", "tr": "Bölmek/Ayırmak", "cat": 1},
+    {"v1": "spread", "v2": "spread", "v3": "spread", "tr": "Yaymak", "cat": 1},
+    {"v1": "shed", "v2": "shed", "v3": "shed", "tr": "Dökmek (yaprak/yaş/ışık)", "cat": 1},
+
+    {"v1": "become", "v2": "became", "v3": "become", "tr": "Olmak", "cat": 2},
+    {"v1": "come", "v2": "came", "v3": "come", "tr": "Gelmek", "cat": 2},
+    {"v1": "overcome", "v2": "overcame", "v3": "overcome", "tr": "Üstesinden gelmek", "cat": 2},
+    {"v1": "run", "v2": "ran", "v3": "run", "tr": "Koşmak", "cat": 2},
+    {"v1": "bend", "v2": "bent", "v3": "bent", "tr": "Eğmek", "cat": 2},
+    {"v1": "bring", "v2": "brought", "v3": "brought", "tr": "Getirmek", "cat": 2},
+    {"v1": "build", "v2": "built", "v3": "built", "tr": "İnşa etmek", "cat": 2},
+    {"v1": "burn", "v2": "burnt", "v3": "burnt", "tr": "Yakmak", "cat": 2},
+    {"v1": "buy", "v2": "bought", "v3": "bought", "tr": "Satın almak", "cat": 2},
+    {"v1": "catch", "v2": "caught", "v3": "caught", "tr": "Yakalamak", "cat": 2},
+    {"v1": "deal", "v2": "dealt", "v3": "dealt", "tr": "Anlaşmak/Başa çıkmak", "cat": 2},
+    {"v1": "dig", "v2": "dug", "v3": "dug", "tr": "Kazmak", "cat": 2},
+    {"v1": "dream", "v2": "dreamt", "v3": "dreamt", "tr": "Rüya görmek", "cat": 2},
+    {"v1": "dwell", "v2": "dwelt", "v3": "dwelt", "tr": "Yaşamak/İkamet etmek", "cat": 2},
+    {"v1": "feed", "v2": "fed", "v3": "fed", "tr": "Beslemek", "cat": 2},
+    {"v1": "feel", "v2": "felt", "v3": "felt", "tr": "Hissetmek", "cat": 2},
+    {"v1": "fight", "v2": "fought", "v3": "fought", "tr": "Savaşmak", "cat": 2},
+    {"v1": "find", "v2": "found", "v3": "found", "tr": "Bulmak", "cat": 2},
+    {"v1": "flee", "v2": "fled", "v3": "fled", "tr": "Kaçmak", "cat": 2},
+    {"v1": "foretell", "v2": "foretold", "v3": "foretold", "tr": "Kehanette bulunmak", "cat": 2},
+    {"v1": "get", "v2": "got", "v3": "got", "tr": "Almak/Varmak", "cat": 2},
+    {"v1": "hang", "v2": "hung", "v3": "hung", "tr": "Asmak", "cat": 2},
+    {"v1": "have", "v2": "had", "v3": "had", "tr": "Sahip olmak", "cat": 2},
+    {"v1": "hear", "v2": "heard", "v3": "heard", "tr": "Duymak", "cat": 2},
+    {"v1": "hold", "v2": "held", "v3": "held", "tr": "Tutmak", "cat": 2},
+    {"v1": "keep", "v2": "kept", "v3": "kept", "tr": "Muhafaza etmek/Saklamak", "cat": 2},
+    {"v1": "lead", "v2": "led", "v3": "led", "tr": "Yönetmek/Önderlik etmek", "cat": 2},
+    {"v1": "learn", "v2": "learnt", "v3": "learnt", "tr": "Öğrenmek", "cat": 2},
+    {"v1": "leave", "v2": "left", "v3": "left", "tr": "Ayrılmak/Bırakmak", "cat": 2},
+    {"v1": "lend", "v2": "lent", "v3": "lent", "tr": "Ödünç vermek", "cat": 2},
+    {"v1": "lose", "v2": "lost", "v3": "lost", "tr": "Kaybetmek", "cat": 2},
+    {"v1": "make", "v2": "made", "v3": "made", "tr": "Yapmak", "cat": 2},
+    {"v1": "mean", "v2": "meant", "v3": "meant", "tr": "Anlamına gelmek/Kastetmek", "cat": 2},
+    {"v1": "meet", "v2": "met", "v3": "met", "tr": "Buluşmak/Tanışmak", "cat": 2},
+    {"v1": "misunderstand", "v2": "misunderstood", "v3": "misunderstood", "tr": "Yanlış anlamak", "cat": 2},
+    {"v1": "pay", "v2": "paid", "v3": "paid", "tr": "Ödemek", "cat": 2},
+    {"v1": "say", "v2": "said", "v3": "said", "tr": "Söylemek", "cat": 2},
+    {"v1": "seek", "v2": "sought", "v3": "sought", "tr": "Aramak/Çabalamak", "cat": 2},
+    {"v1": "sell", "v2": "sold", "v3": "sold", "tr": "Satmak", "cat": 2},
+    {"v1": "send", "v2": "sent", "v3": "sent", "tr": "Göndermek", "cat": 2},
+    {"v1": "shine", "v2": "shone", "v3": "shone", "tr": "Parıldamak", "cat": 2},
+    {"v1": "sit", "v2": "sat", "v3": "sat", "tr": "Oturmak", "cat": 2},
+    {"v1": "sleep", "v2": "slept", "v3": "slept", "tr": "Uyumak", "cat": 2},
+    {"v1": "smell", "v2": "smelt", "v3": "smelt", "tr": "Kokmak", "cat": 2},
+    {"v1": "spend", "v2": "spent", "v3": "spent", "tr": "Harcamak", "cat": 2},
+    {"v1": "stand", "v2": "stood", "v3": "stood", "tr": "Ayakta durmak", "cat": 2},
+    {"v1": "strike", "v2": "struck", "v3": "struck", "tr": "Vurmak/Çarpmak", "cat": 2},
+    {"v1": "teach", "v2": "taught", "v3": "taught", "tr": "Öğretmek", "cat": 2},
+    {"v1": "tell", "v2": "told", "v3": "told", "tr": "Anlatmak/Söylemek", "cat": 2},
+    {"v1": "think", "v2": "thought", "v3": "thought", "tr": "Düşünmek", "cat": 2},
+    {"v1": "understand", "v2": "understood", "v3": "understood", "tr": "Anlamak", "cat": 2},
+    {"v1": "win", "v2": "won", "v3": "won", "tr": "Kazanmak", "cat": 2},
+    {"v1": "withstand", "v2": "withstood", "v3": "withstood", "tr": "Dayanmak", "cat": 2},
+    {"v1": "bind", "v2": "bound", "v3": "bound", "tr": "Bağlamak", "cat": 2},
+    {"v1": "breed", "v2": "bred", "v3": "bred", "tr": "Üretmek/Yetiştirmek", "cat": 2},
+    {"v1": "cling", "v2": "clung", "v3": "clung", "tr": "Sıkıca tutunmak", "cat": 2},
+    {"v1": "creep", "v2": "crept", "v3": "crept", "tr": "Sürünmek/Sokulmak", "cat": 2},
+    {"v1": "uphold", "v2": "upheld", "v3": "upheld", "tr": "Desteklemek/Onaylamak", "cat": 2},
+    {"v1": "withhold", "v2": "withheld", "v3": "withheld", "tr": "Esirgemek/Alıkoymak", "cat": 2},
+    {"v1": "weep", "v2": "wept", "v3": "wept", "tr": "Ağlamak", "cat": 2},
+
+    {"v1": "arise", "v2": "arose", "v3": "arisen", "tr": "Ortaya çıkmak", "cat": 3},
+    {"v1": "be", "v2": "was/were", "v3": "been", "tr": "Olmak", "cat": 3},
+    {"v1": "bear", "v2": "bore", "v3": "born", "tr": "Doğurmak/Taşımak", "cat": 3},
+    {"v1": "begin", "v2": "began", "v3": "begun", "tr": "Başlamak", "cat": 3},
+    {"v1": "bite", "v2": "bit", "v3": "bitten", "tr": "Isırmak", "cat": 3},
+    {"v1": "blow", "v2": "blew", "v3": "blown", "tr": "Esmek/Üflemek", "cat": 3},
+    {"v1": "break", "v2": "broke", "v3": "broken", "tr": "Kırmak", "cat": 3},
+    {"v1": "choose", "v2": "chose", "v3": "chosen", "tr": "Seçmek", "cat": 3},
+    {"v1": "do", "v2": "did", "v3": "done", "tr": "Yapmak", "cat": 3},
+    {"v1": "draw", "v2": "drew", "v3": "drawn", "tr": "Çizmek", "cat": 3},
+    {"v1": "drink", "v2": "drank", "v3": "drunk", "tr": "İçmek", "cat": 3},
+    {"v1": "drive", "v2": "drove", "v3": "driven", "tr": "Sürmek", "cat": 3},
+    {"v1": "eat", "v2": "ate", "v3": "eaten", "tr": "Yemek", "cat": 3},
+    {"v1": "fall", "v2": "fell", "v3": "fallen", "tr": "Düşmek", "cat": 3},
+    {"v1": "fly", "v2": "flew", "v3": "flown", "tr": "Uçmak", "cat": 3},
+    {"v1": "forbid", "v2": "forbade", "v3": "forbidden", "tr": "Yasaklamak", "cat": 3},
+    {"v1": "foresee", "v2": "foresaw", "v3": "foreseen", "tr": "Öngörmek", "cat": 3},
+    {"v1": "forget", "v2": "forgot", "v3": "forgotten", "tr": "Unutmak", "cat": 3},
+    {"v1": "forgive", "v2": "forgave", "v3": "forgiven", "tr": "Affetmek", "cat": 3},
+    {"v1": "freeze", "v2": "froze", "v3": "frozen", "tr": "Donmak", "cat": 3},
+    {"v1": "give", "v2": "gave", "v3": "given", "tr": "Vermek", "cat": 3},
+    {"v1": "go", "v2": "went", "v3": "gone", "tr": "Gitmek", "cat": 3},
+    {"v1": "grow", "v2": "grew", "v3": "grown", "tr": "Büyümek/Yetiştirmek", "cat": 3},
+    {"v1": "hide", "v2": "hid", "v3": "hidden", "tr": "Saklanmak", "cat": 3},
+    {"v1": "know", "v2": "knew", "v3": "known", "tr": "Bilmek", "cat": 3},
+    {"v1": "overtake", "v2": "overtook", "v3": "overtaken", "tr": "Sollamak/Geçmek", "cat": 3},
+    {"v1": "overthrow", "v2": "overthrew", "v3": "overthrown", "tr": "Devirmek", "cat": 3},
+    {"v1": "prove", "v2": "proved", "v3": "proven", "tr": "Kanıtlamak", "cat": 3},
+    {"v1": "ride", "v2": "rode", "v3": "ridden", "tr": "Binmek", "cat": 3},
+    {"v1": "ring", "v2": "rang", "v3": "rung", "tr": "Çalmak (zil/telefon)", "cat": 3},
+    {"v1": "rise", "v2": "rose", "v3": "risen", "tr": "Yükselmek", "cat": 3},
+    {"v1": "see", "v2": "saw", "v3": "seen", "tr": "Görmek", "cat": 3},
+    {"v1": "shake", "v2": "shook", "v3": "shaken", "tr": "Sallamak/Titremek", "cat": 3},
+    {"v1": "show", "v2": "showed", "v3": "shown", "tr": "Göstermek", "cat": 3},
+    {"v1": "sing", "v2": "sang", "v3": "sung", "tr": "Şarkı söylemek", "cat": 3},
+    {"v1": "sink", "v2": "sank", "v3": "sunk", "tr": "Batmak", "cat": 3},
+    {"v1": "speak", "v2": "spoke", "v3": "spoken", "tr": "Konuşmak", "cat": 3},
+    {"v1": "steal", "v2": "stole", "v3": "stolen", "tr": "Çalmak (hırsızlık)", "cat": 3},
+    {"v1": "strive", "v2": "strove", "v3": "striven", "tr": "Çabalamak", "cat": 3},
+    {"v1": "swear", "v2": "swore", "v3": "sworn", "tr": "Yemin etmek/Küfretmek", "cat": 3},
+    {"v1": "swim", "v2": "swam", "v3": "swum", "tr": "Yüzmek", "cat": 3},
+    {"v1": "take", "v2": "took", "v3": "taken", "tr": "Almak", "cat": 3},
+    {"v1": "tear", "v2": "tore", "v3": "torn", "tr": "Yırtmak", "cat": 3},
+    {"v1": "thrive", "v2": "throve", "v3": "thriven", "tr": "Gelişmek/Serpilmek", "cat": 3},
+    {"v1": "throw", "v2": "threw", "v3": "thrown", "tr": "Atmak", "cat": 3},
+    {"v1": "undertake", "v2": "undertook", "v3": "undertaken", "tr": "Üstlenmek", "cat": 3},
+    {"v1": "wake", "v2": "woke", "v3": "woken", "tr": "Uyanmak/Uyandırmak", "cat": 3},
+    {"v1": "wear", "v2": "wore", "v3": "worn", "tr": "Giymek", "cat": 3},
+    {"v1": "withdraw", "v2": "withdrew", "v3": "withdrawn", "tr": "Geri çekilmek/Para çekmek", "cat": 3},
+    {"v1": "write", "v2": "wrote", "v3": "written", "tr": "Yazmak", "cat": 3},
+    {"v1": "undergo", "v2": "underwent", "v3": "undergone", "tr": "Maruz kalmak/Geçirmek", "cat": 3},
+    {"v1": "shrink", "v2": "shrank", "v3": "shrunk", "tr": "Küçülmek/Çekmek", "cat": 3},
+
+    // CATEGORY 4: YDS TUZAK FİİLLER (Confusing / High-Difficulty Academic Verbs)
+    {"v1": "lie", "v2": "lay", "v3": "lain", "tr": "Uzanmak/Yatmak (YDS Tuzağı)", "cat": 4},
+    {"v1": "lay", "v2": "laid", "v3": "laid", "tr": "Serip koymak/Yumurtlamak", "cat": 4},
+    {"v1": "forsake", "v2": "forsook", "v3": "forsaken", "tr": "Terk etmek/Vazgeçmek", "cat": 4},
+    {"v1": "forgo", "v2": "forwent", "v3": "forgone", "tr": "Feragat etmek/Kaçınmak", "cat": 4},
+    {"v1": "slay", "v2": "slew", "v3": "slain", "tr": "Katletmek/Öldürmek", "cat": 4},
+    {"v1": "tread", "v2": "trod", "v3": "trodden", "tr": "Ayak basmak/Çiğnemek", "cat": 4},
+    {"v1": "weave", "v2": "wove", "v3": "woven", "tr": "Dokumak/Örmek", "cat": 4},
+    {"v1": "wind", "v2": "wound", "v3": "wound", "tr": "Sarmak/Kurmak (saat vb.)", "cat": 4},
+    {"v1": "grind", "v2": "ground", "v3": "ground", "tr": "Öğütmek/Bilemek", "cat": 4},
+    {"v1": "wring", "v2": "wrung", "v3": "wrung", "tr": "Sıkıp suyunu çıkarmak/Bükmek", "cat": 4},
+    {"v1": "abide", "v2": "abode", "v3": "abode", "tr": "Riayet etmek/Katlanmak", "cat": 4},
+    {"v1": "behold", "v2": "beheld", "v3": "beheld", "tr": "Seyretmek/Görmek", "cat": 4},
+    {"v1": "stride", "v2": "strode", "v3": "stridden", "tr": "Uzun adımlarla yürümek", "cat": 4},
+    {"v1": "mislead", "v2": "misled", "v3": "misled", "tr": "Yanıltmak/Aldatmak", "cat": 4}
+  ];
 
   // RANKS & LEVELS CONFIGURATION
   const RANKS = [
-    { lvl: 1, minXp: 0, title: "Düzensiz Fiil Cahili", icon: "🌱" },
-    { lvl: 2, minXp: 10000, title: "Düzensiz Fiilden Haberdar", icon: "📖" },
-    { lvl: 3, minXp: 25000, title: "Biraz Biliyor", icon: "🏹" },
-    { lvl: 4, minXp: 50000, title: "Sıradan Ezberci", icon: "⚡" },
-    { lvl: 5, minXp: 90000, title: "Düzensiz Fiil Canavarı", icon: "🦁" },
-    { lvl: 6, minXp: 150000, title: "Düzensiz Fiil Efsanesi", icon: "🏆" }
+    { lvl: 1,  minXp: 0,    title: "Acemi Dilci",      icon: "🌱" },
+    { lvl: 2,  minXp: 150,  title: "YDS Çaylağı",      icon: "📖" },
+    { lvl: 3,  minXp: 400,  title: "Kelime Avcısı",    icon: "🏹" },
+    { lvl: 4,  minXp: 800,  title: "Gramer Savaşçısı", icon: "⚔️" },
+    { lvl: 5,  minXp: 1400, title: "YDS Uzmanı",       icon: "⚡" },
+    { lvl: 6,  minXp: 2300, title: "Dil Virtüözü",     icon: "🧠" },
+    { lvl: 7,  minXp: 3600, title: "Akademik Üstat",   icon: "🎓" },
+    { lvl: 8,  minXp: 5500, title: "YDS Canavarı",     icon: "🦁" },
+    { lvl: 9,  minXp: 8000, title: "Profesör Doktor",  icon: "👑" },
+    { lvl: 10, minXp: 12000,title: "YDS Efsanesi",     icon: "🏆" }
   ];
+
+  // 4 DISTINCT SELECTABLE DIFFICULTY MODES
+  // 1. easy (Çok Basit): 2 boxes already given, only 1 blank! Untimed, free hints, 0 XP penalty.
+  // 2. medium (Orta): 1 box given, 2 blanks. Untimed, free hints, 0 XP penalty.
+  // 3. hard (Zor): All 3 boxes blank (only Turkish meaning shown). 18s timer, -8 XP wrong penalty.
+  // 4. extra_hard (Extra Zor): 10s timer, 50% all 3 blank / 50% Turkish meaning hidden + 4-option meaning quiz, no hints, -15 XP wrong penalty.
+  const DIFFICULTY_MODES = {
+    easy: {
+      id: 'easy',
+      name: "🌱 Çok Basit Mod",
+      blanksCount: 1, // 2 given, only 1 blank!
+      timed: false,
+      timeSec: 0,
+      blindTrProb: 0,
+      wrongPenalty: 0,
+      hintCost: 0,
+      giveUpPenalty: 0,
+      baseXp: 10,
+      hintsAllowed: true,
+      masteryTarget: 2,
+      ruleText: "2 Hali Hazır Verilir • Sadece 1 Kutu Yazılır",
+      penaltyText: "♾️ Süresiz • Ceza Yok"
+    },
+    medium: {
+      id: 'medium',
+      name: "⚖️ Orta Mod",
+      blanksCount: 2, // 1 given, 2 blanks (Classic)
+      timed: false,
+      timeSec: 0,
+      blindTrProb: 0,
+      wrongPenalty: 0,
+      hintCost: 0,
+      giveUpPenalty: 0,
+      baseXp: 14,
+      hintsAllowed: true,
+      masteryTarget: 3,
+      ruleText: "1 Hali Verilir • Diğer 2 Hali Yazılır",
+      penaltyText: "♾️ Süresiz • İpucu Ücretsiz"
+    },
+    hard: {
+      id: 'hard',
+      name: "🔥 Zor Mod",
+      blanksCount: 3, // All 3 blanks! Only Turkish meaning is shown
+      timed: true,
+      timeSec: 18,
+      blindTrProb: 0,
+      wrongPenalty: 8,
+      hintCost: 5,
+      giveUpPenalty: 12,
+      baseXp: 20,
+      hintsAllowed: true,
+      masteryTarget: 4,
+      ruleText: "3 Kutu da Boş (V1-V2-V3) • 18sn Süre",
+      penaltyText: "Hata: -8 XP | İpucu: -5 XP"
+    },
+    extra_hard: {
+      id: 'extra_hard',
+      name: "💀 Extra Zor Mod",
+      blanksCount: 3, // 3 blanks OR 2 blanks + hidden Turkish meaning quiz
+      timed: true,
+      timeSec: 10,
+      blindTrProb: 0.55,
+      wrongPenalty: 15,
+      hintCost: 99,
+      giveUpPenalty: 25,
+      baseXp: 30,
+      hintsAllowed: false,
+      masteryTarget: 5,
+      ruleText: "Kör Anlam Testi & 3 Boşluk • 10sn Süre",
+      penaltyText: "İpucu Yok | Hata: -15 XP"
+    }
+  };
 
   // MOTIVATIONAL MESSAGES
   const CHEERS = [
     "Harikasın! 🎯",
-    "Gözün kapalı yapıyorsun! ⚡",
-    "Bunu ezberledin cepte! 🚀",
-    "Ateş aldın, devam et! 🔥",
+    "Adım adım ustalaşıyorsun! ⚡",
+    "YDS'de bu soru cepte! 🚀",
+    "Çok iyi gidiyorsun, devam et! 🔥",
     "Mükemmel hafıza! 🧠",
     "Harika bir seri yakaladın! ✨",
-    "Tam isabet! 👏",
+    "Tam isabet! 👏"
   ];
 
-  // LOCAL STORAGE STATE INITIALIZATION
+  // LOCAL STORAGE STATE INITIALIZATION (Defaulting to 'easy' for beginners!)
   let state = {
     xp: 0,
     streak: 0,
@@ -1752,15 +1444,15 @@
     correctCount: 0,
     wrongCount: 0,
     soundEnabled: true,
-    darkMode: null, // null: follow system, true/false
-    activeCategory: 'all', // 'all', 1, 2, 3, 'hard'
-    verbStats: {} // { [v1]: { weight: 10, correct: 0, wrong: 0, mastered: false } }
+    darkMode: null,
+    activeCategory: 'all',
+    difficultyMode: 'easy', // 'easy' (Çok Basit), 'medium' (Orta), 'hard' (Zor), 'extra_hard' (Extra Zor)
+    verbStats: {}
   };
 
-  // Load from LocalStorage
   function loadState() {
     try {
-      const saved = localStorage.getItem('verbmaster_yds_state');
+      const saved = localStorage.getItem('verbmaster_yds_hardcore_state') || localStorage.getItem('verbmaster_yds_state');
       if (saved) {
         const parsed = JSON.parse(saved);
         state = Object.assign(state, parsed);
@@ -1769,22 +1461,29 @@
       console.warn("Storage load error:", e);
     }
 
-    // Ensure all verbs exist in verbStats
+    // Ensure valid difficultyMode (migrate old modes like 'auto'/'classic'/'nightmare' to new 4 modes, defaulting to 'easy')
+    if (!DIFFICULTY_MODES[state.difficultyMode]) {
+      state.difficultyMode = 'easy';
+    }
+
     RAW_VERBS.forEach(v => {
       if (!state.verbStats[v.v1]) {
         state.verbStats[v.v1] = {
           weight: 10,
           correct: 0,
           wrong: 0,
+          consecutive: 0,
           mastered: false
         };
+      } else if (typeof state.verbStats[v.v1].consecutive !== 'number') {
+        state.verbStats[v.v1].consecutive = 0;
       }
     });
   }
 
   function saveState() {
     try {
-      localStorage.setItem('verbmaster_yds_state', JSON.stringify(state));
+      localStorage.setItem('verbmaster_yds_hardcore_state', JSON.stringify(state));
     } catch (e) {
       console.warn("Storage save error:", e);
     }
@@ -1792,7 +1491,7 @@
 
   loadState();
 
-  // AUDIO SYNTHESIZER (WEB AUDIO API - ZERO DEPENDENCY)
+  // AUDIO SYNTHESIZER (WEB AUDIO API)
   let audioCtx = null;
   function getAudioContext() {
     if (!audioCtx && (window.AudioContext || window.webkitAudioContext)) {
@@ -1827,39 +1526,43 @@
 
   function playSuccessSound(streakBonus = false) {
     if (streakBonus) {
-      // Ascending celebratory chord
-      playTone(523.25, 'sine', 0.12, 0);       // C5
-      playTone(659.25, 'sine', 0.12, 0.08);    // E5
-      playTone(783.99, 'sine', 0.14, 0.16);    // G5
-      playTone(1046.50, 'sine', 0.25, 0.24);   // C6
+      playTone(523.25, 'sine', 0.12, 0);
+      playTone(659.25, 'sine', 0.12, 0.08);
+      playTone(783.99, 'sine', 0.14, 0.16);
+      playTone(1046.50, 'sine', 0.25, 0.24);
     } else {
-      playTone(659.25, 'sine', 0.10, 0);       // E5
-      playTone(880.00, 'sine', 0.18, 0.08);    // A5
+      playTone(659.25, 'sine', 0.10, 0);
+      playTone(880.00, 'sine', 0.18, 0.08);
     }
   }
 
   function playWrongSound() {
-    playTone(260, 'triangle', 0.15, 0);
-    playTone(220, 'triangle', 0.22, 0.1);
+    playTone(250, 'triangle', 0.15, 0);
+    playTone(210, 'triangle', 0.22, 0.1);
   }
 
   // NATIVE ENGLISH SPEECH SYNTHESIS
   function speakCurrentVerb() {
     if (!window.speechSynthesis || !currentVerb) return;
-    window.speechSynthesis.cancel(); // Stop any pending speech
+    window.speechSynthesis.cancel();
 
     const textToSpeak = `${currentVerb.v1}, ${currentVerb.v2.replace('/', ' or ')}, ${currentVerb.v3}`;
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
     utterance.lang = 'en-US';
-    utterance.rate = 0.88; // Slightly slower for better memorization clarity
+    utterance.rate = 0.88;
     window.speechSynthesis.speak(utterance);
   }
 
-  // CURRENT QUESTION STATE
+  // CURRENT QUESTION & TIMER STATE
   let currentVerb = null;
-  let givenIndex = 0;
+  let lockedIndices = []; // Array of indices (0, 1, 2) that are locked/given
+  let isMeaningHidden = false;
+  let selectedMeaningOption = null;
   let isAnswered = false;
-  let hintStage = 0; // 0: none, 1: meaning shown, 2: letter hint
+  let hintStage = 0;
+  let timerInterval = null;
+  let timeRemaining = 18.0;
+  let maxQuestionTime = 18.0;
 
   // DOM Elements
   const v1Container = document.getElementById('v1-container');
@@ -1869,7 +1572,7 @@
   const groupTag = document.getElementById('group-tag');
   const feedbackToast = document.getElementById('feedback-toast');
   const btnCheck = document.querySelector('.btn-check');
-  const btnGiveUp = document.querySelector('.btn-giveup');
+  const btnGiveUp = document.getElementById('btn-giveup');
   const btnNext = document.querySelector('.btn-next');
   const btnHint = document.getElementById('btn-hint');
   const streakNum = document.getElementById('streak-num');
@@ -1880,21 +1583,34 @@
   const rankIcon = document.getElementById('rank-icon');
   const rankName = document.getElementById('rank-name');
   const rankLvl = document.getElementById('rank-lvl');
+  const rankReqText = document.getElementById('rank-req-text');
   const statLearned = document.getElementById('stat-learned');
   const statAccuracy = document.getElementById('stat-accuracy');
+  const statBestStreak = document.getElementById('stat-best-streak');
   const statTotal = document.getElementById('stat-total');
   const hardCountPill = document.getElementById('hard-count-pill');
+  const allCountPill = document.getElementById('all-count-pill');
   const btnSound = document.getElementById('btn-sound');
   const btnTheme = document.getElementById('btn-theme');
+  const timerBarWrap = document.getElementById('timer-bar-wrap');
+  const timerBar = document.getElementById('timer-bar');
+  const timerPill = document.getElementById('timer-pill');
+  const timerSecEl = document.getElementById('timer-sec');
+  const activeModeDesc = document.getElementById('active-mode-desc');
+  const penaltyDesc = document.getElementById('penalty-desc');
+  const diffBadgePill = document.getElementById('diff-badge-pill');
+  const meaningQuizWrap = document.getElementById('meaning-quiz-wrap');
+  const meaningOptionsGrid = document.getElementById('meaning-options-grid');
 
-  // KEYBOARD NAVIGATION (iPhone SE3 & Desktop)
+  allCountPill.innerText = RAW_VERBS.length;
+
+  // KEYBOARD NAVIGATION
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
       if (isAnswered) {
         nextQuestion();
       } else {
-        // If current input is empty, or if we have another unfilled input, advance to it
         const inputs = Array.from(document.querySelectorAll('.verb-input'));
         const activeEl = document.activeElement;
         const activeIdx = inputs.indexOf(activeEl);
@@ -1908,6 +1624,39 @@
     }
   });
 
+  function getMasteredCount() {
+    let count = 0;
+    RAW_VERBS.forEach(v => {
+      const st = state.verbStats[v.v1];
+      if (st && (st.mastered || st.weight <= 2)) count++;
+    });
+    return count;
+  }
+
+  function getCurrentRankObj() {
+    let currentRank = RANKS[0];
+    for (let i = 0; i < RANKS.length; i++) {
+      if (state.xp >= RANKS[i].minXp) {
+        currentRank = RANKS[i];
+      }
+    }
+    return currentRank;
+  }
+
+  function getActiveDifficultyConfig() {
+    return DIFFICULTY_MODES[state.difficultyMode] || DIFFICULTY_MODES.easy;
+  }
+
+  function setDifficultyMode(mode) {
+    if (!DIFFICULTY_MODES[mode]) return;
+    state.difficultyMode = mode;
+    document.querySelectorAll('.diff-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.diff === mode);
+    });
+    saveState();
+    initGame();
+  }
+
   // FILTER LOGIC
   function getEligibleVerbs() {
     if (state.activeCategory === 'all') {
@@ -1915,7 +1664,7 @@
     }
     if (state.activeCategory === 'hard') {
       const h = RAW_VERBS.filter(v => state.verbStats[v.v1] && (state.verbStats[v.v1].weight > 10 || state.verbStats[v.v1].wrong > 0));
-      return h.length > 0 ? h : RAW_VERBS; // Fallback to all if none
+      return h.length > 0 ? h : RAW_VERBS;
     }
     return RAW_VERBS.filter(v => v.cat === state.activeCategory);
   }
@@ -1929,17 +1678,30 @@
 
   function getWeightedRandomVerb() {
     const pool = getEligibleVerbs();
+    const cfg = getActiveDifficultyConfig();
     let totalWeight = 0;
-    pool.forEach(v => {
+
+    const weights = pool.map(v => {
       const st = state.verbStats[v.v1] || { weight: 10 };
-      totalWeight += st.weight;
+      let mult = 1;
+      // In Very Easy mode, prioritize simpler Group 1 & Group 2 verbs slightly when 'all' is selected
+      if (cfg.id === 'easy' && state.activeCategory === 'all') {
+        if (v.cat === 1) mult = 1.6;
+        else if (v.cat === 2) mult = 1.3;
+        else if (v.cat === 4) mult = 0.5;
+      } else if (cfg.id === 'extra_hard' && state.activeCategory === 'all') {
+        if (v.cat === 4) mult = 2.2;
+        else if (v.cat === 3) mult = 1.5;
+      }
+      const w = Math.max(1, st.weight * mult);
+      totalWeight += w;
+      return w;
     });
 
     let random = Math.random() * totalWeight;
-    for (let v of pool) {
-      const st = state.verbStats[v.v1] || { weight: 10 };
-      if (random < st.weight) return v;
-      random -= st.weight;
+    for (let i = 0; i < pool.length; i++) {
+      if (random < weights[i]) return pool[i];
+      random -= weights[i];
     }
     return pool[0];
   }
@@ -1948,13 +1710,167 @@
   const GROUP_NAMES = {
     1: "1. Grup: 3 Hali Aynı",
     2: "2. Grup: 2 Hali Aynı",
-    3: "3. Grup: 3 Hali Farklı"
+    3: "3. Grup: 3 Hali Farklı",
+    4: "🔥 4. Grup: YDS Tuzağı"
   };
+
+  function stopQuestionTimer() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+  }
+
+  function startQuestionTimer(seconds) {
+    stopQuestionTimer();
+    maxQuestionTime = seconds;
+    timeRemaining = seconds;
+    updateTimerVisuals();
+
+    timerInterval = setInterval(() => {
+      if (isAnswered) {
+        stopQuestionTimer();
+        return;
+      }
+      timeRemaining = Math.max(0, +(timeRemaining - 0.1).toFixed(1));
+      updateTimerVisuals();
+
+      if (timeRemaining <= 0) {
+        stopQuestionTimer();
+        handleTimeOut();
+      }
+    }, 100);
+  }
+
+  function updateTimerVisuals() {
+    timerSecEl.innerText = timeRemaining.toFixed(1) + 'sn';
+    const pct = Math.max(0, Math.min(100, (timeRemaining / maxQuestionTime) * 100));
+    timerBar.style.width = pct + '%';
+
+    timerBar.classList.remove('warn', 'crit');
+    timerPill.classList.remove('crit');
+
+    if (pct <= 30) {
+      timerBar.classList.add('crit');
+      timerPill.classList.add('crit');
+    } else if (pct <= 60) {
+      timerBar.classList.add('warn');
+    }
+  }
+
+  function handleTimeOut() {
+    if (isAnswered) return;
+    const cfg = getActiveDifficultyConfig();
+    isAnswered = true;
+    state.wrongCount++;
+    state.streak = 0;
+    if (cfg.wrongPenalty > 0) {
+      state.xp = Math.max(0, state.xp - cfg.wrongPenalty);
+    }
+
+    const vStat = state.verbStats[currentVerb.v1];
+    vStat.wrong++;
+    vStat.consecutive = 0;
+    vStat.weight += 15;
+    vStat.mastered = false;
+
+    const inputs = document.querySelectorAll('.verb-input');
+    inputs.forEach(input => {
+      input.value = input.dataset.answer;
+      input.classList.remove('correct');
+      input.classList.add('wrong');
+    });
+
+    if (isMeaningHidden) {
+      trText.innerText = currentVerb.tr;
+      trText.classList.remove('hidden-meaning');
+      revealMeaningQuizCorrect();
+    }
+
+    playWrongSound();
+    const penMsg = cfg.wrongPenalty > 0 ? ` (-${cfg.wrongPenalty} XP)` : '';
+    feedbackToast.innerText = `⏰ Süre Doldu!${penMsg} Doğru cevaplar gösterildi.`;
+    feedbackToast.className = 'feedback-toast show failure';
+
+    showDoneState();
+    saveState();
+    updateUI();
+  }
+
+  function buildMeaningQuiz() {
+    meaningOptionsGrid.innerHTML = '';
+    selectedMeaningOption = null;
+
+    const distractors = RAW_VERBS
+      .filter(v => v.tr !== currentVerb.tr)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3)
+      .map(v => v.tr);
+
+    const options = [currentVerb.tr, ...distractors].sort(() => Math.random() - 0.5);
+
+    options.forEach(optText => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'meaning-opt-btn';
+      btn.innerText = optText;
+      btn.dataset.tr = optText;
+      btn.addEventListener('click', () => {
+        if (isAnswered) return;
+        selectedMeaningOption = optText;
+        document.querySelectorAll('.meaning-opt-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+      meaningOptionsGrid.appendChild(btn);
+    });
+  }
+
+  function revealMeaningQuizCorrect() {
+    document.querySelectorAll('.meaning-opt-btn').forEach(btn => {
+      if (btn.dataset.tr === currentVerb.tr) {
+        btn.classList.add('correct');
+      } else if (btn.classList.contains('selected')) {
+        btn.classList.add('wrong');
+      }
+    });
+  }
+
+  // CHOOSE WHICH BOXES ARE LOCKED (GIVEN) VS BLANK
+  function chooseLockedIndices(cfg) {
+    if (cfg.id === 'easy') {
+      // Çok Basit Mod: 2 boxes are given (locked), only 1 box is blank!
+      const blankIdx = Math.floor(Math.random() * 3);
+      return [0, 1, 2].filter(i => i !== blankIdx);
+    }
+    if (cfg.id === 'medium') {
+      // Orta Mod: 1 box is given, 2 boxes are blank
+      const lockedIdx = Math.floor(Math.random() * 3);
+      return [lockedIdx];
+    }
+    if (cfg.id === 'hard') {
+      // Zor Mod: 0 boxes given, all 3 are blank!
+      return [];
+    }
+    // Extra Zor Mod: Either all 3 blank (with Turkish shown) OR 1 given + Turkish meaning hidden + Meaning Quiz!
+    if (Math.random() < cfg.blindTrProb) {
+      const lockedIdx = Math.floor(Math.random() * 3);
+      isMeaningHidden = true;
+      return [lockedIdx];
+    } else {
+      isMeaningHidden = false;
+      return [];
+    }
+  }
 
   // INIT GAME QUESTION
   function initGame() {
+    stopQuestionTimer();
     currentVerb = getWeightedRandomVerb();
-    givenIndex = Math.floor(Math.random() * 3);
+    const cfg = getActiveDifficultyConfig();
+
+    isMeaningHidden = false;
+    lockedIndices = chooseLockedIndices(cfg);
+
     isAnswered = false;
     hintStage = 0;
 
@@ -1965,20 +1881,49 @@
     // Set Group Tag
     groupTag.innerText = GROUP_NAMES[currentVerb.cat] || "YDS Irregular Verb";
 
-    // Set Meaning
-    trText.innerText = currentVerb.tr;
+    // Set Meaning or Blind Quiz
+    if (isMeaningHidden) {
+      trText.innerText = "🔒 Anlam Gizli (Aşağıdan Seç + Fiilleri Yaz)";
+      trText.classList.add('hidden-meaning');
+      meaningQuizWrap.classList.add('active');
+      buildMeaningQuiz();
+    } else {
+      trText.innerText = currentVerb.tr;
+      trText.classList.remove('hidden-meaning');
+      meaningQuizWrap.classList.remove('active');
+    }
 
-    // Reset Buttons
+    // Reset Buttons & Hints
     btnCheck.style.display = 'inline-flex';
     btnGiveUp.style.display = 'inline-flex';
+    btnGiveUp.innerText = cfg.giveUpPenalty > 0 ? `Pes Et (-${cfg.giveUpPenalty} XP)` : "Bilmiyorum";
     btnNext.style.display = 'none';
     feedbackToast.className = 'feedback-toast';
-    btnHint.innerHTML = '<span>💡 İpucu</span>';
+
+    if (!cfg.hintsAllowed) {
+      btnHint.disabled = true;
+      btnHint.innerHTML = '<span>🔒 İpucu Yok</span>';
+    } else {
+      btnHint.disabled = false;
+      btnHint.innerHTML = cfg.hintCost > 0
+        ? `<span>💡 İpucu (-${cfg.hintCost} XP)</span>`
+        : '<span>💡 İpucu (Ücretsiz)</span>';
+    }
+
+    diffBadgePill.innerText = `${cfg.name} Aktif`;
+    activeModeDesc.innerText = cfg.ruleText;
+    penaltyDesc.innerText = cfg.penaltyText;
+    penaltyDesc.classList.toggle('strict', cfg.wrongPenalty > 0);
 
     // Create 3 columns
     createVerbItem(v1Container, currentVerb.v1, 0);
     createVerbItem(v2Container, currentVerb.v2, 1);
     createVerbItem(v3Container, currentVerb.v3, 2);
+
+    // Sync difficulty buttons
+    document.querySelectorAll('.diff-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.diff === state.difficultyMode);
+    });
 
     // Auto-focus first input
     const firstInput = document.querySelector('.verb-input');
@@ -1986,11 +1931,21 @@
       setTimeout(() => firstInput.focus(), 50);
     }
 
+    // Timer handling
+    if (cfg.timed) {
+      timerBarWrap.style.display = 'block';
+      startQuestionTimer(cfg.timeSec);
+    } else {
+      timerBarWrap.style.display = 'none';
+      timerPill.classList.remove('crit');
+      timerSecEl.innerText = "♾️ Süresiz";
+    }
+
     updateUI();
   }
 
   function createVerbItem(container, value, index) {
-    if (index === givenIndex) {
+    if (lockedIndices.includes(index)) {
       const div = document.createElement('div');
       div.className = 'locked-verb';
       div.innerText = value;
@@ -2000,6 +1955,7 @@
       input.className = 'verb-input';
       input.type = 'text';
       input.dataset.answer = value;
+      input.placeholder = `V${index + 1} yaz...`;
       input.autocomplete = "off";
       input.autocorrect = "off";
       input.autocapitalize = "none";
@@ -2009,7 +1965,6 @@
     }
   }
 
-  // SMART ANSWER MATCHING (Handles "was/were", extra spaces, casing)
   function normalizeStr(str) {
     return (str || '').trim().toLowerCase().replace(/\s+/g, '');
   }
@@ -2020,7 +1975,6 @@
     if (!u) return false;
     if (u === c) return true;
 
-    // If answer contains alternatives like "was/were"
     if (correctVal.includes('/')) {
       const options = correctVal.split('/').map(normalizeStr);
       if (options.includes(u)) return true;
@@ -2032,8 +1986,8 @@
   function checkAnswer() {
     if (isAnswered) return;
 
-    // First user gesture unlocks Web Audio on iOS Safari
     getAudioContext();
+    const cfg = getActiveDifficultyConfig();
 
     const inputs = document.querySelectorAll('.verb-input');
     let allCorrect = true;
@@ -2055,59 +2009,87 @@
       }
     });
 
+    // Check Meaning Quiz if active
+    let meaningQuizCorrect = true;
+    if (isMeaningHidden) {
+      if (!selectedMeaningOption) {
+        anyEmpty = true;
+        meaningQuizCorrect = false;
+      } else if (selectedMeaningOption !== currentVerb.tr) {
+        meaningQuizCorrect = false;
+      }
+      if (!meaningQuizCorrect) allCorrect = false;
+    }
+
     const vStat = state.verbStats[currentVerb.v1];
 
     if (allCorrect) {
+      stopQuestionTimer();
       isAnswered = true;
       state.correctCount++;
       state.streak++;
       if (state.streak > state.bestStreak) state.bestStreak = state.streak;
 
-      // Smart Weight reduction on mastery
       vStat.correct++;
+      vStat.consecutive = (vStat.consecutive || 0) + 1;
       vStat.weight = Math.max(1, vStat.weight - 4);
-      if (vStat.weight <= 2) vStat.mastered = true;
+      if (vStat.consecutive >= cfg.masteryTarget || vStat.weight <= 2) {
+        vStat.mastered = true;
+      }
 
-      // XP calculation: 10 base + streak bonus
-      const bonus = state.streak >= 5 ? 10 : (state.streak >= 3 ? 5 : 0);
-      const earnedXp = 10 + bonus;
+      if (isMeaningHidden) {
+        trText.innerText = currentVerb.tr;
+        trText.classList.remove('hidden-meaning');
+        revealMeaningQuizCorrect();
+      }
+
+      const streakBonus = state.streak >= 5 ? 8 : (state.streak >= 3 ? 4 : 0);
+      const earnedXp = cfg.baseXp + streakBonus;
       state.xp += earnedXp;
 
-      // Play Sound
       const isMilestone = state.streak % 5 === 0;
       playSuccessSound(isMilestone);
 
-      // Trigger Confetti on 5, 10, 15... or master
       if (isMilestone) {
         launchConfetti();
         streakBox.classList.add('fire-pulse');
         setTimeout(() => streakBox.classList.remove('fire-pulse'), 500);
       }
 
-      // Feedback Toast
       const cheer = CHEERS[Math.floor(Math.random() * CHEERS.length)];
       feedbackToast.innerText = `${cheer} (+${earnedXp} XP)`;
       feedbackToast.className = 'feedback-toast show success';
 
-      // Auto pronounce after correct answer
       speakCurrentVerb();
-
       showDoneState();
       saveState();
       updateUI();
     } else {
       state.wrongCount++;
       state.streak = 0;
+      if (cfg.wrongPenalty > 0) {
+        state.xp = Math.max(0, state.xp - cfg.wrongPenalty);
+      }
+
       vStat.wrong++;
-      vStat.weight += 12; // Increase weight so it appears more often
+      vStat.consecutive = 0;
+      vStat.weight += 12;
       vStat.mastered = false;
+
+      if (isMeaningHidden && selectedMeaningOption && selectedMeaningOption !== currentVerb.tr) {
+        document.querySelectorAll('.meaning-opt-btn').forEach(btn => {
+          if (btn.classList.contains('selected')) btn.classList.add('wrong');
+        });
+      }
 
       playWrongSound();
 
-      feedbackToast.innerText = anyEmpty ? "Fill in the blanks Irregular Verbs! ✍️" : "Try again or push 'Give Up' 🔄";
+      const penText = cfg.wrongPenalty > 0 ? ` (-${cfg.wrongPenalty} XP)` : '';
+      feedbackToast.innerText = anyEmpty
+        ? `Lütfen boş kutuyu doldur!${penText} ✍️`
+        : `Tekrar dene veya 'İpucu / Bilmiyorum' kullan${penText} 🔄`;
       feedbackToast.className = 'feedback-toast show failure';
 
-      // Vibrate if supported
       if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
 
       saveState();
@@ -2118,15 +2100,21 @@
   // GIVE UP
   function giveUp() {
     if (isAnswered) return;
+    stopQuestionTimer();
     getAudioContext();
 
+    const cfg = getActiveDifficultyConfig();
     isAnswered = true;
     state.wrongCount++;
     state.streak = 0;
+    if (cfg.giveUpPenalty > 0) {
+      state.xp = Math.max(0, state.xp - cfg.giveUpPenalty);
+    }
 
     const vStat = state.verbStats[currentVerb.v1];
     vStat.wrong++;
-    vStat.weight += 20; // High priority for review
+    vStat.consecutive = 0;
+    vStat.weight += 18;
     vStat.mastered = false;
 
     const inputs = document.querySelectorAll('.verb-input');
@@ -2136,9 +2124,16 @@
       input.classList.add('given-up');
     });
 
+    if (isMeaningHidden) {
+      trText.innerText = currentVerb.tr;
+      trText.classList.remove('hidden-meaning');
+      revealMeaningQuizCorrect();
+    }
+
     playWrongSound();
 
-    feedbackToast.innerText = "Answers showed. Try again! 💡";
+    const penMsg = cfg.giveUpPenalty > 0 ? ` (-${cfg.giveUpPenalty} XP)` : '';
+    feedbackToast.innerText = `Cevap gösterildi${penMsg}. Sesini dinle ve tekrarla! 💡`;
     feedbackToast.className = 'feedback-toast show giveup';
 
     speakCurrentVerb();
@@ -2158,45 +2153,44 @@
     initGame();
   }
 
-  // HINT SYSTEM
+  // HINT SYSTEM (Friendly in Çok Basit & Orta, costs XP in Zor, disabled in Extra Zor)
   function useHint() {
     if (isAnswered) return;
+    const cfg = getActiveDifficultyConfig();
+    if (!cfg.hintsAllowed) return;
 
     if (hintStage === 0) {
-      // Stage 1: Highlight Turkish meaning & speak root verb
-      trText.style.color = "var(--warning)";
-      btnHint.innerHTML = "<span>🔤 İlk Harf</span>";
-      hintStage = 1;
-      feedbackToast.innerText = "Caution to Turkish mean! 💡";
-      feedbackToast.className = "feedback-toast show";
-    } else if (hintStage === 1) {
-      // Stage 2: Fill first letter of empty inputs
+      if (cfg.hintCost > 0) {
+        state.xp = Math.max(0, state.xp - cfg.hintCost);
+      }
       const inputs = document.querySelectorAll('.verb-input');
       inputs.forEach(input => {
         if (!input.value) {
-          input.value = input.dataset.answer.charAt(0);
+          // In Çok Basit mode, give first 2 letters if word is >= 4 chars, else 1 letter
+          const ans = input.dataset.answer;
+          input.value = (cfg.id === 'easy' && ans.length >= 4) ? ans.slice(0, 2) : ans.charAt(0);
         }
       });
-      btnHint.innerHTML = "<span>✓ Tips active</span>";
-      hintStage = 2;
+      btnHint.innerHTML = "<span>✓ İpucu Verildi</span>";
+      btnHint.disabled = true;
+      hintStage = 1;
+      feedbackToast.innerText = cfg.hintCost > 0
+        ? `Başlangıç harfleri yazıldı (-${cfg.hintCost} XP)`
+        : "Başlangıç harfleri kutuya yazıldı! 💡";
+      feedbackToast.className = "feedback-toast show giveup";
+      saveState();
+      updateUI();
     }
   }
 
   // UI & GAMIFICATION UPDATE
   function updateUI() {
-    // Streak
     streakNum.innerText = state.streak;
+    statBestStreak.innerText = state.bestStreak;
 
-    // Ranks & XP
-    let currentRank = RANKS[0];
-    let nextRank = RANKS[1];
-
-    for (let i = 0; i < RANKS.length; i++) {
-      if (state.xp >= RANKS[i].minXp) {
-        currentRank = RANKS[i];
-        nextRank = RANKS[i + 1] || null;
-      }
-    }
+    const masteredCount = getMasteredCount();
+    const currentRank = getCurrentRankObj();
+    const nextRank = RANKS.find(r => r.lvl === currentRank.lvl + 1) || null;
 
     rankIcon.innerText = currentRank.icon;
     rankName.innerText = currentRank.title;
@@ -2205,23 +2199,20 @@
     currXpEl.innerText = state.xp;
     if (nextRank) {
       nextXpEl.innerText = nextRank.minXp;
-      const progressPercent = Math.min(100, Math.round(((state.xp - currentRank.minXp) / (nextRank.minXp - currentRank.minXp)) * 100));
-      xpBar.style.width = progressPercent + '%';
+      const xpSpan = Math.max(1, nextRank.minXp - currentRank.minXp);
+      const xpProgress = Math.max(0, Math.min(100, Math.round(((state.xp - currentRank.minXp) / xpSpan) * 100)));
+      xpBar.style.width = xpProgress + '%';
+      rankReqText.innerText = `Sonraki Seviyeye ${nextRank.minXp - state.xp} XP kaldı`;
     } else {
       nextXpEl.innerText = "MAX";
       xpBar.style.width = '100%';
+      rankReqText.innerText = "Maksimum Seviye!";
     }
 
-    // Stats calculations
-    let masteredCount = 0;
     let hardCount = 0;
-
     RAW_VERBS.forEach(v => {
       const st = state.verbStats[v.v1];
-      if (st) {
-        if (st.mastered || st.weight <= 2) masteredCount++;
-        if (st.weight > 10 || st.wrong > 0) hardCount++;
-      }
+      if (st && (st.weight > 10 || st.wrong > 0)) hardCount++;
     });
 
     statLearned.innerText = `${masteredCount} / ${RAW_VERBS.length}`;
@@ -2232,7 +2223,6 @@
     const accuracy = totalQuestions > 0 ? Math.round((state.correctCount / totalQuestions) * 100) : 0;
     statAccuracy.innerText = accuracy + '%';
 
-    // Sound button state
     btnSound.innerText = state.soundEnabled ? '🔊' : '🔇';
   }
 
@@ -2270,10 +2260,10 @@
 
   // MODAL / KELİME LİSTESİ
   function openModal() {
+    toggleResetConfirm(false);
     const container = document.getElementById('verb-list-container');
     container.innerHTML = '';
 
-    // Sort: hardest first, then learning, then mastered
     const sorted = [...RAW_VERBS].sort((a, b) => {
       const stA = state.verbStats[a.v1] || { weight: 10 };
       const stB = state.verbStats[b.v1] || { weight: 10 };
@@ -2281,7 +2271,7 @@
     });
 
     sorted.forEach(v => {
-      const st = state.verbStats[v.v1] || { weight: 10, correct: 0, wrong: 0, mastered: false };
+      const st = state.verbStats[v.v1] || { weight: 10, correct: 0, wrong: 0, consecutive: 0, mastered: false };
       const item = document.createElement('div');
       item.className = 'verb-list-item';
 
@@ -2327,23 +2317,36 @@
     window.speechSynthesis.speak(u);
   }
 
-  function resetProgress() {
-    if (confirm("Tüm XP, Seri ve Öğrenilen kelime ilerlemenizi sıfırlamak istediğinize emin misiniz?")) {
-      state.xp = 0;
-      state.streak = 0;
-      state.correctCount = 0;
-      state.wrongCount = 0;
-      RAW_VERBS.forEach(v => {
-        state.verbStats[v.v1] = { weight: 10, correct: 0, wrong: 0, mastered: false };
-      });
-      saveState();
-      updateUI();
-      closeModal();
-      initGame();
+  function toggleResetConfirm(show) {
+    const bar = document.getElementById('reset-confirm-bar');
+    if (bar) {
+      bar.classList.toggle('show', !!show);
     }
   }
 
-  // LIGHTWEIGHT EMBEDDED CANVAS CONFETTI (Zero external libs)
+  function confirmResetProgress() {
+    state.xp = 0;
+    state.streak = 0;
+    state.bestStreak = 0;
+    state.correctCount = 0;
+    state.wrongCount = 0;
+    RAW_VERBS.forEach(v => {
+      state.verbStats[v.v1] = {
+        weight: 10,
+        correct: 0,
+        wrong: 0,
+        consecutive: 0,
+        mastered: false
+      };
+    });
+    saveState();
+    toggleResetConfirm(false);
+    updateUI();
+    closeModal();
+    initGame();
+  }
+
+  // LIGHTWEIGHT EMBEDDED CANVAS CONFETTI
   function launchConfetti() {
     const canvas = document.getElementById('confetti-canvas');
     if (!canvas) return;
@@ -2376,7 +2379,7 @@
       pieces.forEach(p => {
         p.x += p.vx;
         p.y += p.vy;
-        p.vy += 0.35; // gravity
+        p.vy += 0.35;
         p.rotation += p.rSpeed;
         p.life -= 0.015;
 
@@ -2404,7 +2407,6 @@
 
   // START APP
   initGame();
-
 </script>
 
 </body>
